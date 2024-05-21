@@ -19,8 +19,9 @@ function App() {
       <h1>Vite + React</h1>
       <div className="card">
         <form action="promp" >
+          <a href="http://facebook.com" target="_blank" rel="noopener noreferrer"> Feis</a>
         <fieldset>Buenos dias buenos dias</fieldset>
-        
+
         </form>
       </div>
      
