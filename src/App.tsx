@@ -2,7 +2,7 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-
+import presentacion from './components/PresentacionUsuario'
 function App() {
 
 
@@ -25,7 +25,9 @@ function App() {
           <a href="https://youtu.be/ul3XxCJ8VUQ?si=CRstuLZft3PAcjlF" target="_blank" rel="noopener noreferrer" >
             <img height="60" width="60" src="./img/Logo.jpeg" alt="" /></a>
         </form>
+        
       </div>
+          
      
     </>
   )
