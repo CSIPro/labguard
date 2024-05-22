@@ -1,11 +1,7 @@
-function presentacion(){
-    return(
-        <div>
-            <h1>
-                Bienvenido a la presentacion de componentes
-                awebosi
-            </h1>
-        </div>
-    )
+import React from 'react'
+
+export const PresentacionUsuario = () => {
+  return (
+    <div>PresentacionUsuario</div>
+  )
 }
-export default presentacion

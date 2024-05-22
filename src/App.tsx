@@ -2,7 +2,7 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-
+import { PresentacionUsuario } from './components/PresentacionUsuario'
 function App() {
 
 
@@ -26,7 +26,7 @@ function App() {
             <img height="60" width="60" src="./img/Logo.jpeg" alt="" /></a>
           <label >sambombaso</label>
         </form>
-        
+       <PresentacionUsuario/>
       </div>
           
      
