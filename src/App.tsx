@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { ChangeEvent, FormEvent, useState } from 'react'
+import { Link } from 'react-router-dom'
+import PersonaCard from './components/UsuarioPresentacion/PresentacionUsuario'
 
 function App() {
   const laboratorios = [
@@ -15,10 +17,17 @@ function App() {
     Nombre:"Lab quimica 2",
    }
     
-
   ]
-  const [Value, setValue]= useState(laboratorios);
+  
+  const [LabValue, setLabValue]= useState(laboratorios);
+  const [PersonalValue, setPersonalValue]=useState();
 
+  const persona = {
+    idPersona: 1,
+    NombrePersonal: "Juan Martinez",
+    Ocupacion: "Maestro en ciencias",
+    ImagenPerfil: "../src/img/1.jpg",
+  };
   
 
   const handleSubmit =(event: FormEvent<HTMLFormElement>) =>{
@@ -28,12 +37,24 @@ function App() {
   return (
     <main>
       <h1>Bienvenio a LabGuard</h1>
+      <div>
+        <PersonaCard
+        idPersona={persona.idPersona}
+        NombrePersonal={persona.NombrePersonal}
+        Ocupacion={persona.Ocupacion}
+        ImagenPerfil={persona.ImagenPerfil}
+      />
+      </div>
       <h2>Lista de laboratorios existentes</h2>
-      
+      <h3>Vista de un maestro</h3>
+      <form >
+        <input type="text" />
+
+      </form>
       <ul>
-        {Value.map((Labs) => (
+        {LabValue.map((Labs) => (
           <li key={Labs.id}>
-            {Labs.Nombre} <button ><a href="/RandomPages">Hacer un reporte</a></button>
+            {Labs.Nombre} <button>Notificaciones</button><button ><Link to="/Reporte">Hacer un reporte</Link></button>
           </li>))}
 
       </ul>

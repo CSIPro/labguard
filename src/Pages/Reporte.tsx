@@ -1,43 +1,31 @@
-export default function Root() {
+
+import PersonaCard from "../components/UsuarioPresentacion/PresentacionUsuario";
+const persona = {
+    idPersona: 1,
+    NombrePersonal: "Juan Martinez",
+    Ocupacion: "Maestro en ciencias",
+    ImagenPerfil: "../src/img/1.jpg",
+  };
+export default function Reporte() {
     return (
-      <>
-        <div id="sidebar">
-          <h1>React Router Contacts</h1>
-          <div>
-            <form id="search-form" role="search">
-              <input
-                id="q"
-                aria-label="Search contacts"
-                placeholder="Search"
-                type="search"
-                name="q"
-              />
-              <div
-                id="search-spinner"
-                aria-hidden
-                hidden={true}
-              />
-              <div
-                className="sr-only"
-                aria-live="polite"
-              ></div>
-            </form>
-            <form method="post">
-              <button type="submit">New</button>
-            </form>
-          </div>
-          <nav>
-            <ul>
-              <li>
-                <a href={`/contacts/1`}>Your Name</a>
-              </li>
-              <li>
-                <a href={`/contacts/2`}>Your Friend</a>
-              </li>
-            </ul>
-          </nav>
+      <main>
+        <h1>Registrar Reporte</h1>
+        <div>
+        Bienvenido:
+        <PersonaCard
+        idPersona={persona.idPersona}
+        NombrePersonal={persona.NombrePersonal}
+        Ocupacion={persona.Ocupacion}
+        ImagenPerfil={persona.ImagenPerfil}/>
+        <form action="">
+            tipo de reporte
+            <input type="text" />
+      
+
+        </form>
         </div>
-        <div id="detail"></div>
-      </>
+        
+      </main>
+       
     );
   }

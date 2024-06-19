@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import Root from './Pages/Reporte'
+import Reporte from './Pages/Reporte'
 import './index.css'
 import { createBrowserRouter,Router,RouterProvider } from 'react-router-dom'
 const router = createBrowserRouter([
@@ -9,8 +9,8 @@ const router = createBrowserRouter([
     element: <App />
   },
   {
-    path: "/RandomPages",
-    element: <Root />
+    path: "/Reporte",
+    element: <Reporte />
   }
 ]);
 ReactDOM.createRoot(document.getElementById('root')!).render(
