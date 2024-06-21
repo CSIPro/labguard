@@ -19,7 +19,11 @@ export default function Reporte() {
         ImagenPerfil={persona.ImagenPerfil}/>
         <form action="">
             tipo de reporte
-            <input type="text" />
+            <div>
+            <input type="radio" name="TipMant" id="Equipo" value="Mantenimiento Equipo"/>
+            <input type="radio" name="TipMant" id="Instalacion" value="Mantenimiento Instalacion"/>
+            </div>
+            
       
 
         </form>

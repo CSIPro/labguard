@@ -5,6 +5,7 @@ import './App.css'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PersonaCard from './components/UsuarioPresentacion/PresentacionUsuario'
+import InputConEcho from './components/form-lab/form-lab'
 
 function App() {
   const laboratorios = [
@@ -29,13 +30,13 @@ function App() {
     ImagenPerfil: "../src/img/1.jpg",
   };
   
-
   const handleSubmit =(event: FormEvent<HTMLFormElement>) =>{
     event.preventDefault();
   }
 
   return (
     <main>
+      <InputConEcho/>
       <h1>Bienvenio a LabGuard</h1>
       <div>
         <PersonaCard
