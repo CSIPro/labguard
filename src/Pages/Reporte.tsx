@@ -20,9 +20,15 @@ export default function Reporte() {
         <form action="">
             tipo de reporte
             <div>
-            <input type="radio" name="TipMant" id="Equipo" value="Mantenimiento Equipo"/>
-            <input type="radio" name="TipMant" id="Instalacion" value="Mantenimiento Instalacion"/>
+              <label htmlFor="">
+                <input type="radio" name="Simon" id=""  /> Mantenimiento de Equipo
+              </label>
+              <label htmlFor="">
+                <input type="radio" name="Simon" id=""  /> Mantenimiento de Instalacion
+              </label>
+
             </div>
+            
             
       
 
