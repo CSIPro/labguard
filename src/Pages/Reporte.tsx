@@ -1,34 +1,67 @@
 
-import PersonaCard from "../components/UsuarioPresentacion/PresentacionUsuario";
-const persona = {
-    idPersona: 1,
-    NombrePersonal: "Juan Martinez",
-    Ocupacion: "Maestro en ciencias",
-    ImagenPerfil: "../src/img/1.jpg",
-  };
+
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+  const MantEquipo = [
+    {
+     id: 1,
+     Nombre:"Lab quimica 1",
+    },
+    {
+     id: 2,
+     Nombre:"Lab quimica 2",
+    }
+     
+   ]
+   const MantInstalacion = [
+    {
+      id: 1,
+      Nombre: "Agua"
+    },
+    {
+      id:2,
+      Nombre:"Gas"
+    }
+   ]
 export default function Reporte() {
+  const [MantValue, setMantValue]= useState();
+  const [RadioValue, setRadioValue] = useState();
+  
+  const form = useForm({
+    defaultValues: {
+      Mant: MantEquipo
+    },
+    mode: "onChange"
+  });
+  const { register } = form;
     return (
+      
       <main>
         <h1>Registrar Reporte</h1>
         <div>
         Bienvenido:
-        <PersonaCard
-        idPersona={persona.idPersona}
-        NombrePersonal={persona.NombrePersonal}
-        Ocupacion={persona.Ocupacion}
-        ImagenPerfil={persona.ImagenPerfil}/>
+
         <form action="">
             tipo de reporte
             <div>
               <label htmlFor="">
-                <input type="radio" name="Simon" id=""  /> Mantenimiento de Equipo
+                <input type="radio" name="Simon" id="1"  /> Mantenimiento de Equipo
               </label>
               <label htmlFor="">
-                <input type="radio" name="Simon" id=""  /> Mantenimiento de Instalacion
+                <input type="radio" name="Simon" id="2" value="MantInstala" /> Mantenimiento de Instalacion
               </label>
 
             </div>
-            
+            <div>
+              <select name="" id="">
+                {
+                  
+             /* MantValue.map((Labs) => (
+              <option value={Labs.Nombre} key={Labs.id}>{Labs.Nombre}</option>
+              ))*/
+                }
+              </select>
+            </div>
             
       
 

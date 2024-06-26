@@ -1,8 +1,6 @@
 
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PersonaCard from './components/UsuarioPresentacion/PresentacionUsuario'
 import InputConEcho from './components/form-lab/form-lab'
