@@ -1,7 +1,13 @@
 
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+
+  const Opciones= [
+    {label:"MantEquipo",value: "MantEquipo"},
+    {label:"MantInstalacion",value:"MantInstalacion"}
+  ]
+  
   const MantEquipo = [
     {
      id: 1,
@@ -24,16 +30,36 @@ import { useForm } from "react-hook-form";
     }
    ]
 export default function Reporte() {
-  const [MantValue, setMantValue]= useState();
-  const [RadioValue, setRadioValue] = useState();
-  
+  const { register, watch, setValue } = useForm({
+    defaultValues: {
+      primaryOption: 'MantEquipo',
+      secondaryOption: MantEquipo
+    },
+    mode: 'onChange'
+  });
+  const getSecondaryOptions = () => {
+    if (primaryOption === 'MantEquipo') {
+      return MantEquipo;
+    } else if (primaryOption === 'MantInstalacion') {
+      return MantInstalacion;
+    }
+    return [];
+  };
+  const primaryOption = watch('primaryOption');
+  useEffect(() => {
+    if (primaryOption === 'MantEquipo') {
+      setValue('secondaryOption', MantEquipo);
+    } else if (primaryOption === 'MantInstalacion') {
+      setValue('secondaryOption', MantInstalacion);
+    }
+  }, [primaryOption, setValue]);
   const form = useForm({
     defaultValues: {
       Mant: MantEquipo
     },
     mode: "onChange"
   });
-  const { register } = form;
+  
     return (
       
       <main>
@@ -45,10 +71,10 @@ export default function Reporte() {
             tipo de reporte
             <div>
               <label htmlFor="">
-                <input type="radio" name="Simon" id="1"  /> Mantenimiento de Equipo
+                <input type="radio"  id="1" {...register("primaryOption")} /> Mantenimiento de Equipo
               </label>
               <label htmlFor="">
-                <input type="radio" name="Simon" id="2" value="MantInstala" /> Mantenimiento de Instalacion
+                <input type="radio"  id="2" value="MantInstala" {...register("secondaryOption")} /> Mantenimiento de Instalacion
               </label>
 
             </div>
