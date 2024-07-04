@@ -42,8 +42,8 @@ function App() {
 
   return (
     <main>
-      <h1>Bienvenio a LabGuard</h1>
-      <div>
+      <h1 className="text-2xl font-semibold text-center">Bienvenio a LabGuard</h1>
+      <div className="rounded-md bg-violet-400">
         <PersonaCard
         idPersona={persona.idPersona}
         NombrePersonal={persona.NombrePersonal}

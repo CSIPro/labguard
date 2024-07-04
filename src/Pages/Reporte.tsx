@@ -1,37 +1,35 @@
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
 const opciones = [
-  { label: 'Mantenimiento de Equipo', value: 'MantEquipo' },
-  { label: 'Mantenimiento de Instalación', value: 'MantInstalacion' },
+  { label: "Mantenimiento de Equipo", value: "MantEquipo" },
+  { label: "Mantenimiento de Instalación", value: "MantInstalacion" },
 ];
 
 const MantEquipo = [
-  { id: 1, Nombre: 'Lab química 1' },
-  { id: 2, Nombre: 'Lab química 2' },
+  { id: 1, Nombre: "Lab química 1" },
+  { id: 2, Nombre: "Lab química 2" },
 ];
 
 const MantInstalacion = [
-  { id: 1, Nombre: 'Agua' },
-  { id: 2, Nombre: 'Gas' },
+  { id: 1, Nombre: "Agua" },
+  { id: 2, Nombre: "Gas" },
 ];
 
 export default function Reporte() {
   const { register, watch, setValue } = useForm({
     defaultValues: {
-      primaryOption: 'MantEquipo',
+      primaryOption: "MantEquipo",
       secondaryOption: MantEquipo[0].Nombre,
     },
   });
-
-  const primaryOption = watch('primaryOption');
-  const [secondaryOptions, setSecondaryOptions] = useState(MantEquipo);
-
+  
+  const primaryOption = watch("primaryOption");
   useEffect(() => {
-    setSecondaryOptions(primaryOption === 'MantEquipo' ? MantEquipo : MantInstalacion);
-    setValue('secondaryOption', secondaryOptions[0].Nombre); // Set default on change
-  }, [primaryOption, setValue]);
+    setValue( "secondaryOption", primaryOption=== "MantEquipo" ? MantEquipo[0].Nombre : MantInstalacion[0].Nombre)
 
+  }, [setValue, primaryOption])
+  
   return (
     <main>
       <h1>Registrar Reporte</h1>
@@ -53,16 +51,26 @@ export default function Reporte() {
 
           <div>
             <select {...register("secondaryOption")}>
-              {secondaryOptions.map((option) => (
-                <option value={option.Nombre} key={option.id}>
-                  {option.Nombre}
-                </option>
-              ))}
+              {primaryOption === "MantEquipo"
+                ? MantEquipo.map((option) => (
+                    <option value={option.Nombre} key={option.id}>
+                      {option.Nombre}
+                    </option>
+                  ))
+                : MantInstalacion.map((option) => (
+                    <option value={option.Nombre} key={option.id}>
+                      {option.Nombre}
+                    </option>
+                  ))}
             </select>
           </div>
 
-          {/* ...rest of your form elements */}
+          
         </form>
+        <form action="">
+          <link rel="stylesheet" href="" />
+        </form>
+        
       </div>
     </main>
   );
