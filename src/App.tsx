@@ -14,8 +14,16 @@ function App() {
    {
     id: 2,
     Nombre:"Lab quimica 2",
+   },
+   {
+    id: 3,
+    Nombre:"Lab quimica 3",
    }
-    
+   ,
+   {
+    id: 4,
+    Nombre:"Lab quimica 4",
+   }
   ]
   
   const [LabValue, setLabValue]= useState(laboratorios);
@@ -34,7 +42,6 @@ function App() {
 
   return (
     <main>
-      <InputConEcho/>
       <h1>Bienvenio a LabGuard</h1>
       <div>
         <PersonaCard
@@ -48,12 +55,12 @@ function App() {
       <h3>Vista de un maestro</h3>
       <form >
         <input type="text" />
-
+        
       </form>
       <ul>
         {LabValue.map((Labs) => (
           <li key={Labs.id}>
-            {Labs.Nombre} <button>Notificaciones</button><button ><Link to="/Reporte">Hacer un reporte</Link></button>
+            {Labs.Nombre} <button>Notificaciones</button><Link to="/Reporte"><button >Hacer un reporte</button></Link>
           </li>))}
 
       </ul>

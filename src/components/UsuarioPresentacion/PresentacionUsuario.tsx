@@ -13,6 +13,7 @@ import { FC } from "react"
             <img src={ImagenPerfil} alt={`Profile of ${NombrePersonal}`} />
             <h2>{NombrePersonal}</h2>
             <p>{Ocupacion}</p>
+          
           </div>
         );
       };

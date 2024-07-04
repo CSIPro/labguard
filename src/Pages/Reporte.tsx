@@ -1,100 +1,69 @@
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
+const opciones = [
+  { label: 'Mantenimiento de Equipo', value: 'MantEquipo' },
+  { label: 'Mantenimiento de Instalación', value: 'MantInstalacion' },
+];
 
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+const MantEquipo = [
+  { id: 1, Nombre: 'Lab química 1' },
+  { id: 2, Nombre: 'Lab química 2' },
+];
 
-  const Opciones= [
-    {label:"MantEquipo",value: "MantEquipo"},
-    {label:"MantInstalacion",value:"MantInstalacion"}
-  ]
-  
-  const MantEquipo = [
-    {
-     id: 1,
-     Nombre:"Lab quimica 1",
-    },
-    {
-     id: 2,
-     Nombre:"Lab quimica 2",
-    }
-     
-   ]
-   const MantInstalacion = [
-    {
-      id: 1,
-      Nombre: "Agua"
-    },
-    {
-      id:2,
-      Nombre:"Gas"
-    }
-   ]
+const MantInstalacion = [
+  { id: 1, Nombre: 'Agua' },
+  { id: 2, Nombre: 'Gas' },
+];
+
 export default function Reporte() {
   const { register, watch, setValue } = useForm({
     defaultValues: {
       primaryOption: 'MantEquipo',
-      secondaryOption: MantEquipo
+      secondaryOption: MantEquipo[0].Nombre,
     },
-    mode: 'onChange'
   });
-  const getSecondaryOptions = () => {
-    if (primaryOption === 'MantEquipo') {
-      return MantEquipo;
-    } else if (primaryOption === 'MantInstalacion') {
-      return MantInstalacion;
-    }
-    return [];
-  };
+
   const primaryOption = watch('primaryOption');
+  const [secondaryOptions, setSecondaryOptions] = useState(MantEquipo);
+
   useEffect(() => {
-    if (primaryOption === 'MantEquipo') {
-      setValue('secondaryOption', MantEquipo);
-    } else if (primaryOption === 'MantInstalacion') {
-      setValue('secondaryOption', MantInstalacion);
-    }
+    setSecondaryOptions(primaryOption === 'MantEquipo' ? MantEquipo : MantInstalacion);
+    setValue('secondaryOption', secondaryOptions[0].Nombre); // Set default on change
   }, [primaryOption, setValue]);
-  const form = useForm({
-    defaultValues: {
-      Mant: MantEquipo
-    },
-    mode: "onChange"
-  });
-  
-    return (
-      
-      <main>
-        <h1>Registrar Reporte</h1>
-        <div>
-        Bienvenido:
 
-        <form action="">
-            tipo de reporte
-            <div>
-              <label htmlFor="">
-                <input type="radio"  id="1" {...register("primaryOption")} /> Mantenimiento de Equipo
+  return (
+    <main>
+      <h1>Registrar Reporte</h1>
+      <div>
+        <form>
+          <div>
+            {opciones.map((opcion) => (
+              <label key={opcion.value} htmlFor={opcion.value}>
+                <input
+                  type="radio"
+                  id={opcion.value}
+                  value={opcion.value}
+                  {...register("primaryOption")}
+                />
+                {opcion.label}
               </label>
-              <label htmlFor="">
-                <input type="radio"  id="2" value="MantInstala" {...register("secondaryOption")} /> Mantenimiento de Instalacion
-              </label>
+            ))}
+          </div>
 
-            </div>
-            <div>
-              <select name="" id="">
-                {
-                  
-             /* MantValue.map((Labs) => (
-              <option value={Labs.Nombre} key={Labs.id}>{Labs.Nombre}</option>
-              ))*/
-                }
-              </select>
-            </div>
-            
-      
+          <div>
+            <select {...register("secondaryOption")}>
+              {secondaryOptions.map((option) => (
+                <option value={option.Nombre} key={option.id}>
+                  {option.Nombre}
+                </option>
+              ))}
+            </select>
+          </div>
 
+          {/* ...rest of your form elements */}
         </form>
-        </div>
-        
-      </main>
-       
-    );
-  }
+      </div>
+    </main>
+  );
+}
