@@ -72,10 +72,23 @@ export default function Reporte() {
             Descripcion del problema <br />
             <textarea name="" id=""></textarea>
           </div>
+          <div>
+            <select name="" id="">
+              <option value="">Maria Elena</option>
+              <option value="">Sapote con lechuga</option>
+            </select>
+          </div>
         </form>
+        <div>
         <form action="">
           <Link to="/"><button>Regresar</button></Link>
         </form>
+        <form action="">
+          <Link to=""><button>Enviar</button></Link>
+        </form>
+        </div>
+
+     
         
       </div>
     </main>
