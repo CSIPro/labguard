@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
+import { Link } from "react-router-dom";
+import Reloj from "../components/Reloj/Reloj"
 const opciones = [
   { label: "Mantenimiento de Equipo", value: "MantEquipo" },
   { label: "Mantenimiento de Instalación", value: "MantInstalacion" },
@@ -33,6 +34,8 @@ export default function Reporte() {
   return (
     <main>
       <h1>Registrar Reporte</h1>
+      <h4>Fecha actual del reporte</h4>
+    <Reloj></Reloj>
       <div>
         <form>
           <div>
@@ -65,10 +68,13 @@ export default function Reporte() {
             </select>
           </div>
 
-          
+          <div>
+            Descripcion del problema <br />
+            <textarea name="" id=""></textarea>
+          </div>
         </form>
         <form action="">
-          <link rel="stylesheet" href="" />
+          <Link to="/"><button>Regresar</button></Link>
         </form>
         
       </div>
