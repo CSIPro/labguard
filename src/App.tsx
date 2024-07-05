@@ -61,7 +61,7 @@ function App() {
       <ul>
         {LabValue.map((Labs) => (
           <li key={Labs.id}>
-            {Labs.Nombre} <button>Notificaciones</button><Link to={{pathname:`/Reporte/${Labs.Nombre}`}}><button >Hacer un reporte</button></Link>
+            {Labs.Nombre} <Link to={{pathname:`/ListadoReporte`}}><button>Notificaciones</button></Link><Link to={{pathname:`/Reporte/${Labs.Nombre,Labs.id}`}}><button >Hacer un reporte</button></Link>
           </li>))}
 
       </ul>

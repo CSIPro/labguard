@@ -87,7 +87,7 @@ export default function Reporte() {
           <Link to="/"><button>Regresar</button></Link>
         </form>
         <form action="">
-          <Link to=""><button>Enviar</button></Link>
+          <Link to="/ListadoReporte"><button>Enviar</button></Link>
         </form>
         </div>
 
