@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Reloj from "../components/Reloj/Reloj"
+import { useLocation } from "react-router-dom";
 const opciones = [
   { label: "Mantenimiento de Equipo", value: "MantEquipo" },
   { label: "Mantenimiento de Instalación", value: "MantInstalacion" },
@@ -18,6 +19,8 @@ const MantInstalacion = [
 ];
 
 export default function Reporte() {
+  console.log(useParams())
+  let {Nombre}= useParams()
   const { register, watch, setValue } = useForm({
     defaultValues: {
       primaryOption: "MantEquipo",
@@ -33,7 +36,7 @@ export default function Reporte() {
   
   return (
     <main>
-      <h1>Registrar Reporte</h1>
+      <h1>Registrar Reporte {Nombre} </h1>
       <h4>Fecha actual del reporte</h4>
     <Reloj></Reloj>
       <div>

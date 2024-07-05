@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react'
 import { Link } from 'react-router-dom'
 import PersonaCard from './components/UsuarioPresentacion/PresentacionUsuario'
 import InputConEcho from './components/form-lab/form-lab'
+import { useLocation } from 'react-router-dom'
 
 function App() {
   const laboratorios = [
@@ -60,7 +61,7 @@ function App() {
       <ul>
         {LabValue.map((Labs) => (
           <li key={Labs.id}>
-            {Labs.Nombre} <button>Notificaciones</button><Link to="/Reporte"><button >Hacer un reporte</button></Link>
+            {Labs.Nombre} <button>Notificaciones</button><Link to={{pathname:`/Reporte/${Labs.Nombre}`}}><button >Hacer un reporte</button></Link>
           </li>))}
 
       </ul>
