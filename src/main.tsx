@@ -15,11 +15,11 @@ const router = createBrowserRouter([
     element: <App />
   },
   {
-    path: "/Reporte/:Nombre",
+    path: "/Reporte/:Nombre/:Id",
     element:<Reporte />
   },
   {
-    path:"/ListadoReporte",
+    path:"/ListadoReporte/:Nombre/:Id",
     element: <ListaReporte/>
   }
 
