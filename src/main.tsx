@@ -5,7 +5,7 @@ import Reporte from './Pages/Reporte'
 import './index.css'
 import {  createBrowserRouter,RouterProvider } from 'react-router-dom'
 import ListaReporte from './Pages/ListadoReportes'
-
+import { LabProvider } from './Context/LabsContexto'
 
 
 
@@ -27,7 +27,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   
   <React.StrictMode>
-    
+
     <RouterProvider router={router} />
+   
   </React.StrictMode>
 )

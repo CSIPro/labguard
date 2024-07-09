@@ -11,6 +11,7 @@ const opciones = [
 const MantEquipo = [
   { id: 1, Nombre: "Lab química 1" },
   { id: 2, Nombre: "Lab química 2" },
+  { id: 3, Nombre: "Lab química 3" }
 ];
 
 const MantInstalacion = [
@@ -132,9 +133,7 @@ export default function Reporte() {
         <form action="">
           <Link to="/"><button >Regresar</button></Link>
         </form>
-        <form action="">
-         
-        </form>
+        
         </div>
 
      
