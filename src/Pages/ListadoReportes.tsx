@@ -6,7 +6,7 @@ import { LabsContext } from "../main";
 export default function ListaReporte(){
 
 let {Nombre,Id} = useParams()
-const [Labs] = useContext(LabsContext);
+const [Labs,setLabs] = useContext(LabsContext);
 const filteredLabs = Labs.filter(
     (reporte) => reporte.NombreLab === Nombre && reporte.IdLab === Id
 );

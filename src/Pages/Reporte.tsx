@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm} from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import Reloj from "../components/Reloj/Reloj"
-
+import { LabReporte, LabsContext } from "../main";
 
 const opciones = [
   { label: "Mantenimiento de Equipo", value: "MantEquipo" },
@@ -26,22 +26,9 @@ const Maestro=[
   {id:4, Nombre:"Don Jesus"}
 ]
 
-export interface LabReporte {
-  Id: number;
-  NombreLab: string | undefined;
-  IdLab: string | undefined;
-  FechaActual: string;
-  HoraActual: string;
-  TipoMant: string;
-  MantObjeto: string;
-  Descripcion: string;
-  NombreSoli: string;
-
-
-}
 export default function Reporte() {
   
-  const [Labs, setLabs] = useState<LabReporte[]>([]);
+  const [Labs, setLabs]= useContext(LabsContext)
 
   let { Nombre, Id } = useParams();
  
