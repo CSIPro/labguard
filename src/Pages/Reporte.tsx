@@ -3,6 +3,7 @@ import { useForm} from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import Reloj from "../components/Reloj/Reloj"
 
+
 const opciones = [
   { label: "Mantenimiento de Equipo", value: "MantEquipo" },
   { label: "Mantenimiento de Instalación", value: "MantInstalacion" },
@@ -24,6 +25,7 @@ const Maestro=[
    {id:3, Nombre:"Cilantro"},
   {id:4, Nombre:"Don Jesus"}
 ]
+
 export interface LabReporte {
   Id: number;
   NombreLab: string | undefined;
@@ -37,10 +39,12 @@ export interface LabReporte {
 
 
 }
-
 export default function Reporte() {
-  const [Labs, setLabs]= useState<Array<LabReporte>>([])
-  let {Nombre,Id}= useParams();
+  
+  const [Labs, setLabs] = useState<LabReporte[]>([]);
+
+  let { Nombre, Id } = useParams();
+ 
   
   const { register, watch, setValue ,getValues,handleSubmit} = useForm({
     defaultValues: {
@@ -73,10 +77,11 @@ export default function Reporte() {
       Descripcion: data.descripcion,
       NombreSoli: data.NombreSoli,
     };
-    setLabs(prevLabs =>[...prevLabs, newReporte]);
+    setLabs((prevLabs) =>[...prevLabs, newReporte]);
     console.log("Nuevo reporte: ",newReporte)
   };
   return (
+    
     <main>
       <h1>Registrar Reporte {Nombre} </h1>
       <h1>Con el id {Id}</h1>
@@ -161,5 +166,6 @@ export default function Reporte() {
         </ul>
       </div>
     </main>
+    
   );
 }
