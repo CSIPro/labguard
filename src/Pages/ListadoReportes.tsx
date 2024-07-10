@@ -19,9 +19,9 @@ console.log(filteredLabs)
             <h1>Reportes del {Nombre} Id: {Id}</h1>
             <div>
                 <ul>
-                    {Labs.filter((reporte) => reporte.NombreLab ===Nombre && reporte.IdLab === Id).map(
+                    {filteredLabs.map(
                         (reporte) =>(
-                        <Link to=""><li key={reporte.Id}>{reporte.NombreLab} {reporte.FechaActual}{reporte.HoraActual} {reporte.TipoMant}</li></Link>
+                        /*<Link to={{pathname:`/InfoReporte/:${reporte.Id}/:${Nombre}`}}>*/<li key={reporte.Id}>{reporte.NombreSoli} {reporte.FechaActual}{reporte.HoraActual} {reporte.TipoMant}</li>/*</Link>*/
                     ))}
                 </ul>
             </div>

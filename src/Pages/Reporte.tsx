@@ -33,7 +33,7 @@ export default function Reporte() {
   let { Nombre, Id } = useParams();
  
   
-  const { register, watch, setValue ,getValues,handleSubmit} = useForm({
+  const { register, watch, setValue ,handleSubmit} = useForm({
     defaultValues: {
       primaryOption: "MantEquipo",
       secondaryOption: MantEquipo[0].Nombre,
@@ -51,7 +51,7 @@ export default function Reporte() {
     setValue( "secondaryOption", primaryOption=== "MantEquipo" ? MantEquipo[0].Nombre : MantInstalacion[0].Nombre)
 
   }, [setValue, primaryOption])
- 
+
   const onSubmit = (data: any) => {
     const newReporte: LabReporte = {
       Id: Labs.length + 1,
@@ -135,22 +135,7 @@ export default function Reporte() {
       
       <h2>Reportes Registrados</h2>
       
-        <ul>
-          {Labs.map((reporte) => (
-            <li key={reporte.Id}>
-              <strong>ID:</strong> {reporte.Id} <br />
-              <strong>Nombre del Lab:</strong> {reporte.NombreLab} <br />
-              <strong>ID del Lab:</strong> {reporte.IdLab} <br />
-              <strong>Fecha:</strong> {reporte.FechaActual} <br />
-              <strong>Hora:</strong> {reporte.HoraActual} <br />
-              <strong>Tipo de Mantenimiento:</strong> {reporte.TipoMant} <br />
-              <strong>Objeto de Mantenimiento:</strong> {reporte.MantObjeto} <br />
-              <strong>Descripción:</strong> {reporte.Descripcion} <br />
-              <strong>Nombre del Solicitante:</strong> {reporte.NombreSoli} <br />
-              
-            </li>
-          ))}
-        </ul>
+        
       </div>
     </main>
     
