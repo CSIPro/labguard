@@ -18,7 +18,7 @@ export interface LabReporte {
   MantObjeto: string;
   Descripcion: string;
   NombreSoli: string;
-
+  Estado: string;
 
 }
 

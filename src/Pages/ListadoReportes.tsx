@@ -21,7 +21,11 @@ console.log(filteredLabs)
                 <ul>
                     {filteredLabs.map(
                         (reporte) =>(
-                        /*<Link to={{pathname:`/InfoReporte/:${reporte.Id}/:${Nombre}`}}>*/<li key={reporte.Id}>{reporte.NombreSoli} {reporte.FechaActual}{reporte.HoraActual} {reporte.TipoMant}</li>/*</Link>*/
+                            <li key={reporte.Id}><Link to={`/InfoReporte/${reporte.Id}/${Nombre}`}>
+                            <button  >
+                                {reporte.NombreSoli+" "} {reporte.FechaActual+" "}{reporte.HoraActual+" "} {reporte.TipoMant+" "}  {reporte.Estado}</button>
+                                </Link></li>
+                            
                     ))}
                 </ul>
             </div>

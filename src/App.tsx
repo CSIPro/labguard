@@ -28,6 +28,8 @@ function App() {
   
   const [LabValue, setLabValue]= useState(laboratorios);
   
+
+  
   const persona = {
     idPersona: 1,
     NombrePersonal: "Juan Martinez",
@@ -35,7 +37,8 @@ function App() {
     ImagenPerfil: "../src/img/1.jpg",
   };
   
-
+  
+  
 
   return (
     <main>
@@ -49,16 +52,18 @@ function App() {
       />
       </div>
       <h2>Lista de laboratorios existentes</h2>
-      <h3>Vista de un maestro</h3>
+     
      
       <ul>
         {LabValue.map((Labs) => (
           <li key={Labs.id}>
-            {Labs.Nombre} <Link to={{pathname:`/ListadoReporte/${Labs.Nombre}/${Labs.id}`}}><button>Notificaciones</button></Link><Link to={{pathname:`/Reporte/${Labs.Nombre}/${Labs.id}`}}><button >Hacer un reporte</button></Link>
+            {Labs.Nombre} <Link to={{pathname:`/ListadoReporte/${Labs.Nombre}/${Labs.id}`}}><button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">Reportes</button>
+            </Link><Link to={{pathname:`/Reporte/${Labs.Nombre}/${Labs.id}`}}><button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300" >Hacer un reporte</button></Link>
           </li>))}
 
       </ul>
-      
+
+     
     </main>
     
   )
