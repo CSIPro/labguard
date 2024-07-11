@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     element: <ListadoReportes/>
   },
   {
-    path:"/InfoReporte/:IdReporte/:Nombre",
+    path:"/InfoReporte/:IdReporte/:Nombre/:Id",
     element: <InfoReporte/>
   }
 

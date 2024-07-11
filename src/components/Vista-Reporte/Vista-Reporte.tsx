@@ -1,21 +1,29 @@
 import React, { useContext } from "react";
 import { LabsContext } from "../../main";
 import { Link } from "react-router-dom";
-export default function VistaReporte ({IdReporte,NombreLab,IdLab}:any){
-const [Labs, setLabs]= useContext(LabsContext)
-console.log(Labs)
+import { LabReporte } from "../../main";
+
+interface Props {
+  IdReporte: string|any; 
+  Labs: LabReporte[]; 
+}
+
+export  const VistaReporte : React.FC<Props>=({ IdReporte, Labs })=>{
+
 const filteredLabs = Labs.filter(
-    (reporte) => reporte.NombreLab === NombreLab && reporte.IdLab === IdLab && reporte.Id=== IdReporte
+    (reporte) => reporte.Id=== parseInt(IdReporte)
 );
+
 console.log(filteredLabs)
     return(
     <main>
         <ul>
-          {filteredLabs.map((report) => (
+          {filteredLabs.map((report:any) => (
             <li key={report.Id+1}>
               <strong>ID:</strong> {report.Id} <br />
               <strong>Nombre del Lab:</strong> {report.NombreLab} <br />
               <strong>ID del Lab:</strong> {report.IdLab} <br />
+              <strong>Estado del Reporte:</strong> {report.Estado} <br />
               <strong>Fecha:</strong> {report.FechaActual} <br />
               <strong>Hora:</strong> {report.HoraActual} <br />
               <strong>Tipo de Mantenimiento:</strong> {report.TipoMant} <br />
@@ -24,7 +32,7 @@ console.log(filteredLabs)
               <strong>Nombre del Solicitante:</strong> {report.NombreSoli} <br />
               <form action="">
        
-        <Link to={{pathname:`/`}}><button>Menu</button></Link><br />
+       
         </form> 
             </li>
           ))}

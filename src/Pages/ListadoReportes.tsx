@@ -7,11 +7,11 @@ export default function ListaReporte(){
 
 let {Nombre,Id} = useParams()
 const [Labs,setLabs] = useContext(LabsContext);
+console.log(Labs)
 const filteredLabs = Labs.filter(
     (reporte) => reporte.NombreLab === Nombre && reporte.IdLab === Id
 );
 console.log(filteredLabs)
-
     return(
 
         <main>
@@ -21,7 +21,7 @@ console.log(filteredLabs)
                 <ul>
                     {filteredLabs.map(
                         (reporte) =>(
-                            <li key={reporte.Id}><Link to={`/InfoReporte/${reporte.Id}/${Nombre}`}>
+                            <li key={reporte.Id}><Link to={`/InfoReporte/${reporte.Id}/${Nombre}/${Id}`}>
                             <button  >
                                 {reporte.NombreSoli+" "} {reporte.FechaActual+" "}{reporte.HoraActual+" "} {reporte.TipoMant+" "}  {reporte.Estado}</button>
                                 </Link></li>
