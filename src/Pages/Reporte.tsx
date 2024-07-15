@@ -10,14 +10,15 @@ const opciones = [
 ];
 
 const MantEquipo = [
-  { id: 1, Nombre: "Lab química 1" },
-  { id: 2, Nombre: "Lab química 2" },
-  { id: 3, Nombre: "Lab química 3" }
+  { id: 1, Nombre: "Campana" },
+  { id: 2, Nombre: "Balvula" },
+  { id: 3, Nombre: "otros" }
 ];
 
 const MantInstalacion = [
   { id: 1, Nombre: "Agua" },
   { id: 2, Nombre: "Gas" },
+  { id: 3, Nombre: "otro" }
 ];
 const Maestro = [
   { id: 1, Nombre: "Maria Elena" },
@@ -38,7 +39,8 @@ export default function Reporte() {
       primaryOption: "MantEquipo",
       secondaryOption: MantEquipo[0].Nombre,
       descripcion: "",
-      NombreSoli: ""
+      NombreSoli: "",
+      Otros:""
     },
   });
 
@@ -49,7 +51,8 @@ export default function Reporte() {
     setMensaje("Se guardo correctamente")
   }
 
-
+  
+  
   const primaryOption = watch("primaryOption");
   useEffect(() => {
     setValue("secondaryOption", primaryOption === "MantEquipo" ? MantEquipo[0].Nombre : MantInstalacion[0].Nombre)
@@ -65,6 +68,7 @@ export default function Reporte() {
       HoraActual: new Date().toLocaleTimeString(),
       TipoMant: data.primaryOption,
       MantObjeto: data.secondaryOption,
+      Manotro:data.Otros,
       Descripcion: data.descripcion,
       NombreSoli: data.NombreSoli,
       Estado: "En Revision"
@@ -101,19 +105,28 @@ export default function Reporte() {
           <div>
             <select {...register("secondaryOption")}>
               {primaryOption === "MantEquipo"
-                ? MantEquipo.map((option) => (
-                  <option value={option.Nombre} key={option.id}>
-                    {option.Nombre}
+                ? MantEquipo.map((opcion) => (
+                  <option value={opcion.Nombre} key={opcion.id}>
+                    {opcion.Nombre}
+                    
                   </option>
+                
+                ) 
+              
+              )
+                : MantInstalacion.map((opcion) => (
+                  <option value={opcion.Nombre} key={opcion.id}>
+                    {opcion.Nombre}
+                  </option>
+                  
                 ))
-                : MantInstalacion.map((option) => (
-                  <option value={option.Nombre} key={option.id}>
-                    {option.Nombre}
-                  </option>
-                ))}
+                
+              
+                }
             </select>
+            Menciona otro:
+            <input type="text" id="otro" {...register("Otros") } />
           </div>
-
           <div>
             Descripcion del problema <br />
             <textarea  {...register("descripcion")}></textarea>

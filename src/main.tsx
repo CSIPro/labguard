@@ -16,6 +16,7 @@ export interface LabReporte {
   HoraActual: string;
   TipoMant: string;
   MantObjeto: string;
+  Manotro:string;
   Descripcion: string;
   NombreSoli: string;
   Estado: string;

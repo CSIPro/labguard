@@ -34,7 +34,7 @@ function App() {
     idPersona: 1,
     NombrePersonal: "Juan Martinez",
     Ocupacion: "Maestro en ciencias",
-    ImagenPerfil: "../src/img/1.jpg",
+    ImagenPerfil: "../src/img/1.jpeg",
   };
   
   

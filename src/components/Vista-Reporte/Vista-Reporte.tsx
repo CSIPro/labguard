@@ -28,6 +28,7 @@ console.log(filteredLabs)
               <strong>Hora:</strong> {report.HoraActual} <br />
               <strong>Tipo de Mantenimiento:</strong> {report.TipoMant} <br />
               <strong>Objeto de Mantenimiento:</strong> {report.MantObjeto} <br />
+              <strong>Otros: </strong>{report.Manotro}<br/>
               <strong>Descripción:</strong> {report.Descripcion} <br />
               <strong>Nombre del Solicitante:</strong> {report.NombreSoli} <br />
               <form action="">

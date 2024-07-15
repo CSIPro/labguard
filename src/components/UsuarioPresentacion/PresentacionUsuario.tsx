@@ -10,7 +10,7 @@ import { FC } from "react"
     const PersonaCard: React.FC<Props> = ({ idPersona, NombrePersonal, Ocupacion, ImagenPerfil }) => {
         return (
           <div className="persona-card">
-            <img src={ImagenPerfil} alt={`Profile of ${NombrePersonal}`} />
+            <img src={ImagenPerfil} alt={`Profile of ${NombrePersonal}`} width={200} height={200}/>
             <h2>{NombrePersonal}</h2>
             <p>{Ocupacion}</p>
           
