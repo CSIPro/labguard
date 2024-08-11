@@ -30,6 +30,7 @@ console.log(filteredLabs)
               <strong>Objeto de Mantenimiento:</strong> {report.MantObjeto} <br />
               <strong>Otros: </strong>{report.Manotro}<br/>
               <strong>Descripción:</strong> {report.Descripcion} <br />
+              <strong>Comentarios:</strong> {report.Comentarios} <br />
               <strong>Nombre del Solicitante:</strong> {report.NombreSoli} <br />
               <form action="">
        

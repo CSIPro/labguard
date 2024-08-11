@@ -39,6 +39,7 @@ export default function Reporte() {
       primaryOption: "MantEquipo",
       secondaryOption: MantEquipo[0].Nombre,
       descripcion: "",
+      comentarios: "",
       NombreSoli: "",
       Otros:""
     },
@@ -70,6 +71,7 @@ export default function Reporte() {
       MantObjeto: data.secondaryOption,
       Manotro:data.Otros,
       Descripcion: data.descripcion,
+      Comentarios: data.comentarios,
       NombreSoli: data.NombreSoli,
       Estado: "En Revision"
     };
@@ -130,6 +132,11 @@ export default function Reporte() {
           <div>
             Descripcion del problema <br />
             <textarea  {...register("descripcion")}></textarea>
+          </div>
+          <div>
+
+            Comentarios adicionales <br />
+            <textarea  {...register("comentarios")}></textarea>
           </div>
           <div>
             <h6>Nombre del solicitante</h6>
