@@ -134,7 +134,6 @@ export default function Reporte() {
             <textarea  {...register("descripcion")}></textarea>
           </div>
           <div>
-
             Comentarios adicionales <br />
             <textarea  {...register("comentarios")}></textarea>
           </div>
