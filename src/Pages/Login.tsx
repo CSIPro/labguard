@@ -1,3 +1,4 @@
+// Login.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../Pages/UserContext';
@@ -5,16 +6,23 @@ import { useUser } from '../Pages/UserContext';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState<'Maestro' | 'Mantenimiento'>('Maestro');
   const navigate = useNavigate();
-  const { setUsername: setContextUsername, setUserType: setContextUserType } = useUser();  // Obtén setUsername y setUserType del contexto
+  const { setUsername: setContextUsername, setUserType: setContextUserType, setPersona } = useUser();  
+
+  // Mock de datos de usuarios y personas
+  const users = [
+    { username: 'admin', password: 'password', userType: 'Maestro' as 'Maestro', persona: { idPersona: 1, NombrePersonal: 'Juan Martinez', Ocupacion: 'Maestro en ciencias', ImagenPerfil: '../src/img/maestro.png' }},
+    { username: 'mantenimiento', password: 'password', userType: 'Mantenimiento' as 'Mantenimiento', persona: { idPersona: 2, NombrePersonal: 'Ana López', Ocupacion: 'Técnico de mantenimiento', ImagenPerfil: '../src/img/mantenimiento.jpg' }},
+    // Agrega más usuarios aquí
+  ];
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Falta la lógica para autenticar al usuario
-    if (username === 'admin' && password === 'password') {
-      setContextUsername(username);  // Establece el nombre de usuario en el contexto
-      setContextUserType(userType);  // Establece el tipo de usuario en el contexto
+    const user = users.find(user => user.username === username && user.password === password);
+    if (user) {
+      setContextUsername(username);
+      setContextUserType(user.userType as 'Maestro' | 'Mantenimiento');  // Aserción de tipo
+      setPersona(user.persona);
       navigate('/');
     } else {
       alert('Usuario o contraseña incorrectos');
@@ -44,17 +52,6 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-        <div>
-          <label htmlFor="userType">Tipo de Usuario:</label>
-          <select
-            id="userType"
-            value={userType}
-            onChange={(e) => setUserType(e.target.value as 'Maestro' | 'Mantenimiento')}
-          >
-            <option value="Maestro">Maestro</option>
-            <option value="Mantenimiento">Mantenimiento</option>
-          </select>
         </div>
         <button type="submit">Iniciar Sesión</button>
       </form>
