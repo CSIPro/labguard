@@ -16,7 +16,7 @@ return(
         IdReporte= {IdReporte}
         Labs={Labs}></VistaReporte>
          <Link to={{pathname:`/Reporte/${Nombre}/${Id}`}}><button>Hacer Reporte</button></Link><br />    
-       <Link to={{pathname:`/`}}><button>Regresar</button></Link><br />
+       <Link to={{pathname:`/`}}><button>Regresarnyah</button></Link><br />
     </main>
 )
 }
