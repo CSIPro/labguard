@@ -16,16 +16,23 @@ function App() {
   const [LabValue, setLabValue] = useState(laboratorios);
 
   return (
-    <main>
-      <h1 className="text-2xl font-semibold text-center">Bienvenio a LabGuard</h1>
-      <div className="min-h-screen bg-customCream flex flex-col items-center justify-center">
+    // Contenedor principal
+    <main className="min-h-screen bg-gray-100 flex flex-col items-center">
+      {/* Contenedor de la tarjeta de usuario con fondo customCream */}
+      <div className="bg-customCream shadow-lg rounded-lg p-6 mb-6 text-center w-full h-60 flex flex-col items-center justify-center">
+        {/* Verifica si hay información de usuario disponible */}
         {persona ? (
-          <PersonaCard
-            idPersona={persona.idPersona}
-            NombrePersonal={persona.NombrePersonal}
-            Ocupacion={persona.Ocupacion}
-            ImagenPerfil={persona.ImagenPerfil}
-          />
+          <>
+            {/* Muestra el nombre y ocupación del usuario */}
+            <h1 className="text-2xl font-semibold whitespace-nowrap">{persona.NombrePersonal}</h1>
+            <p className="text-lg text-gray-600 whitespace-nowrap">{persona.Ocupacion}</p>
+            <PersonaCard
+              idPersona={persona.idPersona}
+              NombrePersonal={persona.NombrePersonal}
+              Ocupacion={persona.Ocupacion}
+              ImagenPerfil={persona.ImagenPerfil}
+            />
+          </>
         ) : (
           <p>No hay información de usuario disponible</p>
         )}
