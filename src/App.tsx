@@ -37,10 +37,10 @@ function App() {
           <p>No hay información de usuario disponible</p>
         )}
       </div>
-      <h2>Lista de laboratorios existentes</h2>
+      <h2 className="text-xl font-bold text-colorNameUser my-3">Lista de laboratorios existentes</h2>
       <ul>
         {LabValue.map((Labs) => (
-          <li key={Labs.id} className="mb-4"> {/* Espaciado entre los elementos de la lista */}
+          <li key={Labs.id} className="my-6 mb-4"> {/* Espaciado entre los elementos de la lista */}
           {/* Cambia 'text-blue-500' por el color que desees */}
           <span className="text-textoLabs px-5">{Labs.Nombre}</span>
             <Link to={{ pathname: `/ListadoReporte/${Labs.Nombre}/${Labs.id}` }}>
