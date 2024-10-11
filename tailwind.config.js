@@ -12,6 +12,7 @@ export default {
         bordercolororange: '#F99C0A',
         colorButtonOrange: '#FCA61F',
         colorhoverButton: '#f98d0a',
+        textoLabs: '#40201E',
       },
     },
   },

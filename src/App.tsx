@@ -8,10 +8,10 @@ import { useUser } from './Pages/UserContext';
 function App() {
   const { persona } = useUser();
   const laboratorios = [
-    { id: 1, Nombre: "Lab quimica 1" },
-    { id: 2, Nombre: "Lab quimica 2" },
-    { id: 3, Nombre: "Lab quimica 3" },
-    { id: 4, Nombre: "Lab quimica 4" }
+    { id: 1, Nombre: "Laboratorio quimica 1" },
+    { id: 2, Nombre: "Laboratorio quimica 2" },
+    { id: 3, Nombre: "Laboratorio quimica 3" },
+    { id: 4, Nombre: "Laboratorio quimica 4" }
   ];
   const [LabValue, setLabValue] = useState(laboratorios);
 
@@ -40,10 +40,11 @@ function App() {
       <h2>Lista de laboratorios existentes</h2>
       <ul>
         {LabValue.map((Labs) => (
-          <li key={Labs.id}>
-            {Labs.Nombre}
+          <li key={Labs.id} className="mb-4"> {/* Espaciado entre los elementos de la lista */}
+          {/* Cambia 'text-blue-500' por el color que desees */}
+          <span className="text-textoLabs px-5">{Labs.Nombre}</span>
             <Link to={{ pathname: `/ListadoReporte/${Labs.Nombre}/${Labs.id}` }}>
-              <button className="border-2 border-white px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-white transition duration-300 opacity-80">Historial</button>
+              <button className="border-2 border-pink px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-white transition duration-300 opacity-80">Historial</button>
             </Link>
             <Link to={{ pathname: `/Reporte/${Labs.Nombre}/${Labs.id}` }}>
               <button className="border-2 border-white px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-white transition duration-300 opacity-80">Hacer un reporte</button>
