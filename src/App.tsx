@@ -17,7 +17,7 @@ function App() {
 
   return (
     // Contenedor principal
-    <main className="min-h-screen bg-gray-100 flex flex-col items-center">
+    <main className="min-h-screen bg-backgroundColor flex flex-col items-center">
       {/* Contenedor de la tarjeta de usuario con fondo customCream */}
       <div className="bg-customCream p-6 mb-6 text-center w-full h-80 flex flex-col items-center justify-center">
         {/* Verifica si hay información de usuario disponible */}
@@ -43,10 +43,10 @@ function App() {
           <li key={Labs.id}>
             {Labs.Nombre}
             <Link to={{ pathname: `/ListadoReporte/${Labs.Nombre}/${Labs.id}` }}>
-              <button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">Historial</button>
+              <button className="border-1 border-white px-4 py-2 rounded-sm bg-colorButtonOrange hover:bg-gray-300 text-black transition duration-300">Historial</button>
             </Link>
             <Link to={{ pathname: `/Reporte/${Labs.Nombre}/${Labs.id}` }}>
-              <button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">Hacer un reporte</button>
+              <button className="border-2 border-white px-4 py-2 rounded-sm bg-colorButtonOrange hover:bg-gray-300 text-black transition duration-300">Hacer un reporte</button>
             </Link>
           </li>
         ))}

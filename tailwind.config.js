@@ -8,6 +8,9 @@ export default {
     extend: {
       colors: {
         customCream: '#FFF1CE', // Color personalizado
+        backgroundColor: '#FFF9F2',
+        bordercolororange: '#F99C0A',
+        colorButtonOrange: '#FCA61F',
       },
     },
   },
