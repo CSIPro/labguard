@@ -11,6 +11,7 @@ export default {
         backgroundColor: '#FFF9F2',
         bordercolororange: '#F99C0A',
         colorButtonOrange: '#FCA61F',
+        colorhoverButton: '#f98d0a',
       },
     },
   },

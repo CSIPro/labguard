@@ -43,10 +43,10 @@ function App() {
           <li key={Labs.id}>
             {Labs.Nombre}
             <Link to={{ pathname: `/ListadoReporte/${Labs.Nombre}/${Labs.id}` }}>
-              <button className="border-1 border-bordercolororange px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-gray-300 text-black transition duration-300 opacity-80">Historial</button>
+              <button className="border-1 bordercolororange px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-black transition duration-300 opacity-80">Historial</button>
             </Link>
             <Link to={{ pathname: `/Reporte/${Labs.Nombre}/${Labs.id}` }}>
-              <button className="border-2 border-white px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-gray-300 text-black transition duration-300 opacity-80">Hacer un reporte</button>
+              <button className="border-2 border-white px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-black transition duration-300 opacity-80">Hacer un reporte</button>
             </Link>
           </li>
         ))}
