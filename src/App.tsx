@@ -19,7 +19,7 @@ function App() {
     // Contenedor principal
     <main className="min-h-screen bg-gray-100 flex flex-col items-center">
       {/* Contenedor de la tarjeta de usuario con fondo customCream */}
-      <div className="bg-customCream p-6 mb-6 text-center w-full h-60 flex flex-col items-center justify-center">
+      <div className="bg-customCream p-6 mb-6 text-center w-full h-80 flex flex-col items-center justify-center">
         {/* Verifica si hay información de usuario disponible */}
         {persona ? (
           <>
