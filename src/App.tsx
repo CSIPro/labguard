@@ -18,7 +18,7 @@ function App() {
   return (
     <main>
       <h1 className="text-2xl font-semibold text-center">Bienvenio a LabGuard</h1>
-      <div className="rounded-md bg-violet-400">
+      <div className="min-h-screen bg-customCream flex flex-col items-center justify-center">
         {persona ? (
           <PersonaCard
             idPersona={persona.idPersona}
