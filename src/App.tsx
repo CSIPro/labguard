@@ -35,7 +35,7 @@ function App() {
             </div>
           </div>
         )}
-        {!persona && <h1 className="text-2xl font-semibold ">Bienvenido a LabGuard</h1>}
+        {!persona && <h1 className="text-2xl font-semibold text-center">Bienvenido a LabGuard</h1>}
       </header>
       {/* Fin de la sección de encabezado */}
 
