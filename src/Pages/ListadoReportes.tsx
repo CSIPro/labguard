@@ -3,7 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { LabsContext } from "../main";
 
-export default function ListaReporte(){
+
+const ListaReporte:React.FC=({})=>{
 
 let {Nombre,Id} = useParams()
 const [Labs,setLabs] = useContext(LabsContext);
@@ -41,3 +42,5 @@ console.log(filteredLabs)
         </main>
     )
 }
+
+export default ListaReporte;
