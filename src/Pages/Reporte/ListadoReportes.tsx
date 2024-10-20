@@ -1,8 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useContext } from "react";
-import { LabsContext } from "../main";
-
+import { LabsContext } from "../../main";
 
 const ListaReporte:React.FC=({})=>{
 

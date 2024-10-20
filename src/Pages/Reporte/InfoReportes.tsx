@@ -3,8 +3,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import { LabsContext } from "../main";
-import { VistaReporte } from "../components/Vista-Reporte/Vista-Reporte";
+import { LabsContext } from "../../main";
+import { VistaReporte } from "../../components/Vista-Reporte/Vista-Reporte";
 export default function InfoReporte(){
 const {IdReporte,Nombre, Id}= useParams()
 console.log(useParams())

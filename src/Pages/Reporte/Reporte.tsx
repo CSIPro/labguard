@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { set, useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
-import Reloj from "../components/Reloj/Reloj"
-import { LabReporte, LabsContext } from "../main";
-
+import { LabReporte, LabsContext } from "../../main";
+import Clock from "../../components/Reloj/Reloj";
 const opciones = [
   { label: "Mantenimiento de Equipo", value: "MantEquipo" },
   { label: "Mantenimiento de Instalación", value: "MantInstalacion" },
@@ -87,8 +86,8 @@ export default function Reporte() {
       <h1>Registrar Reporte {Nombre} </h1>
       <h1>Con el id {Id}</h1>
       <h4>Fecha actual del reporte</h4>
-      <Reloj></Reloj>
       <div>
+      <Clock />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             {opciones.map((opcion) => (
