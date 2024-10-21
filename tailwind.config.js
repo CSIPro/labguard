@@ -7,8 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        customCream: '#FFF1CE', // Color personalizado
-        backgroundColor: '#FFF9F2',
+        customCream: '#FFF1CE', // Color header inicio
+        colorNavHeaderPag: 'rgba(249, 156, 10, 0.57)',
+        backgroundColor: '#FFF9F2', //Color fondo
         bordercolororange: '#F99C0A',
         colorButtonOrange: '#FCA61F',
         colorhoverButton: '#f98d0a',
