@@ -5,10 +5,10 @@ import PersonaCard from '../../components/UsuarioPresentacion/PresentacionUsuari
 const Inicio = () => {
     const {persona} =useUser()
     const laboratorios = [
-      { id: 1, Nombre: "Laboratorio quimica 1" },
-      { id: 2, Nombre: "Laboratorio quimica 2" },
-      { id: 3, Nombre: "Laboratorio quimica 3" },
-      { id: 4, Nombre: "Laboratorio quimica 4" }
+      { id: 1, Nombre: "Laboratorio Química 1" },
+      { id: 2, Nombre: "Laboratorio Química 2" },
+      { id: 3, Nombre: "Laboratorio Química 3" },
+      { id: 4, Nombre: "Laboratorio Química 4" }
     ];
     const [LabValue, setLabValue] = useState(laboratorios);
   
