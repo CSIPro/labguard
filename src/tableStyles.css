@@ -1,25 +1,66 @@
 /* styles.css */
 .custom-table {
-    background-color: #FFF7E2; /* Cambia el color de fondo de la tabla */
-    border-radius: 10px; /* Bordes redondeados */
-    border: 3px solid #F9C68A; /* Agrega un borde alrededor de la tabla */
-    overflow: hidden; /* Para asegurar que los bordes redondeados se vean bien */
-  }
-  
-  .custom-table .ant-table {
-    /* border: none; /* Elimina el borde de la tabla */
-        width: 100%;
-        /* Asegura que la tabla ocupe el 100% de su contenedor */
-        height: 100%;
-        /* Asegura que la tabla ocupe el 100% de la altura de su contenedor */
-  }
-  
-  .custom-table .ant-table-thead > tr > th {
-    background-color: #FFEEC5; /* Color de fondo para el encabezado */
-    color: #40201E; /* Color del texto en el encabezado */
-  }
-  
-  .custom-table .ant-table-tbody > tr > td {
-    background-color: #FFEEC5; /* Color de fondo de las celdas */
-  }
-  
+    background-color: #FFF7E2;
+    /* Cambia el color de fondo de la tabla */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    border: 3px solid #F9C68A;
+    /* Agrega un borde alrededor de la tabla */
+    overflow: hidden;
+    /* Para asegurar que los bordes redondeados se vean bien */
+}
+
+.custom-table .ant-table {
+    width: 100%;
+    /* Asegura que la tabla ocupe el 100% de su contenedor */
+    height: 100%;
+    /* Asegura que la tabla ocupe el 100% de la altura de su contenedor */
+    border-collapse: collapse;
+    /* Asegura que los bordes se combinen */
+}
+
+/* Bordes solo en la parte superior e inferior de cada fila */
+.custom-table .ant-table-tbody>tr {
+    border-top: 1px solid #40201E;
+    /* Línea superior */
+    border-bottom: 1px solid #40201E;
+    /* Línea inferior */
+}
+
+/* Cambiar el color de las filas al pasar el mouse */
+.custom-table .ant-table-tbody>tr:hover {
+    background-color: #ffeec5;
+    /* Color de fondo al pasar el mouse */
+}
+
+.custom-table .ant-table-thead>tr>th {
+    background-color: #ffeec5;
+    /* Color de fondo para el encabezado */
+    color: #40201E;
+    /* Color del texto en el encabezado */
+}
+
+/* Estilo para las celdas del cuerpo */
+.custom-table .ant-table-tbody>tr>td {
+    background-color: #fff5dd;
+    /* Color de fondo de las celdas */
+    padding: 8px;
+    /* Espaciado interno */
+}
+
+/* Estilo para filas sin registros */
+.custom-table .ant-table-tbody>tr.no-records>td {
+    background-color: #FFEEC5;
+    /* Color de fondo para filas vacías */
+    color: #40201E;
+    /* Color del texto para filas vacías */
+    text-align: center;
+    /* Alinear el texto al centro */
+}
+
+/* Borde derecho solo a las columnas de encabezado específicas */
+.custom-table .ant-table-thead > tr > th:nth-child(1),
+.custom-table .ant-table-thead > tr > th:nth-child(2),
+.custom-table .ant-table-thead > tr > th:nth-child(3) {
+    border-right: 3px solid #F9C68A !important; /* Borde derecho en las tres primeras columnas del encabezado */
+}
