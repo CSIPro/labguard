@@ -5,6 +5,7 @@ import { LabsContext } from "../../main";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
+
 const ListaReporte:React.FC=({})=>{
 
 let {Nombre,Id} = useParams()
@@ -42,8 +43,8 @@ console.log(filteredLabs)
             Lista de Reportes
           </h1>
         </header>
-        <h1>
-          Reportes del {Nombre} Id: {Id}
+        <h1 className="font-inter font-medium">
+          Reportes del {Nombre} ID: {Id}
         </h1>
         <div>
           <ul>

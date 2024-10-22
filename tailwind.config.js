@@ -19,7 +19,8 @@ export default {
       },
 
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'], // nuevo: Se agrega la tipografía Poppins
+        poppins: ['Poppins', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'], // nuevo: Se agrega la tipografía Poppins
       },
     },
   },
