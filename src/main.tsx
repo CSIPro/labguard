@@ -32,6 +32,7 @@ export interface LabReporte {
   Comentarios: string;
   NombreSoli: string;
   Estado: string;
+  Asunto: string;
 }
 
 // Componente de protección de ruta inline

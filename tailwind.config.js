@@ -15,6 +15,7 @@ export default {
         colorButtonOrange: '#FCA61F',
         colorhoverButton: '#f98d0a',
         textoLabs: '#40201E',
+        colorColumn1: '#FFEEC5',
         colorNameUser: '#1C140D',
       },
 

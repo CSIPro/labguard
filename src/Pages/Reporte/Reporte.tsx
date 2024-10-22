@@ -37,6 +37,7 @@ export default function Reporte() {
     defaultValues: {
       primaryOption: "MantEquipo",
       secondaryOption: MantEquipo[0].Nombre,
+      asunto: "",
       descripcion: "",
       comentarios: "",
       NombreSoli: "",
@@ -69,6 +70,7 @@ export default function Reporte() {
       TipoMant: data.primaryOption,
       MantObjeto: data.secondaryOption,
       Manotro:data.Otros,
+      Asunto: data.asunto,
       Descripcion: data.descripcion,
       Comentarios: data.comentarios,
       NombreSoli: data.NombreSoli,
@@ -127,6 +129,10 @@ export default function Reporte() {
             </select>
             Menciona otro:
             <input type="text" id="otro" {...register("Otros") } />
+          </div>
+          <div>
+            <h4>Asunto del reporte:</h4> {/* nuevo: Título del reporte para que el usuario pueda especificar un asunto */}
+            <input type="text" {...register("asunto")} placeholder="Asunto" />
           </div>
           <div>
             Descripcion del problema <br />
