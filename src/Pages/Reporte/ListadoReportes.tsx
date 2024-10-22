@@ -4,7 +4,8 @@ import { useContext } from "react";
 import { LabsContext } from "../../main";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
+import { Space, Table, Tag } from 'antd';
+import type { TableProps } from 'antd';
 
 const ListaReporte:React.FC=({})=>{
 
@@ -43,8 +44,11 @@ console.log(filteredLabs)
             Lista de Reportes
           </h1>
         </header>
-        <h1 className="font-inter font-medium">
-          Reportes del {Nombre} ID: {Id}
+        <h1 className="text-textoLabs font-inter text-lg font-medium mt-6">
+          Reportes del {Nombre}
+        </h1>
+        <h1 className="text-textoLabs font-inter text-lg font-semibold">
+        ID: {Id}
         </h1>
         <div>
           <ul>
