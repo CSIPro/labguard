@@ -7,8 +7,11 @@
   }
   
   .custom-table .ant-table {
-    /*border: none; /* Elimina el borde de la tabla */
-    width: 100%; /* Asegura que la tabla ocupe el 100% de su contenedor */
+    /* border: none; /* Elimina el borde de la tabla */
+        width: 100%;
+        /* Asegura que la tabla ocupe el 100% de su contenedor */
+        height: 100%;
+        /* Asegura que la tabla ocupe el 100% de la altura de su contenedor */
   }
   
   .custom-table .ant-table-thead > tr > th {

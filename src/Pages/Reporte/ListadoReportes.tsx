@@ -112,7 +112,7 @@ const ListaReporte: React.FC = () => {
           width: "70%",
           height: "400px",
           overflowY: "auto",
-          padding: "20px",
+          padding: "0px",
           borderRadius: "8px",
           border: "2px solid #e0e0e0",
         }}
@@ -125,6 +125,7 @@ const ListaReporte: React.FC = () => {
           pagination={false}
           bordered
           size="large"
+          style={{ width: "100%" }} // nuevo: Asegura que la tabla use el 100% del contenedor
         />
       </div>
 
