@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { Space, Table, Tag } from 'antd';
 import type { TableProps } from 'antd';
+import "../../tableStyles.css"; // Ajusta la ruta a dos niveles hacia arriba
+ // Ajusta la ruta según la ubicación del archivo
 
 // Componente ListaReporte
 const ListaReporte: React.FC = () => {
@@ -105,15 +107,24 @@ const ListaReporte: React.FC = () => {
       </h1>
 
       {/* Contenedor de la tabla con ancho específico */}
-      <div style={{ width: '70%', height: '400px', overflowY: 'auto', padding: '20px', borderRadius: '8px', border: '1px solid #e0e0e0'}}>
+      <div
+        style={{
+          width: "70%",
+          height: "400px",
+          overflowY: "auto",
+          padding: "20px",
+          borderRadius: "8px",
+          border: "1px solid #e0e0e0",
+        }}
+      >
         {/* Tabla de reportes */}
-        <Table 
+        <Table
+          className="custom-table"
           columns={columns}
-          dataSource={data} 
-          pagination={false} 
-          bordered 
-          style={{ borderRadius: '80px' }}
-          size="large" // nuevo: Aumenta el tamaño general de la tabla
+          dataSource={data}
+          pagination={false}
+          bordered
+          size="large"
         />
       </div>
 

@@ -1,0 +1,20 @@
+/* styles.css */
+.custom-table {
+    background-color: #FFF7E2; /* Cambia el color de fondo de la tabla */
+    border-radius: 8px; /* Bordes redondeados */
+  }
+  
+  .custom-table .ant-table {
+    border: none; /* Elimina el borde de la tabla */
+    width: 100%; /* Asegura que la tabla ocupe el 100% de su contenedor */
+  }
+  
+  .custom-table .ant-table-thead > tr > th {
+    background-color: #FFEEC5; /* Color de fondo para el encabezado */
+    color: #40201E; /* Color del texto en el encabezado */
+  }
+  
+  .custom-table .ant-table-tbody > tr > td {
+    background-color: #FFEEC5; /* Color de fondo de las celdas */
+  }
+  
