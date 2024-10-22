@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PersonaCard from './components/UsuarioPresentacion/PresentacionUsuario';
 import { useUser } from './Pages/UserContext';
+import { Button } from "antd";
 
 function App() {
   const { persona } = useUser();
@@ -15,10 +16,20 @@ function App() {
   ];
   const [LabValue, setLabValue] = useState(laboratorios);
 
+  function button() {
+    alert("Pulsaste el botón uwu")
+  }
+  
+  
   return (
     <main>
       <h1 className="text-2xl font-semibold text-center">Bienvenio a LabGuard</h1>
       <div className="rounded-md bg-violet-400">
+        <Button
+          type='primary'
+          onClick={button}
+          >Soy un botón uwu
+        </Button>
         {persona ? (
           <PersonaCard
             idPersona={persona.idPersona}

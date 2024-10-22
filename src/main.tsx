@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import Reporte from './Pages/Reporte';
@@ -8,9 +7,15 @@ import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import ListadoReportes from './Pages/ListadoReportes';
 import InfoReporte from './Pages/InfoReportes';
 import Login from './Pages/Login';
-import { UserProvider, useUser } from './Pages/UserContext';  // Importa UserProvider y useUser
+import Comentarios from './Pages/Comentarios'; // Importa el nuevo componente
+import { UserProvider, useUser } from './Pages/UserContext'; // Importa UserProvider y useUser
 
-export const LabsContext = React.createContext<[LabReporte[], React.Dispatch<React.SetStateAction<LabReporte[]>>]>([[], () => {}]);
+export const LabsContext = React.createContext<[
+  LabReporte[], 
+  React.Dispatch<React.SetStateAction<LabReporte[]>>,
+  { [key: string]: Comentario[] }, // Comentarios por reporte
+  React.Dispatch<React.SetStateAction<{ [key: string]: Comentario[] }>> // Función para actualizar comentarios
+]>([[], () => {}, {}, () => {}]);
 
 export interface LabReporte {
   Id: number;
@@ -25,6 +30,12 @@ export interface LabReporte {
   Comentarios: string;
   NombreSoli: string;
   Estado: string;
+}
+
+export interface Comentario {
+  texto: string;
+  fecha: string;
+  nombreUsuario: string; // Almacena el nombre del usuario
 }
 
 // Componente de protección de ruta inline
@@ -61,13 +72,19 @@ const router = createBrowserRouter([
   {
     path: "/Login",
     element: <Login />
+  },
+  {
+    path: "/Comentarios/:Id",
+    element: <Comentarios />
   }
 ]);
 
 function Root() {
   const [Labs, setLabs] = useState<LabReporte[]>([]);
+  const [comentariosAdicionales, setComentariosAdicionales] = useState<{ [key: string]: Comentario[] }>({}); // Estado para comentarios
+
   return (
-    <LabsContext.Provider value={[Labs, setLabs]}>
+    <LabsContext.Provider value={[Labs, setLabs, comentariosAdicionales, setComentariosAdicionales]}>
       <UserProvider>
         <RouterProvider router={router}></RouterProvider>
       </UserProvider>

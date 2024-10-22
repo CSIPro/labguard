@@ -3,6 +3,7 @@ import { set, useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import Reloj from "../components/Reloj/Reloj"
 import { LabReporte, LabsContext } from "../main";
+import Collapse from "../Pages/EjemploCollapse/PaginaCollapse";
 
 const opciones = [
   { label: "Mantenimiento de Equipo", value: "MantEquipo" },
@@ -134,7 +135,7 @@ export default function Reporte() {
             <textarea  {...register("descripcion")}></textarea>
           </div>
           <div>
-            Comentarios adicionales <br />
+            Comentarios <br />
             <textarea  {...register("comentarios")}></textarea>
           </div>
           <div>
@@ -150,7 +151,10 @@ export default function Reporte() {
           <Link to="/"><button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">Menu</button></Link> <br />
           <Link to={{ pathname: `/ListadoReporte/${Nombre}/${Id}` }}><button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">Ver Lista de Reportes</button></Link>
 
-
+          <div>
+            <Collapse>
+            </Collapse>
+          </div>
         </form>
 
       </div>
