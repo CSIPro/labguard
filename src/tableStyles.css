@@ -40,6 +40,11 @@
     /* Color del texto en el encabezado */
 }
 
+/* Aplicar borde inferior solo a las celdas del encabezado */
+.custom-table .ant-table-thead > tr > th {
+    border-bottom: 3px solid #F9C68A !important; /* Línea inferior solo en el encabezado */
+}
+
 /* Estilo para las celdas del cuerpo */
 .custom-table .ant-table-tbody>tr>td {
     background-color: #fff5dd;
@@ -57,6 +62,8 @@
     text-align: center;
     /* Alinear el texto al centro */
 }
+
+
 
 /* Borde derecho solo a las columnas de encabezado específicas */
 .custom-table .ant-table-thead > tr > th:nth-child(1),
