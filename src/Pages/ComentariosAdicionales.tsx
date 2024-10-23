@@ -1,35 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useUser } from './UserContext';
 import { useNavigate, useParams } from 'react-router-dom';
-import { LabsContext, Comentario } from '../main';
+import { LabsContext, Comentario } from '../main'; // Asegúrate de que esta ruta sea correcta
 import { Table } from 'antd';
 
 const ComentariosAdicionales: React.FC = () => {
   const { persona } = useUser();
-  const { Id } = useParams<{ Id: string }>();
+  const { IdReporte } = useParams<{ IdReporte: string }>(); // Cambié Id a IdReporte
   const [comentario, setComentario] = useState('');
   const [comentarios, setComentarios] = useState<Comentario[]>([]);
   const navigate = useNavigate();
-  const [labs, setLabs, comentariosAdicionales, setComentariosAdicionales] = React.useContext(LabsContext);
+  
+  // Obtén el contexto
+  const [labs, setLabs, comentariosAdicionales, setComentariosAdicionales] = useContext(LabsContext)!;
 
   useEffect(() => {
-    if (Id && comentariosAdicionales[Id]) {
-      setComentarios(comentariosAdicionales[Id]);
+    if (IdReporte && comentariosAdicionales[IdReporte]) { // Cambié Id a IdReporte
+      setComentarios(comentariosAdicionales[IdReporte]);
     }
-  }, [Id, comentariosAdicionales]);
+  }, [IdReporte, comentariosAdicionales]);
 
   const handleAddComentario = () => {
-    if (comentario.trim() !== '' && persona && Id) {
+    if (comentario.trim() !== '' && persona && IdReporte) { // Cambié Id a IdReporte
       const nuevoComentario: Comentario = {
         texto: comentario,
         fecha: new Date().toLocaleString(),
         nombreUsuario: persona.NombrePersonal,
       };
 
-      const updatedComentarios = [...(comentariosAdicionales[Id] || []), nuevoComentario];
-      setComentariosAdicionales(prev => ({ ...prev, [Id]: updatedComentarios }));
+      const updatedComentarios = [...(comentariosAdicionales[IdReporte] || []), nuevoComentario]; // Cambié Id a IdReporte
+      setComentariosAdicionales(prev => ({ ...prev, [IdReporte]: updatedComentarios })); // Cambié Id a IdReporte
       setComentarios(updatedComentarios);
-      setComentario('');
+      setComentario(''); // Limpiar el campo de texto
     }
   };
 
@@ -51,6 +53,7 @@ const ComentariosAdicionales: React.FC = () => {
     },
   ];
 
+  // Transformar los comentarios a la forma que necesita la tabla
   const dataSource = comentarios.map((c, index) => ({
     key: index,
     nombreUsuario: c.nombreUsuario,
@@ -67,6 +70,8 @@ const ComentariosAdicionales: React.FC = () => {
           <p><strong>Ocupación:</strong> {persona.Ocupacion}</p>
         </div>
       )}
+      {/* Mostrar ID del reporte */}
+      <p><strong>ID del Reporte:</strong> {IdReporte}</p> {/* Cambié Id a IdReporte */}
       <textarea
         value={comentario}
         onChange={(e) => setComentario(e.target.value)}

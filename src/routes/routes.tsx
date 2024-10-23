@@ -4,40 +4,48 @@ import App from "../App";
 import Reporte from "../Pages/Reporte/Reporte";
 import InfoReporte from "../Pages/Reporte/InfoReportes";
 import Login from "../Pages/Login";
+import ComentariosAdicionales from "../Pages/ComentariosAdicionales";
 import { UserProvider } from "../Pages/UserContext";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
+
 const routes = createBrowserRouter([
-    {
-        path: "/",
-        element: <App /> /* (
-          <ProtectedRoute element={<App />} />
-        ) */
-      },
-      {
-        path: "/Reporte/:Nombre/:Id",
-        element: <Reporte /> /* (
-          <ProtectedRoute element={<Reporte />} />
-        ) */
-      },
-      {
-        path: "/ListadoReporte/:Nombre/:Id",
-        element: <ListadoReportes /> /* (
-          <ProtectedRoute element={<ListadoReportes />} />
-        ) */
-      },
-      {
-        path: "/InfoReporte/:IdReporte/:Nombre/:Id",
-        element: <InfoReporte /> /* (
-          <ProtectedRoute element={<InfoReporte />} />
-        ) */
-      },
-      {
-        path: "/Login",
-        element: <Login />
-      }
+  {
+    path: "/",
+    element: <App /> /* (
+      <ProtectedRoute element={<App />} />
+    ) */
+  },
+  {
+    path: "/Reporte/:Nombre/:Id",
+    element: <Reporte /> /* (
+      <ProtectedRoute element={<Reporte />} />
+    ) */
+  },
+  {
+    path: "/ListadoReporte/:Nombre/:Id",
+    element: <ListadoReportes /> /* (
+      <ProtectedRoute element={<ListadoReportes />} />
+    ) */
+  },
+  {
+    path: "/InfoReporte/:IdReporte/:Nombre/:Id",
+    element: <InfoReporte /> /* (
+      <ProtectedRoute element={<InfoReporte />} />
+    ) */
+  },
+  {
+    path: "/ComentariosAdicionales/:IdReporte/:Nombre/:Id", // Nueva ruta para comentarios adicionales
+    element: <ComentariosAdicionales />
+  },
+  {
+    path: "/Login",
+    element: <Login />
+  }
 ]);
+
 const Router: React.FC = () => {
-    return <RouterProvider router={routes} />;
-  };
+  return <RouterProvider router={routes} />;
+};
+
 export default Router;
