@@ -14,10 +14,12 @@ export default {
         bordercolororange: '#F99C0A',
         colorButtonOrange: '#FCA61F',
         colorhoverButton: '#f98d0a',
+        colorhoverBrown: '#2f1716',
         textoLabs: '#40201E',
         colorColumn1: '#FFEEC5',
         colorNameUser: '#1C140D',
         backgroundTable: '#FFEEC5',
+        buttonPrueba: '#F9C68A',
       },
 
       fontFamily: {

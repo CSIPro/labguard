@@ -138,7 +138,7 @@ const ListaReporte: React.FC = () => {
           </Link>
           <br />
           <Link to={{ pathname: `/Reporte/${Nombre}/${Id}` }}>
-            <button className="border-2 border-white px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-white transition duration-300 opacity-80">Redactar Reporte</button>
+          <button className="border-2 border-white px-4 py-2 rounded-lg bg-textoLabs hover:bg-colorhoverBrown text-white transition duration-300 opacity-80">Redactar Reporte</button>
           </Link>
         </div>
       </form>
