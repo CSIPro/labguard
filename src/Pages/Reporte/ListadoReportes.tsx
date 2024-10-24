@@ -134,7 +134,7 @@ const ListaReporte: React.FC = () => {
       <form action="">
         <div style={{ marginTop: '40px' }}> {/* nuevo: Se agregó un margen superior para separar los botones */}
           <Link to={{ pathname: `/` }}>
-            <button>Regresar</button>
+            <button className="border-2 border-white px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-white transition duration-300 opacity-80">Regresar</button>
           </Link>
           <br />
           <Link to={{ pathname: `/Reporte/${Nombre}/${Id}` }}>
