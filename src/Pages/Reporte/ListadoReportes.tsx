@@ -102,7 +102,7 @@ const ListaReporte: React.FC = () => {
       <h1 className="text-textoLabs font-inter text-lg font-medium mt-6">
         Reportes del {Nombre}
       </h1>
-      <h1 className="text-textoLabs font-inter text-lg font-semibold">
+      <h1 className="text-textoLabs font-inter text-lg font-semibold" style={{ marginBottom: '20px' }}>
         ID: {Id}
       </h1>
 
@@ -113,7 +113,7 @@ const ListaReporte: React.FC = () => {
           height: "400px",
           overflowY: "auto",
           padding: "0px",
-          borderRadius: "8px",
+          borderRadius: "12px",
           border: "2px solid #e0e0e0",
         }}
       >
@@ -129,8 +129,10 @@ const ListaReporte: React.FC = () => {
         />
       </div>
 
+
+
       <form action="">
-        <div>
+        <div style={{ marginTop: '40px' }}> {/* nuevo: Se agregó un margen superior para separar los botones */}
           <Link to={{ pathname: `/` }}>
             <button>Regresar</button>
           </Link>
