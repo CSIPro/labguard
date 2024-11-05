@@ -94,9 +94,9 @@ export default function Reporte() {
       <div className="text-lg font-inter text-textoLabs">
       <Clock />
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
+        <div style={{ display: "flex", gap: "80px" }}> {/* NUEVO: Usar Flexbox con gap para espaciar ambas opciones de radio uniformemente */}
             {opciones.map((opcion) => (
-              <label key={opcion.value} htmlFor={opcion.value}>
+              <label key={opcion.value} htmlFor={opcion.value}> {/* NUEVO: Se agrega margen derecho para separar cada opción */}
                 <input
                   type="radio"
                   id={opcion.value}
@@ -109,7 +109,7 @@ export default function Reporte() {
             ))}
           </div>
 
-          <div>
+          <div style={{ marginTop: "20px" }}> {/* NUEVO: Se agrega margen superior para separar el select del grupo de radio buttons */}
             <select {...register("secondaryOption")}>
               {primaryOption === "MantEquipo"
                 ? MantEquipo.map((opcion) => (
@@ -128,10 +128,12 @@ export default function Reporte() {
                   
                 ))
                 
-              
+            
                 }
             </select>
-            Menciona otro:
+            <label style={{ display: "block", marginTop: "5px" }}> {/* NUEVO: Se agrega un estilo display block y margen para separar el input de texto */}
+      Menciona otro:
+    </label>
             <input type="text" id="otro" {...register("Otros") } />
           </div>
           <div>
