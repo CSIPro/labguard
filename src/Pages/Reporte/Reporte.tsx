@@ -9,9 +9,10 @@ const opciones = [
 ];
 
 const MantEquipo = [
-  { id: 1, Nombre: "Campana" },
-  { id: 2, Nombre: "Balvula" },
-  { id: 3, Nombre: "otros" }
+  { id: 1, Nombre: "Selecciona el Equipo" },
+  { id: 2, Nombre: "Campana" },
+  { id: 3, Nombre: "Válvula" },
+  { id: 4, Nombre: "Otros" }
 ];
 
 const MantInstalacion = [
