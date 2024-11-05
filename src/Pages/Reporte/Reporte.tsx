@@ -96,7 +96,7 @@ export default function Reporte() {
         <form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ display: "flex", gap: "80px" }}> {/* NUEVO: Usar Flexbox con gap para espaciar ambas opciones de radio uniformemente */}
             {opciones.map((opcion) => (
-              <label key={opcion.value} htmlFor={opcion.value}> {/* NUEVO: Se agrega margen derecho para separar cada opción */}
+              <label key={opcion.value} htmlFor={opcion.value} style={{ display: "block", marginTop: "20px" }}> {/* NUEVO: Se agrega margen derecho para separar cada opción */}
                 <input
                   type="radio"
                   id={opcion.value}
