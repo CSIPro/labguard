@@ -74,7 +74,7 @@ const ListaReporte: React.FC = () => {
   return (
     <main className="min-h-screen bg-backgroundColor flex flex-col items-center">
       <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center">
-        {/* Botón de regresar */}
+        {/* Botón de regresar 
         <button
           className="mr-2 p-0 bg-transparent border-none"
           aria-label="Regresar"
@@ -93,7 +93,7 @@ const ListaReporte: React.FC = () => {
               d="M15 12H3m0 0l6-6m-6 6l6 6"
             />
           </svg>
-        </button>
+        </button> */}
         {/* Título */}
         <h1 className="text-3xl font-extrabold text-center flex-grow text-colorArrowBack font-poppins">
           Lista de Reportes

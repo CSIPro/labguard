@@ -84,11 +84,14 @@ export default function Reporte() {
   }, 4000);
   return (
 
-    <main>
-      <h1>Registrar Reporte {Nombre} </h1>
-      <h1>Con el id {Id}</h1>
-      <h4>Fecha actual del reporte</h4>
-      <div>
+    <main className="min-h-screen bg-backgroundColor flex flex-col items-center">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center mb-4">
+      <h1 className="text-3xl font-extrabold text-center flex-grow text-colorArrowBack font-poppins">Registrar Reporte</h1>
+      </header>
+      <h1 className="text-lg font-inter text-textoLabs">{Nombre}</h1>
+      <h1 className="text-lg font-inter text-textoLabs mb-4">Con el <span className="font-bold">ID </span><span className="font-bold">{Id}</span></h1>
+      <h4 className="text-lg font-inter text-textoLabs">Fecha actual del reporte</h4>
+      <div className="text-lg font-inter text-textoLabs">
       <Clock />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
@@ -98,9 +101,10 @@ export default function Reporte() {
                   type="radio"
                   id={opcion.value}
                   value={opcion.value}
-                  {...register("primaryOption")}
+                  {...register("primaryOption")}  
                 />
                 {opcion.label}
+                
               </label>
             ))}
           </div>

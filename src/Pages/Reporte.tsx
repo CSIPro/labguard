@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import Reloj from "../components/Reloj/Reloj";
+
+
 const opciones = [
   { label: "Mantenimiento de Equipo", value: "MantEquipo" },
   { label: "Mantenimiento de Instalación", value: "MantInstalacion" },
@@ -36,8 +38,10 @@ export default function Reporte() {
   }, [setValue, primaryOption]);
 
   return (
-    <main>
+    <main className="min-h-screen bg-backgroundColor flex flex-col items-center">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center">
       <h1>Registrar Reporte</h1>
+      </header>
       <h4>Fecha actual del reporte</h4>
       <Reloj></Reloj>
       <div>
