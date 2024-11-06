@@ -95,7 +95,7 @@ export default function Reporte() {
       <div className="text-lg font-inter text-textoLabs">
       <Clock />
         <form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ display: "flex", gap: "80px" }}> {/* NUEVO: Usar Flexbox con gap para espaciar ambas opciones de radio uniformemente */}
+        <div style={{ display: "flex", gap: "260px" }}> {/* NUEVO: Usar Flexbox con gap para espaciar ambas opciones de radio uniformemente */}
             {opciones.map((opcion) => (
               <label key={opcion.value} htmlFor={opcion.value} style={{ display: "block", marginTop: "20px" }}> {/* NUEVO: Se agrega margen derecho para separar cada opción */}
                 <input
@@ -110,7 +110,7 @@ export default function Reporte() {
             ))}
           </div>
 
-          <div style={{ marginTop: "20px" }}> {/* NUEVO: Se agrega margen superior para separar el select del grupo de radio buttons */}
+          <div style={{ marginTop: "20px", display: "flex", alignItems: "center", gap: "10px" }}> {/* NUEVO: Se agrega margen superior para separar el select del grupo de radio buttons */}
             <select {...register("secondaryOption")}>
               {primaryOption === "MantEquipo"
                 ? MantEquipo.map((opcion) => (
@@ -132,18 +132,19 @@ export default function Reporte() {
             
                 }
             </select>
-            <label style={{ display: "block", marginTop: "5px" }}> {/* NUEVO: Se agrega un estilo display block y margen para separar el input de texto */}
-      Menciona otro:
-    </label>
-            <input type="text" id="otro" {...register("Otros") } />
+            {/*<label htmlFor="otro" style={{ marginBottom: "5px" }}>
+   Alineación de la etiqueta y el input
+  Menciona otro:
+</label> } 
+            <input type="text" id="otro" {...register("Otros") } /> */}
           </div>
-          <div>
-            <h4>Asunto del reporte:</h4> {/* nuevo: Título del reporte para que el usuario pueda especificar un asunto */}
-            <input type="text" {...register("asunto")} placeholder="Asunto" />
-          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "20px", marginLeft: "-0px" }}> {/* Margen negativo para mover a la izquierda */}
+  <h4 style={{ margin: 0 }}>Asunto del reporte:</h4>
+  <input type="text" {...register("asunto")} placeholder="Escriba el Asunto" style={{ width: "250px" }} />
+</div>
           <div>
             Descripcion del problema <br />
-            <textarea  {...register("descripcion")}></textarea>
+            <textarea  {...register("descripcion")} className="w-[750px]"></textarea>
           </div>
           <div>
             Comentarios adicionales <br />
