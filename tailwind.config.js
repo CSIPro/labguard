@@ -20,6 +20,8 @@ export default {
         colorNameUser: '#1C140D',
         backgroundTable: '#FFEEC5',
         buttonPrueba: '#F9C68A',
+        selectorButton: '#FFE0BD',
+        generalBorder: '#FF927444'
       },
 
       fontFamily: {
