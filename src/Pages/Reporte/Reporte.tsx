@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { LabReporte, LabsContext } from "../../main";
 import Clock from "../../components/Reloj/Reloj";
+
 const opciones = [
   { label: "Mantenimiento de Equipo", value: "MantEquipo" },
   { label: "Mantenimiento de Instalación", value: "MantInstalacion" },
@@ -12,54 +13,58 @@ const MantEquipo = [
   { id: 1, Nombre: "Selecciona el Equipo" },
   { id: 2, Nombre: "Campana" },
   { id: 3, Nombre: "Válvula" },
-  { id: 4, Nombre: "Otros" }
+  { id: 4, Nombre: "Otros" },
 ];
 
 const MantInstalacion = [
   { id: 1, Nombre: "Agua" },
   { id: 2, Nombre: "Gas" },
-  { id: 3, Nombre: "otro" }
+  { id: 3, Nombre: "Otros" },
 ];
+
 const Maestro = [
   { id: 1, Nombre: "Maria Elena" },
   { id: 2, Nombre: "Sapote con lechuga" },
   { id: 3, Nombre: "Cilantro" },
-  { id: 4, Nombre: "Don Jesus" }
-]
+  { id: 4, Nombre: "Don Jesus" },
+];
 
 export default function Reporte() {
-
-  const [Labs, setLabs] = useContext(LabsContext)
-
+  const [Labs, setLabs] = useContext(LabsContext);
   let { Nombre, Id } = useParams();
-
 
   const { register, watch, setValue, handleSubmit } = useForm({
     defaultValues: {
-      primaryOption: "MantEquipo",
-      secondaryOption: MantEquipo[0].Nombre,
+      primaryOption: "", // Sin selección inicial
+      secondaryOption: "",
       asunto: "",
       descripcion: "",
       comentarios: "",
       NombreSoli: "",
-      Otros:""
+      Otros: "",
     },
   });
 
+  const [mensaje, setMensaje] = useState("");
 
-  const [mensaje, setMensaje] = useState("")
+  const primaryOption = watch("primaryOption");
+  const secondaryOption = watch("secondaryOption");
+
+  useEffect(() => {
+    if (primaryOption) {
+      const defaultOption =
+        primaryOption === "MantEquipo"
+          ? MantEquipo[0].Nombre
+          : MantInstalacion[0].Nombre;
+      setValue("secondaryOption", defaultOption);
+    } else {
+      setValue("secondaryOption", "");
+    }
+  }, [primaryOption, setValue]);
 
   const handlemensaje = () => {
-    setMensaje("Se guardo correctamente")
-  }
-
-  
-  
-  const primaryOption = watch("primaryOption");
-  useEffect(() => {
-    setValue("secondaryOption", primaryOption === "MantEquipo" ? MantEquipo[0].Nombre : MantInstalacion[0].Nombre)
-
-  }, [setValue, primaryOption])
+    setMensaje("Se guardó correctamente");
+  };
 
   const onSubmit = (data: any) => {
     const newReporte: LabReporte = {
@@ -70,19 +75,24 @@ export default function Reporte() {
       HoraActual: new Date().toLocaleTimeString(),
       TipoMant: data.primaryOption,
       MantObjeto: data.secondaryOption,
-      Manotro:data.Otros,
+      Manotro: data.Otros,
       Asunto: data.asunto,
       Descripcion: data.descripcion,
       Comentarios: data.comentarios,
       NombreSoli: data.NombreSoli,
-      Estado: "En Revision"
+      Estado: "En Revision",
     };
     setLabs((prevLabs) => [...prevLabs, newReporte]);
-    console.log("Nuevo reporte: ", newReporte)
+    console.log("Nuevo reporte: ", newReporte);
   };
-  setTimeout(() => {
-    setMensaje("")
-  }, 4000);
+
+  useEffect(() => {
+    if (mensaje) {
+      const timer = setTimeout(() => setMensaje(""), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [mensaje]);
+
   return (
     <main className="min-h-screen bg-backgroundColor flex flex-col items-center">
       <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center mb-4">
@@ -102,16 +112,12 @@ export default function Reporte() {
         <Clock />
         <form onSubmit={handleSubmit(onSubmit)}>
           <div style={{ display: "flex", gap: "260px" }}>
-            {" "}
-            {/* NUEVO: Usar Flexbox con gap para espaciar ambas opciones de radio uniformemente */}
             {opciones.map((opcion) => (
               <label
                 key={opcion.value}
                 htmlFor={opcion.value}
                 style={{ display: "block", marginTop: "20px" }}
               >
-                {" "}
-                {/* NUEVO: Se agrega margen derecho para separar cada opción */}
                 <input
                   type="radio"
                   id={opcion.value}
@@ -122,38 +128,41 @@ export default function Reporte() {
               </label>
             ))}
           </div>
-          <div
-            style={{
-              marginTop: "20px",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
-            {" "}
-            {/* NUEVO: Se agrega margen superior para separar el select del grupo de radio buttons */}
-            <select
-              {...register("secondaryOption")}
-              className="bg-selectorButton border-2 border-orange-400 rounded-xl p-2 w-90"
+          {primaryOption && (
+            <div
+              style={{
+                marginTop: "20px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+              }}
             >
-              {primaryOption === "MantEquipo"
-                ? MantEquipo.map((opcion) => (
+              <select
+                {...register("secondaryOption")}
+                className="bg-selectorButton border-2 border-orange-400 rounded-xl p-2 w-90"
+              >
+                {(primaryOption === "MantEquipo" ? MantEquipo : MantInstalacion).map(
+                  (opcion) => (
                     <option value={opcion.Nombre} key={opcion.id}>
                       {opcion.Nombre}
                     </option>
-                  ))
-                : MantInstalacion.map((opcion) => (
-                    <option value={opcion.Nombre} key={opcion.id}>
-                      {opcion.Nombre}
-                    </option>
-                  ))}
-            </select>
-            {/*<label htmlFor="otro" style={{ marginBottom: "5px" }}>
-   Alineación de la etiqueta y el input
-  Menciona otro:
-</label> } 
-            <input type="text" id="otro" {...register("Otros") } /> */}
-          </div>
+                  )
+                )}
+              </select>
+              {secondaryOption === "Otros" && (
+                <div style={{ marginTop: "10px" }}>
+                  <label htmlFor="otro">Especifica el equipo: </label>
+                  <input
+                    type="text"
+                    id="otro"
+                    {...register("Otros")}
+                    placeholder="Escribe aquí el equipo"
+                    className="border-2 border-orange-400 rounded-md p-2 h-8 w-30"
+                  />
+                </div>
+              )}
+            </div>
+          )}
           <div
             style={{
               display: "flex",
@@ -163,8 +172,6 @@ export default function Reporte() {
               marginLeft: "-0px",
             }}
           >
-            {" "}
-            {/* Margen negativo para mover a la izquierda */}
             <h4 style={{ margin: 0 }}>Asunto del reporte:</h4>
             <input
               type="text"
@@ -175,16 +182,12 @@ export default function Reporte() {
             />
           </div>
           <div>
-            {/*Descripcion del problema */} <br />
+            <br />
             <textarea
               {...register("descripcion")}
               placeholder="Descripcion del problema"
               className="w-[750px] h-[300px] border-2 border-orange-400 rounded-md"
             ></textarea>
-          </div>
-          <div>
-            Comentarios adicionales <br />
-            <textarea {...register("comentarios")}></textarea>
           </div>
           <div>
             <h6>Nombre del solicitante</h6>
@@ -211,7 +214,7 @@ export default function Reporte() {
             <button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">
               Menu
             </button>
-          </Link>{" "}
+          </Link>
           <br />
           <Link to={{ pathname: `/ListadoReporte/${Nombre}/${Id}` }}>
             <button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">
