@@ -1,46 +1,32 @@
-import React, { useContext } from "react";
-import { LabsContext } from "../../main";
-import { Link } from "react-router-dom";
-import { LabReporte } from "../../main";
+import React from "react";
 
 interface Props {
-  IdReporte: string|any; 
-  Labs: LabReporte[]; 
+  report: {
+    id: number;
+    objeto: string;
+    especificacion: string;
+    descripcion: string;
+    tipoMant: string;
+    creado: string;
+    laboratorio: {
+      id: number;
+      clave: string;
+      nombre: string;
+    };
+  };
 }
 
-export  const VistaReporte : React.FC<Props>=({ IdReporte, Labs })=>{
-
-const filteredLabs = Labs.filter(
-    (reporte) => reporte.Id=== parseInt(IdReporte)
-);
-
-console.log(filteredLabs)
-    return(
+export const VistaReporte: React.FC<Props> = ({ report }) => {
+  return (
     <main>
-        <ul>
-          {filteredLabs.map((report:any) => (
-            <li key={report.Id+1}>
-              <strong>ID:</strong> {report.Id} <br />
-              <strong>Nombre del Lab:</strong> {report.NombreLab} <br />
-              <strong>ID del Lab:</strong> {report.IdLab} <br />
-              <strong>Estado del Reporte:</strong> {report.Estado} <br />
-              <strong>Fecha:</strong> {report.FechaActual} <br />
-              <strong>Hora:</strong> {report.HoraActual} <br />
-              <strong>Tipo de Mantenimiento:</strong> {report.TipoMant} <br />
-              <strong>Objeto de Mantenimiento:</strong> {report.MantObjeto} <br />
-              <strong>Otros: </strong>{report.Manotro}<br/>
-              <strong>Descripción:</strong> {report.Descripcion} <br />
-              <strong>Comentarios:</strong> {report.Comentarios} <br />
-              <strong>Nombre del Solicitante:</strong> {report.NombreSoli} <br />
-              <form action="">
-       
-       
-        </form> 
-            </li>
-          ))}
-          
-        </ul>
-        
+      <h2>Detalles del Reporte</h2>
+      <p><strong>ID:</strong> {report.id}</p>
+      <p><strong>Objeto:</strong> {report.objeto}</p>
+      <p><strong>Especificación:</strong> {report.especificacion}</p>
+      <p><strong>Descripción:</strong> {report.descripcion}</p>
+      <p><strong>Tipo de Mantenimiento:</strong> {report.tipoMant}</p>
+      <p><strong>Fecha de Creación:</strong> {new Date(report.creado).toLocaleDateString()}</p>
+      <p><strong>Laboratorio:</strong> {report.laboratorio.nombre}</p>
     </main>
-)
-}
+  );
+};

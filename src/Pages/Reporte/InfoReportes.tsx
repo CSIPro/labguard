@@ -1,22 +1,37 @@
-import React from "react";
-
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { LabsContext } from "../../main";
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import { VistaReporte } from "../../components/Vista-Reporte/Vista-Reporte";
-export default function InfoReporte(){
-const {IdReporte,Nombre, Id}= useParams()
-console.log(useParams())
-const [Labs, setLabs]= useContext(LabsContext)
-console.log(Labs)
-return(
+export default function InfoReporte() {
+  const { IdReporte } = useParams<{ IdReporte: string }>();
+  const [reporte, setReporte] = useState<any>(null);
+  const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    const fetchReporte = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/v1/reporte/${IdReporte}`);
+        if (!response.ok) {
+          throw new Error("No se pudo obtener el reporte");
+        }
+        const data = await response.json();
+        setReporte(data);
+      } catch (error: any) {
+        setError(error.message);
+      }
+    };
+
+    fetchReporte();
+  }, [IdReporte]);
+
+  return (
     <main>
-        <VistaReporte 
-        IdReporte= {IdReporte}
-        Labs={Labs}></VistaReporte>
-         <Link to={{pathname:`/Reporte/${Nombre}/${Id}`}}><button>Hacer Reporte</button></Link><br />    
-       <Link to={{pathname:`/`}}><button>Regresar</button></Link><br />
+      <h2>Información del Reporte</h2>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {reporte ? <VistaReporte report={reporte} /> : <p>Cargando...</p>}
+
+      <Link to={`/ListadoReporte/Todos/1`}>
+        <button>Regresar al listado</button>
+      </Link>
     </main>
-)
+  );
 }
