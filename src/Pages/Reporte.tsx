@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
-import { set, useForm } from "react-hook-form";
-import { Link, useParams } from "react-router-dom";
-import Reloj from "../components/Reloj/Reloj"
-import { LabReporte, LabsContext } from "../main";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import Reloj from "../components/Reloj/Reloj";
+
 
 const opciones = [
   { label: "Mantenimiento de Equipo", value: "MantEquipo" },
@@ -10,86 +10,42 @@ const opciones = [
 ];
 
 const MantEquipo = [
-  { id: 1, Nombre: "Campana" },
-  { id: 2, Nombre: "Balvula" },
-  { id: 3, Nombre: "otros" }
+  { id: 1, Nombre: "Lab química 1" },
+  { id: 2, Nombre: "Lab química 2" },
 ];
 
 const MantInstalacion = [
   { id: 1, Nombre: "Agua" },
   { id: 2, Nombre: "Gas" },
-  { id: 3, Nombre: "otro" }
 ];
-const Maestro = [
-  { id: 1, Nombre: "Maria Elena" },
-  { id: 2, Nombre: "Sapote con lechuga" },
-  { id: 3, Nombre: "Cilantro" },
-  { id: 4, Nombre: "Don Jesus" }
-]
 
 export default function Reporte() {
-
-  const [Labs, setLabs] = useContext(LabsContext)
-
-  let { Nombre, Id } = useParams();
-
-
-  const { register, watch, setValue, handleSubmit } = useForm({
+  const { register, watch, setValue } = useForm({
     defaultValues: {
       primaryOption: "MantEquipo",
       secondaryOption: MantEquipo[0].Nombre,
-      descripcion: "",
-      comentarios: "",
-      NombreSoli: "",
-      Otros:""
     },
   });
 
-
-  const [mensaje, setMensaje] = useState("")
-
-  const handlemensaje = () => {
-    setMensaje("Se guardo correctamente")
-  }
-
-  
-  
   const primaryOption = watch("primaryOption");
   useEffect(() => {
-    setValue("secondaryOption", primaryOption === "MantEquipo" ? MantEquipo[0].Nombre : MantInstalacion[0].Nombre)
+    setValue(
+      "secondaryOption",
+      primaryOption === "MantEquipo"
+        ? MantEquipo[0].Nombre
+        : MantInstalacion[0].Nombre
+    );
+  }, [setValue, primaryOption]);
 
-  }, [setValue, primaryOption])
-
-  const onSubmit = (data: any) => {
-    const newReporte: LabReporte = {
-      Id: Labs.length + 1,
-      NombreLab: Nombre,
-      IdLab: Id,
-      FechaActual: new Date().toLocaleDateString(),
-      HoraActual: new Date().toLocaleTimeString(),
-      TipoMant: data.primaryOption,
-      MantObjeto: data.secondaryOption,
-      Manotro:data.Otros,
-      Descripcion: data.descripcion,
-      Comentarios: data.comentarios,
-      NombreSoli: data.NombreSoli,
-      Estado: "En Revision"
-    };
-    setLabs((prevLabs) => [...prevLabs, newReporte]);
-    console.log("Nuevo reporte: ", newReporte)
-  };
-  setTimeout(() => {
-    setMensaje("")
-  }, 4000);
   return (
-
-    <main>
-      <h1>Registrar Reporte {Nombre} </h1>
-      <h1>Con el id {Id}</h1>
+    <main className="min-h-screen bg-backgroundColor flex flex-col items-center">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center">
+      <h1>Registrar Reporte</h1>
+      </header>
       <h4>Fecha actual del reporte</h4>
       <Reloj></Reloj>
       <div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form>
           <div>
             {opciones.map((opcion) => (
               <label key={opcion.value} htmlFor={opcion.value}>
@@ -105,57 +61,54 @@ export default function Reporte() {
           </div>
 
           <div>
+            {/* NUEVO: Agrego un label para el select de "secondaryOption" */}
+            {/* Para qué: Asociar una etiqueta al select para mejorar la accesibilidad y legibilidad */}
+            <label htmlFor="secondaryOption">Selecciona una opción</label>
             <select {...register("secondaryOption")}>
               {primaryOption === "MantEquipo"
-                ? MantEquipo.map((opcion) => (
-                  <option value={opcion.Nombre} key={opcion.id}>
-                    {opcion.Nombre}
-                    
-                  </option>
-                
-                ) 
-              
-              )
-                : MantInstalacion.map((opcion) => (
-                  <option value={opcion.Nombre} key={opcion.id}>
-                    {opcion.Nombre}
-                  </option>
-                  
-                ))
-                
-              
-                }
+                ? MantEquipo.map((option) => (
+                    <option value={option.Nombre} key={option.id}>
+                      {option.Nombre}
+                    </option>
+                  ))
+                : MantInstalacion.map((option) => (
+                    <option value={option.Nombre} key={option.id}>
+                      {option.Nombre}
+                    </option>
+                  ))}
             </select>
-            Menciona otro:
-            <input type="text" id="otro" {...register("Otros") } />
           </div>
+
           <div>
             Descripcion del problema <br />
-            <textarea  {...register("descripcion")}></textarea>
+            <textarea name="" id=""></textarea>
           </div>
+
           <div>
-            Comentarios adicionales <br />
-            <textarea  {...register("comentarios")}></textarea>
-          </div>
-          <div>
-            <h6>Nombre del solicitante</h6>
-            <select {...register("NombreSoli")}>
-              {Maestro.map((Opcion) => (
-                <option value={Opcion.Nombre} key={Opcion.id}>{Opcion.Nombre}
-                </option>))}
+            {/* NUEVO: Agrego un label para el select de "responsable" */}
+            {/* Para qué: Asociar una etiqueta al select para mejorar la accesibilidad y legibilidad */}
+            <label htmlFor="responsable">Responsable</label>
+            <select name="responsable" id="responsable">
+              {/* NUEVO: Opciones para el select de responsables */}
+              {/* Para qué: Proporcionar opciones predeterminadas para que el usuario seleccione */}
+              <option value="Maria Elena">Maria Elena</option>
+              <option value="Sapote con lechuga">Sapote con lechuga</option>
             </select>
           </div>
-          {mensaje && <p className="mt-2 text-green-600">{mensaje}</p>}
-          <button type="submit" onClick={handlemensaje}className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">Guardar Reporte</button><br />
-          <Link to="/"><button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">Menu</button></Link> <br />
-          <Link to={{ pathname: `/ListadoReporte/${Nombre}/${Id}` }}><button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">Ver Lista de Reportes</button></Link>
-
-
         </form>
-
+        <div>
+          <form action="">
+            <Link to="/">
+              <button>Regresar</button>
+            </Link>
+          </form>
+          <form action="">
+            <Link to="">
+              <button>Enviar</button>
+            </Link>
+          </form>
+        </div>
       </div>
-
     </main>
-
   );
 }
