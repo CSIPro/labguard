@@ -21,7 +21,9 @@ export default {
         backgroundTable: '#FFEEC5',
         buttonPrueba: '#F9C68A',
         selectorButton: '#FFE0BD',
-        generalBorder: '#FF927444'
+        generalBorder: '#FF927444',
+        cardsbg: '#fff3e6',
+        colorLine: '#ece1d5'
       },
 
       fontFamily: {

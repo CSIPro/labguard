@@ -100,23 +100,29 @@ export default function Reporte() {
           Registrar Reporte
         </h1>
       </header>
+      {/*
       <h1 className="text-lg font-inter text-textoLabs">{Nombre}</h1>
       <h1 className="text-lg font-inter text-textoLabs mb-4">
         Con el <span className="font-bold">ID </span>
         <span className="font-bold">{Id}</span>
       </h1>
+      /*}
+      {/*
       <h4 className="text-lg font-inter text-textoLabs">
         Fecha actual del reporte
       </h4>
+      */}
       <div className="text-lg font-inter text-textoLabs">
+        {/*
         <Clock />
+        */}
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div style={{ display: "flex", gap: "260px" }}>
+          <div className="flex gap-[260px]">
             {opciones.map((opcion) => (
               <label
                 key={opcion.value}
                 htmlFor={opcion.value}
-                style={{ display: "block", marginTop: "20px" }}
+                className="block mt-5"
               >
                 <input
                   type="radio"
@@ -130,12 +136,11 @@ export default function Reporte() {
           </div>
           {primaryOption && (
             <div
-              style={{
-                marginTop: "20px",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-              }}
+              className={`${
+                primaryOption === "MantEquipo"
+                  ? "mt-5 flex items-center gap-2"
+                  : "mt-5 ml-[260px]"
+              }`}
             >
               <select
                 {...register("secondaryOption")}
@@ -150,8 +155,10 @@ export default function Reporte() {
                 )}
               </select>
               {secondaryOption === "Otros" && (
-                <div style={{ marginTop: "10px" }}>
-                  <label htmlFor="otro">Especifica el equipo: </label>
+                <div className="mt-2">
+                  <label htmlFor="otro" className="block">
+                    Especifica el equipo:
+                  </label>
                   <input
                     type="text"
                     id="otro"
@@ -163,22 +170,13 @@ export default function Reporte() {
               )}
             </div>
           )}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "7px",
-              marginTop: "20px",
-              marginLeft: "-0px",
-            }}
-          >
-            <h4 style={{ margin: 0 }}>Asunto del reporte:</h4>
+          <div className="flex items-center gap-2 mt-5">
+            <h4 className="m-0">Asunto del reporte:</h4>
             <input
               type="text"
               {...register("asunto")}
               placeholder="Escriba el Asunto"
-              style={{ width: "250px" }}
-              className="border-2 border-orange-400 rounded-md"
+              className="w-[250px] border-2 border-orange-400 rounded-md"
             />
           </div>
           <div>
@@ -208,7 +206,6 @@ export default function Reporte() {
             >
               Guardar Reporte
             </button>
-            <br />
           </div>
           <Link to="/">
             <button className="border-2 border-white px-4 py-2 rounded-sm bg-gray-200 hover:bg-gray-300 text-black transition duration-300">
