@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLaboratorio } from '../LaboratorioContext';
+import { useLaboratorio } from '../Context/LaboratorioContext';
 import { Link } from 'react-router-dom';
 
 const ListadoReportes = () => {
@@ -16,8 +16,10 @@ const ListadoReportes = () => {
         return;
       }
 
+      const baseUrl = import.meta.env.VITE_API_URL;
+
       try {
-        const response = await fetch(`http://localhost:3000/api/v1/reporte`);
+        const response = await fetch(`${baseUrl}/reporte`);
         if (!response.ok) {
           throw new Error('No se pudo obtener los reportes');
         }
@@ -49,9 +51,14 @@ const ListadoReportes = () => {
           reportes.map((reporte) => (
             <li key={reporte.id}>
               <h3>{reporte.objeto}</h3>
-              <p>{reporte.descripcion}</p>
+              <p><strong>Descripción:</strong> {reporte.descripcion}</p>
+              <p><strong>Estado:</strong> {reporte.estado}</p>
               <Link to={`/InfoReporte/${reporte.id}/${reporte.laboratorio.nombre}/${reporte.laboratorio.id}`}>
                 <button>Ver más</button>
+              </Link>
+              <p></p>
+              <Link to={`/`}>
+                <button>Regresar</button>
               </Link>
             </li>
           ))

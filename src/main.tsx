@@ -5,22 +5,90 @@ import "./index.css";
 import {
   createBrowserRouter,
   RouterProvider,
+  Navigate,
 } from "react-router-dom";
-import { UserProvider } from "./Pages/UserContext"
-import { LaboratorioProvider } from "./Pages/LaboratorioContext";
+import { UserProvider, useUser } from "./Pages/Context/UserContext";
+import { LaboratorioProvider } from "./Pages/Context/LaboratorioContext";
 import Reporte from "./Pages/Reporte/Reporte";
 import ListadoReportes from "./Pages/Reporte/ListadoReportes";
 import InfoReporte from "./Pages/Reporte/InfoReportes";
 import Login from "./Pages/Login";
-import ComentariosAdicionales from "./Pages/ComentariosAdicionales";
+import ListadoUsuarios from "./Pages/Usuario/ListadoUsuarios"; 
+import AgregarUsuario from "./Pages/Usuario/AgregarUsuario";
+import EditarUsuario from "./Pages/Usuario/EditarUsuario";
+import EditarLaboratorio from "./Pages/EditarLaboratorio";
+
+const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+  const { user } = useUser();
+
+  return user ? children : <Navigate to="/Login" />;
+};
 
 const router = createBrowserRouter([
-  { path: "/", element: <App /> },
-  { path: "/Reporte/:Nombre/:Id", element: <Reporte /> },
-  { path: "/ListadoReporte/:Nombre/:Id", element: <ListadoReportes /> },
-  { path: "/InfoReporte/:IdReporte/:Nombre/:Id", element: <InfoReporte /> },
-  { path: "/ComentariosAdicionales/:IdReporte/:Nombre/:Id", element: <ComentariosAdicionales /> },
-  { path: "/Login", element: <Login /> }
+  { path: "/Login", element: <Login /> },
+  { 
+    path: "/", element: (
+    <ProtectedRoute>
+      <App /> 
+    </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/Reporte/:Nombre/:Id",
+    element: (
+      <ProtectedRoute>
+        <Reporte />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/ListadoReporte/:Nombre/:Id",
+    element: (
+      <ProtectedRoute>
+        <ListadoReportes />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/InfoReporte/:IdReporte/:Nombre/:Id",
+    element: (
+      <ProtectedRoute>
+        <InfoReporte />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/ListadoUsuarios",
+    element: (
+      <ProtectedRoute>
+        <ListadoUsuarios />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/AgregarUsuario",
+    element: (
+      <ProtectedRoute>
+        <AgregarUsuario />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/EditarUsuario/:id",
+    element: (
+      <ProtectedRoute>
+        <EditarUsuario />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/EditarLaboratorio/:id",
+    element: (
+      <ProtectedRoute>
+        <EditarLaboratorio />
+      </ProtectedRoute>
+    ),
+  },
 ]);
 
 function Root() {

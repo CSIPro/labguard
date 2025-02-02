@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useLaboratorio } from '../LaboratorioContext';
+import { Link, useParams } from 'react-router-dom';
+import { useLaboratorio } from '../Context/LaboratorioContext';
 
 const Reporte = () => {
   const { laboratorioId: laboratorioIdUrl } = useParams<{ laboratorioId: string }>();
@@ -10,6 +10,7 @@ const Reporte = () => {
   const [objeto, setObjeto] = useState('');
   const [especificacion, setEspecificacion] = useState('');
   const [descripcion, setDescripcion] = useState('');
+  const [estado] = useState('PENDIENTE'); // Estado inicial fijo
   const [error, setError] = useState<string>('');
 
   useEffect(() => {
@@ -31,11 +32,14 @@ const Reporte = () => {
       objeto,
       especificacion,
       descripcion,
+      estado, // Estado se envía como "PENDIENTE"
       laboratorio: Number(contextoLaboratorioId),
     };
 
+    const baseUrl = import.meta.env.VITE_API_URL;
+
     try {
-      const response = await fetch('http://localhost:3000/api/v1/reporte', {
+      const response = await fetch(`${baseUrl}/reporte`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nuevoReporte),
@@ -98,6 +102,9 @@ const Reporte = () => {
         >
           Crear Reporte
         </button>
+        <Link to={`/`}>
+        <button>Regresar</button>
+        </Link>
       </form>
 
       {contextoLaboratorioId && (
@@ -106,6 +113,7 @@ const Reporte = () => {
         </div>
       )}
     </div>
+    
   );
 };
 

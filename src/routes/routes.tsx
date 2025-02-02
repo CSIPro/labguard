@@ -4,8 +4,7 @@ import App from "../App";
 import Reporte from "../Pages/Reporte/Reporte";
 import InfoReporte from "../Pages/Reporte/InfoReportes";
 import Login from "../Pages/Login";
-import ComentariosAdicionales from "../Pages/ComentariosAdicionales";
-import { UserProvider } from "../Pages/UserContext";
+import { UserProvider } from "../Pages/Context/UserContext";
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 
@@ -33,10 +32,6 @@ const routes = createBrowserRouter([
     element: <InfoReporte /> /* (
       <ProtectedRoute element={<InfoReporte />} />
     ) */
-  },
-  {
-    path: "/ComentariosAdicionales/:IdReporte/:Nombre/:Id", // Nueva ruta para comentarios adicionales
-    element: <ComentariosAdicionales />
   },
   {
     path: "/Login",

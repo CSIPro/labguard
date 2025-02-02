@@ -1,31 +1,57 @@
-// Login.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../Pages/UserContext';
+import { useUser } from './Context/UserContext';
+
+const baseUrl = import.meta.env.VITE_API_URL;
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const { setUsername: setContextUsername, setUserType: setContextUserType, setPersona } = useUser();  
+  const { setUser } = useUser();
 
-  // Mock de datos de usuarios y personas
-  const users = [
-    { username: 'admin', password: 'password', userType: 'Maestro' as 'Maestro', persona: { idPersona: 1, NombrePersonal: 'Juan Martinez', Ocupacion: 'Maestro en ciencias', ImagenPerfil: '../src/img/maestro.png' }},
-    { username: 'mantenimiento', password: 'password', userType: 'Mantenimiento' as 'Mantenimiento', persona: { idPersona: 2, NombrePersonal: 'Ana López', Ocupacion: 'Técnico de mantenimiento', ImagenPerfil: '../src/img/mantenimiento.jpg' }},
-    // Agrega más usuarios aquí
-  ];
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const user = users.find(user => user.username === username && user.password === password);
-    if (user) {
-      setContextUsername(username);
-      setContextUserType(user.userType as 'Maestro' | 'Mantenimiento');  // Aserción de tipo
-      setPersona(user.persona);
-      navigate('/');
-    } else {
-      alert('Usuario o contraseña incorrectos');
+    console.log("Enviando datos a:", `${baseUrl}/auth/login`);
+    console.log("Credenciales:", { email, password });
+
+    try {
+      const response = await fetch(`${baseUrl}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const responseText = await response.text();
+      console.log("Respuesta del servidor:", responseText);
+
+      if (!response.ok) {
+        alert('Usuario o contraseña incorrectos');
+        return;
+      }
+
+      const data = JSON.parse(responseText);
+
+      if (data.token) {
+        setUser({
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          rol: data.rol,
+        });
+
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('user', JSON.stringify(data));
+
+        navigate('/');
+      } else {
+        alert("Error: La respuesta no contiene un token válido.");
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      alert('Ocurrió un error al intentar iniciar sesión.');
     }
   };
 
@@ -34,12 +60,12 @@ const Login = () => {
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Usuario:</label>
+          <label htmlFor="email">Correo electrónico:</label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
