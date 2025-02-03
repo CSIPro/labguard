@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from './Context/UserContext';
 import type { FormProps } from 'antd';
 import { Button, Checkbox, Form, Input } from 'antd';
+import bgImage from '../img/beaker-6308923.jpg';
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
@@ -57,41 +58,51 @@ const Login = () => {
   };
 
   return (
-    <Form
-      name="login"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      style={{ maxWidth: 600, margin: 'auto', marginTop: 50 }}
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      autoComplete="off"
-    >
-      <Form.Item
-        label="Correo electrónico"
-        name="email"
-        rules={[{ required: true, message: 'Por favor ingrese su correo electrónico' }]}
+    <div
+  className="flex justify-center items-center min-h-screen bg-cover bg-center"
+  style={{ backgroundImage: `url(${bgImage})` }}
+>
+      <Form
+        name="login"
+        className="bg-white/90 p-8 rounded-lg shadow-md w-full max-w-md"
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        autoComplete="off"
       >
-        <Input type="email" />
-      </Form.Item>
+        <h2 className="text-2xl font-bold text-center text-textoLabs mb-6">Iniciar Sesión</h2>
+        <Form.Item
+  label="Correo electrónico: "
+  name="email"
+  rules={[{ required: true, message: 'Por favor ingrese su correo electrónico' }]}
+  labelCol={{ span: 24 }}
+  wrapperCol={{ span: 24 }}
+>
+  <Input className="w-full" />
+</Form.Item>
 
-      <Form.Item
-        label="Contraseña"
-        name="password"
-        rules={[{ required: true, message: 'Por favor ingrese su contraseña' }]}
-      >
-        <Input.Password />
-      </Form.Item>
+<Form.Item
+  label="Contraseña: "
+  name="password"
+  rules={[{ required: true, message: 'Por favor ingrese su contraseña' }]}
+  labelCol={{ span: 24 }}
+  wrapperCol={{ span: 24 }}
+>
+  <Input.Password className="w-full" />
+</Form.Item>
 
-      <Form.Item name="remember" valuePropName="checked" label={null}>
-        <Checkbox>Recordarme</Checkbox>
-      </Form.Item>
+{/*
+        <Form.Item name="remember" valuePropName="checked" label={null}>
+          <Checkbox>Recordarme</Checkbox>
+        </Form.Item>
+        */}
 
-      <Form.Item label={null}>
-        <Button type="primary" htmlType="submit">
-          Iniciar Sesión
-        </Button>
-      </Form.Item>
-    </Form>
+        <Form.Item label={null}>
+          <Button type="primary" htmlType="submit" className="w-50 bg-colorButtonOrange hover-custom text-white py-2 rounded-md">
+            Iniciar Sesión
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 
