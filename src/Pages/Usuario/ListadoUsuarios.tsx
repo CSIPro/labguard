@@ -47,7 +47,7 @@ const ListadoUsuarios: React.FC = () => {
 
   return (
     <main className="min-h-screen bg-backgroundColor flex flex-col items-center">
-      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center mb-12">
   <h1 className="text-2xl font-bold text-center">Gestión de Usuario</h1>
 </header>
 
