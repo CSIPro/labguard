@@ -46,9 +46,10 @@ const ListadoUsuarios: React.FC = () => {
   };
 
   return (
-    <main className="min-h-screen bg-backgroundColor flex flex-col items-center p-6">
-      <h1 className="text-3xl font-bold mb-6">Gestión de Usuarios</h1>
-
+    <main className="min-h-screen bg-backgroundColor flex flex-col items-center">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center">
+  <h1 className="text-2xl font-bold text-center">Gestión de Usuario</h1>
+</header>
       <Link to="/AgregarUsuario">
         <button className="mb-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
           Agregar Usuario
