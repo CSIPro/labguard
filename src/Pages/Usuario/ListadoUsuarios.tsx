@@ -50,11 +50,6 @@ const ListadoUsuarios: React.FC = () => {
       <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center">
   <h1 className="text-2xl font-bold text-center">Gestión de Usuario</h1>
 </header>
-      <Link to="/AgregarUsuario">
-        <button className="mb-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
-          Agregar Usuario
-        </button>
-      </Link>
 
       {error ? (
         <p className="text-red-500">Error: {error}</p>
@@ -100,6 +95,11 @@ const ListadoUsuarios: React.FC = () => {
           </tbody>
         </table>
       )}
+      <Link to="/AgregarUsuario">
+        <button className="mb-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+          Agregar Usuario
+        </button>
+      </Link>
     </main>
   );
 };
