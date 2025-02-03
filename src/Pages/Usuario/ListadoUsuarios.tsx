@@ -54,7 +54,7 @@ const ListadoUsuarios: React.FC = () => {
       {error ? (
         <p className="text-red-500">Error: {error}</p>
       ) : (
-        <table className="w-full max-w-4xl border-collapse border border-gray-300">
+        <table className="w-full max-w-4xl border-collapse border border-gray-300 mb-12">
           <thead>
             <tr className="bg-gray-200">
               <th className="border border-gray-300 px-4 py-2">ID</th>
