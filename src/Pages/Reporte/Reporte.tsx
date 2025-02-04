@@ -10,8 +10,6 @@ const Reporte = () => {
   const [otroObjeto, setOtroObjeto] = useState('');
   const [especificacion, setEspecificacion] = useState('');
   const [descripcion, setDescripcion] = useState('');
-  const [asunto, setAsunto] = useState('');
-  const [nombreSolicitante, setNombreSolicitante] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const estado = "PENDIENTE";
@@ -54,8 +52,6 @@ const Reporte = () => {
       especificacion,
       descripcion,
       estado,
-      asunto,
-      nombreSolicitante,
       laboratorio: Number(contextoLaboratorioId),
     };
 
@@ -75,8 +71,6 @@ const Reporte = () => {
       setTipoMant('');
       setObjeto('');
       setDescripcion('');
-      setAsunto('');
-      setNombreSolicitante('');
     } catch (error: any) {
       setError(error.message);
     } finally {
