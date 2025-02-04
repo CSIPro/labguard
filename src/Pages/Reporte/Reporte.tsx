@@ -7,6 +7,8 @@ const Reporte = () => {
   const { laboratorioId: contextoLaboratorioId, setLaboratorioId } = useLaboratorio();
   const [tipoMant, setTipoMant] = useState('');
   const [objeto, setObjeto] = useState('');
+  const [otroObjeto, setOtroObjeto] = useState('');
+  const [especificacion, setEspecificacion] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [asunto, setAsunto] = useState('');
   const [nombreSolicitante, setNombreSolicitante] = useState('');
@@ -29,9 +31,27 @@ const Reporte = () => {
       return;
     }
 
+    if (!tipoMant) {
+      setError('Debe seleccionar un tipo de mantenimiento.');
+      return;
+    }
+
+    if (!objeto) {
+      setError('Debe seleccionar un objeto.');
+      return;
+    }
+
+    const objetoFinal = objeto === "OTRO" ? otroObjeto : objeto;
+
+    if (!objetoFinal) {
+      setError('Debe ingresar un objeto personalizado.');
+      return;
+    }
+
     const nuevoReporte = {
       tipoMant,
-      objeto,
+      objeto: objetoFinal,
+      especificacion,
       descripcion,
       estado,
       asunto,
@@ -67,46 +87,92 @@ const Reporte = () => {
   return (
     <div className="text-lg font-inter text-textoLabs flex flex-col items-center justify-center min-h-screen">
       <h2>Crear Reporte</h2>
-      {error && <p className="text-red-500">{error}</p>}
-      <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
-        <div className="flex gap-10">
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
+        
+        <div>
+          <h3>Tipo de Mantenimiento</h3>
           <label>
-            <input type="radio" value="MantEquipo" checked={tipoMant === 'MantEquipo'} onChange={() => setTipoMant('MantEquipo')} />
-            Mantenimiento de Equipo
-          </label>
-          <label>
-            <input type="radio" value="MantInstalacion" checked={tipoMant === 'MantInstalacion'} onChange={() => setTipoMant('MantInstalacion')} />
+            <input
+              type="radio"
+              name="tipoMant"
+              value="Mantenimiento de Instalación"
+              checked={tipoMant === "Mantenimiento de Instalación"}
+              onChange={(e) => setTipoMant(e.target.value)}
+            />
             Mantenimiento de Instalación
           </label>
+          <label style={{ marginLeft: "10px" }}>
+            <input
+              type="radio"
+              name="tipoMant"
+              value="Mantenimiento de Equipo"
+              checked={tipoMant === "Mantenimiento de Equipo"}
+              onChange={(e) => setTipoMant(e.target.value)}
+            />
+            Mantenimiento de Equipo
+          </label>
         </div>
-        <select value={objeto} onChange={(e) => setObjeto(e.target.value)} className="bg-selectorButton border-2 border-orange-400 rounded-xl p-2 w-90">
-          <option value="">Seleccione un objeto</option>
-          <option value="Computadora">Computadora</option>
-          <option value="Proyector">Proyector</option>
-          <option value="Otros">Otros</option>
-        </select>
-        {objeto === "Otros" && (
-          <input type="text" placeholder="Especifique el objeto" value={objeto} onChange={(e) => setObjeto(e.target.value)} className="border-2 border-orange-400 rounded-md p-2" />
-        )}
-        <div className="flex items-center gap-2">
-          <h4 className="m-0">Asunto del reporte:</h4>
-          <input type="text" value={asunto} onChange={(e) => setAsunto(e.target.value)} placeholder="Escriba el Asunto" className="w-64 border-2 border-orange-400 rounded-md p-2" />
-        </div>
-        <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)} placeholder="Descripción del problema" className="w-[750px] h-[300px] border-2 border-orange-400 rounded-md p-2"></textarea>
-        <div>
-          <h6>Nombre del solicitante</h6>
-          <select value={nombreSolicitante} onChange={(e) => setNombreSolicitante(e.target.value)} className="border-2 border-orange-400 rounded-md p-2">
-            <option value="">Seleccione su nombre</option>
-            <option value="Juan Pérez">Juan Pérez</option>
-            <option value="Ana López">Ana López</option>
-            <option value="Carlos Díaz">Carlos Díaz</option>
+
+        <div className="mb-4">
+          <label className="block font-semibold">Objeto:</label>
+          <select
+            value={objeto}
+            onChange={(e) => setObjeto(e.target.value)}
+            className="w-full border p-2 rounded-md"
+          >
+            <option value="">Seleccionar objeto</option>
+            <option value="CAMPANA">Campana</option>
+            <option value="LLAVES">Llaves</option>
+            <option value="MATRACES">Matraces</option>
+            <option value="FUENTE DE AGUA">Fuente de Agua</option>
+            <option value="OTRO">Otro</option>
           </select>
         </div>
-        <button type="submit" disabled={loading} className={`px-4 py-2 rounded-md text-white ${loading ? 'bg-gray-400' : 'bg-orange-500'}`}>
-          {loading ? 'Enviando...' : 'Crear Reporte'}
+
+        {objeto === "OTRO" && (
+          <input
+            value={otroObjeto}
+            onChange={(e) => setOtroObjeto(e.target.value)}
+            placeholder="Ingrese el objeto"
+            style={{ padding: '10px', width: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
+            required
+          />
+        )}
+
+        <input
+          value={especificacion}
+          onChange={(e) => setEspecificacion(e.target.value)}
+          placeholder="Especificación"
+          style={{ padding: '10px', width: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
+        />
+        
+        <textarea
+          value={descripcion}
+          onChange={(e) => setDescripcion(e.target.value)}
+          placeholder="Descripción"
+          required
+          style={{ padding: '10px', width: '250px', height: '100px', borderRadius: '5px', border: '1px solid #ccc' }}
+        />
+
+        <button
+          type="submit"
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#08a3ff',
+            color: 'white',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer',
+            width: '250px',
+            marginTop: '15px',
+          }}
+        >
+          Crear Reporte
         </button>
-        <Link to="/">
-          <button type="button" className="mt-2 px-4 py-2 bg-gray-500 text-white rounded-md">Regresar</button>
+        
+        <Link to={`/`}>
+          <button>Regresar</button>
         </Link>
       </form>
     </div>

@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useUser } from '../Context/UserContext';
-import { Link } from 'react-router-dom';
-import { useLaboratorio } from '../Context/LaboratorioContext';
+import React, { useState, useEffect } from "react";
+import { useUser } from "../Context/UserContext";
+import { Link, useNavigate } from "react-router-dom"; // Importar useNavigate
+import { useLaboratorio } from "../Context/LaboratorioContext";
 import BeakerImage from "../../img/beaker-6308923.jpg";
 
 const Inicio = () => {
-  const { user } = useUser();
+  const { user, setUser } = useUser(); // Obtener setUser para cerrar sesión
+  const navigate = useNavigate(); // Hook para la navegación
   const [laboratorios, setLaboratorios] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { setLaboratorioId } = useLaboratorio();
@@ -20,45 +21,22 @@ const Inicio = () => {
       try {
         const response = await fetch(`${baseUrl}/laboratorio`);
         if (!response.ok) {
-          throw new Error('No se pudo obtener la lista de laboratorios');
+          throw new Error("No se pudo obtener la lista de laboratorios");
         }
         const data = await response.json();
         setLaboratorios(data);
       } catch (error: any) {
         setError(error.message);
-        console.error('Error al cargar los laboratorios:', error);
+        console.error("Error al cargar los laboratorios:", error);
       }
     };
 
     fetchLaboratorios();
   }, []);
 
-  const handleSelectLaboratorio = (id: string) => {
-    setLaboratorioId(id);
-  };
-
-  const handleDeleteLaboratorio = async (id: string) => {
-    try {
-      const response = await fetch(`${baseUrl}/laboratorio/${id}`, {
-        method: 'DELETE',
-      });
-      if (!response.ok) {
-        throw new Error('No se pudo eliminar el laboratorio');
-      }
-      setLaboratorios(laboratorios.filter((lab) => lab.id !== id));
-      setShowConfirm(null);
-    } catch (error: any) {
-      setError(error.message);
-    }
-  };
-
-  const confirmDelete = (id: string) => {
-    setLaboratorioAEliminar(id);
-    setShowConfirm(id);
-  };
-
-  const cancelDelete = () => {
-    setShowConfirm(null);
+  const handleLogout = () => {
+    setUser(null);
+    navigate("/login");
   };
 
   return (
@@ -111,15 +89,15 @@ const Inicio = () => {
               {user?.rol === "ADMINISTRADOR" && (
                 <>
                   <button
-                    onClick={() => confirmDelete(lab.id)}
+                    onClick={() => setShowConfirm(lab.id)}
                     className="text-red-500 hover:text-red-700"
-                  >
-                    Eliminar 🗑️
+                    >
+                      Eliminar 🗑️
                   </button>
 
                   <Link to={`/EditarLaboratorio/${lab.id}`}>
                     <button
-                      onClick={() => handleSelectLaboratorio(lab.id)}
+                      
                       className="text-yellow-500 hover:text-yellow-700"
                     >
                       Editar ✏️
@@ -133,6 +111,7 @@ const Inicio = () => {
               </Link>
 
               {user?.rol !== "MANTENIMIENTO" && (
+          
                 <Link to={{ pathname: `/Reporte/${lab.nombre}/${lab.id}` }}>
                   <button
                   onClick={()=> setLaboratorioId(lab.id)}
@@ -157,15 +136,16 @@ const Inicio = () => {
             </h3>
             <div className="mt-4 flex justify-between">
               <button
-                onClick={() => handleDeleteLaboratorio(laboratorioAEliminar!)}
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-              >
+                onClick={() => {
+                  setLaboratorios(laboratorios.filter((lab) => lab.id !== showConfirm));
+                  setShowConfirm(null);
+                }}
+                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
                 Sí, eliminar
               </button>
               <button
-                onClick={cancelDelete}
-                className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400"
-              >
+                onClick={() => setShowConfirm(null)}
+                className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-400">
                 Cancelar
               </button>
             </div>
