@@ -38,7 +38,7 @@ const Reporte = () => {
       return;
     }
 
-    const objetoFinal = objeto === "OTRO" ? otroObjeto : objeto; // Usar el valor del input si es "OTRO"
+    const objetoFinal = objeto === "OTRO" ? otroObjeto : objeto;
 
     if (!objetoFinal) {
       setError('Debe ingresar un objeto personalizado.');
@@ -79,7 +79,6 @@ const Reporte = () => {
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
         
-        {/* Grupo de Radio Buttons para Tipo de Mantenimiento */}
         <div>
           <h3>Tipo de Mantenimiento</h3>
           <label>
@@ -104,7 +103,6 @@ const Reporte = () => {
           </label>
         </div>
 
-        {/* Select de Objeto */}
         <div className="mb-4">
           <label className="block font-semibold">Objeto:</label>
           <select
@@ -121,7 +119,6 @@ const Reporte = () => {
           </select>
         </div>
 
-        {/* Campo de texto para "Otro" si se selecciona */}
         {objeto === "OTRO" && (
           <input
             value={otroObjeto}
