@@ -14,7 +14,7 @@ export default {
         bordercolororange: '#F99C0A',
         colorButtonOrange: '#FCA61F',
         colorhoverButton: '#f98d0a',
-        colorhoverBrown: '#2f1716',
+        colorhoverBrown: '#43280a',
         textoLabs: '#40201E',
         colorColumn1: '#FFEEC5',
         colorNameUser: '#1C140D',
@@ -25,7 +25,8 @@ export default {
         generalBorder: '#FF927444',
         cardsbg: '#fff3e6',
         colorLine: '#ece1d5',
-        linedividers: '#FF654321'
+        linedividers: '#FF654321',
+        buttonBrown:'#643b0e',
       },
 
       fontFamily: {

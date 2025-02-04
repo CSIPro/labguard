@@ -5,13 +5,14 @@ import { useLaboratorio } from '../Context/LaboratorioContext';
 const Reporte = () => {
   const { laboratorioId: laboratorioIdUrl } = useParams<{ laboratorioId: string }>();
   const { laboratorioId: contextoLaboratorioId, setLaboratorioId } = useLaboratorio();
-
   const [tipoMant, setTipoMant] = useState('');
   const [objeto, setObjeto] = useState('');
-  const [especificacion, setEspecificacion] = useState('');
   const [descripcion, setDescripcion] = useState('');
-  const [estado] = useState('PENDIENTE'); // Estado inicial fijo
-  const [error, setError] = useState<string>('');
+  const [asunto, setAsunto] = useState('');
+  const [nombreSolicitante, setNombreSolicitante] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const estado = "PENDIENTE";
 
   useEffect(() => {
     if (laboratorioIdUrl) {
@@ -21,7 +22,8 @@ const Reporte = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setError('');
+    
     if (!contextoLaboratorioId) {
       setError('Laboratorio no seleccionado.');
       return;
@@ -30,16 +32,16 @@ const Reporte = () => {
     const nuevoReporte = {
       tipoMant,
       objeto,
-      especificacion,
       descripcion,
-      estado, // Estado se envía como "PENDIENTE"
+      estado,
+      asunto,
+      nombreSolicitante,
       laboratorio: Number(contextoLaboratorioId),
     };
 
-    const baseUrl = import.meta.env.VITE_API_URL;
-
     try {
-      const response = await fetch(`${baseUrl}/reporte`, {
+      setLoading(true);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/reporte`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nuevoReporte),
@@ -50,70 +52,64 @@ const Reporte = () => {
       }
 
       alert('Reporte creado exitosamente');
+      setTipoMant('');
+      setObjeto('');
+      setDescripcion('');
+      setAsunto('');
+      setNombreSolicitante('');
     } catch (error: any) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+    <div className="text-lg font-inter text-textoLabs flex flex-col items-center justify-center min-h-screen">
       <h2>Crear Reporte</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
-        <input
-          value={tipoMant}
-          onChange={(e) => setTipoMant(e.target.value)}
-          placeholder="Tipo de Mantenimiento"
-          required
-          style={{ padding: '10px', width: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
-        />
-        <input
-          value={objeto}
-          onChange={(e) => setObjeto(e.target.value)}
-          placeholder="Objeto"
-          required
-          style={{ padding: '10px', width: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
-        />
-        <input
-          value={especificacion}
-          onChange={(e) => setEspecificacion(e.target.value)}
-          placeholder="Especificación"
-          style={{ padding: '10px', width: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
-        />
-        <textarea
-          value={descripcion}
-          onChange={(e) => setDescripcion(e.target.value)}
-          placeholder="Descripción"
-          required
-          style={{ padding: '10px', width: '250px', height: '100px', borderRadius: '5px', border: '1px solid #ccc' }}
-        />
-        <button
-          type="submit"
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#08a3ff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            width: '250px',
-            marginTop: '15px',
-          }}
-        >
-          Crear Reporte
+      {error && <p className="text-red-500">{error}</p>}
+      <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
+        <div className="flex gap-10">
+          <label>
+            <input type="radio" value="MantEquipo" checked={tipoMant === 'MantEquipo'} onChange={() => setTipoMant('MantEquipo')} />
+            Mantenimiento de Equipo
+          </label>
+          <label>
+            <input type="radio" value="MantInstalacion" checked={tipoMant === 'MantInstalacion'} onChange={() => setTipoMant('MantInstalacion')} />
+            Mantenimiento de Instalación
+          </label>
+        </div>
+        <select value={objeto} onChange={(e) => setObjeto(e.target.value)} className="bg-selectorButton border-2 border-orange-400 rounded-xl p-2 w-90">
+          <option value="">Seleccione un objeto</option>
+          <option value="Computadora">Computadora</option>
+          <option value="Proyector">Proyector</option>
+          <option value="Otros">Otros</option>
+        </select>
+        {objeto === "Otros" && (
+          <input type="text" placeholder="Especifique el objeto" value={objeto} onChange={(e) => setObjeto(e.target.value)} className="border-2 border-orange-400 rounded-md p-2" />
+        )}
+        <div className="flex items-center gap-2">
+          <h4 className="m-0">Asunto del reporte:</h4>
+          <input type="text" value={asunto} onChange={(e) => setAsunto(e.target.value)} placeholder="Escriba el Asunto" className="w-64 border-2 border-orange-400 rounded-md p-2" />
+        </div>
+        <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)} placeholder="Descripción del problema" className="w-[750px] h-[300px] border-2 border-orange-400 rounded-md p-2"></textarea>
+        <div>
+          <h6>Nombre del solicitante</h6>
+          <select value={nombreSolicitante} onChange={(e) => setNombreSolicitante(e.target.value)} className="border-2 border-orange-400 rounded-md p-2">
+            <option value="">Seleccione su nombre</option>
+            <option value="Juan Pérez">Juan Pérez</option>
+            <option value="Ana López">Ana López</option>
+            <option value="Carlos Díaz">Carlos Díaz</option>
+          </select>
+        </div>
+        <button type="submit" disabled={loading} className={`px-4 py-2 rounded-md text-white ${loading ? 'bg-gray-400' : 'bg-orange-500'}`}>
+          {loading ? 'Enviando...' : 'Crear Reporte'}
         </button>
-        <Link to={`/`}>
-        <button>Regresar</button>
+        <Link to="/">
+          <button type="button" className="mt-2 px-4 py-2 bg-gray-500 text-white rounded-md">Regresar</button>
         </Link>
       </form>
-
-      {contextoLaboratorioId && (
-        <div style={{ marginTop: '20px', fontSize: '16px' }}>
-          <p><strong>ID del Laboratorio Actual:</strong> {contextoLaboratorioId}</p>
-        </div>
-      )}
     </div>
-    
   );
 };
 

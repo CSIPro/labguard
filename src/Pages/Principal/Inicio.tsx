@@ -133,8 +133,12 @@ const Inicio = () => {
               </Link>
 
               {user?.rol !== "MANTENIMIENTO" && (
-                <Link to={{ pathname: `/Reporte/${lab.nombre}/${lab.clave}` }}>
-                  <button className="text-blue-500 hover:text-blue-700">Crear Reporte 📩</button>
+                <Link to={{ pathname: `/Reporte/${lab.nombre}/${lab.id}` }}>
+                  <button
+                  onClick={()=> setLaboratorioId(lab.id)}
+                  className="text-blue-500 hover:text-blue-700">
+                    Crear Reporte 📩
+                  </button>
                 </Link>
               )}
             </td>
