@@ -68,7 +68,10 @@ const Inicio = () => {
             <p className="text-lg text-gray-600 whitespace-nowrap">{user.email}</p>
           </>
         ) : (
-          <p>No hay información de usuario disponible</p>
+          // Si no hay usuario, muestra un mensaje de bienvenida
+          <h1 className="text-2xl font-semibold text-white bg-opacity-70 p-2 rounded-lg">
+            Bienvenido a LabGuard
+          </h1>
         )}
       </div>
 
