@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "../Context/UserContext";
-import { Link, useNavigate } from "react-router-dom"; // Importar useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import { useLaboratorio } from "../Context/LaboratorioContext";
 
 const Inicio = () => {
-  const { user, setUser } = useUser(); // Obtener setUser para cerrar sesión
-  const navigate = useNavigate(); // Hook para la navegación
+  const { user, setUser } = useUser();
+  const navigate = useNavigate();
   const [laboratorios, setLaboratorios] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const { setLaboratorioId } = useLaboratorio();
 
   const [showConfirm, setShowConfirm] = useState<string | null>(null);
-  const [laboratorioAEliminar, setLaboratorioAEliminar] = useState<string | null>(null);
 
   const baseUrl = import.meta.env.VITE_API_URL;
 
@@ -36,6 +35,22 @@ const Inicio = () => {
   const handleLogout = () => {
     setUser(null);
     navigate("/login");
+  };
+
+  const handleEliminarLaboratorio = async (id: string) => {
+    try {
+      const response = await fetch(`${baseUrl}/laboratorio/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('No se pudo eliminar el laboratorio');
+      }
+      setLaboratorios(laboratorios.filter((lab) => lab.id !== id));
+      setShowConfirm(null);
+    } catch (error) {
+      setError('Error al eliminar el laboratorio');
+      console.error('Error al eliminar laboratorio:', error);
+    }
   };
 
   return (
@@ -68,7 +83,6 @@ const Inicio = () => {
             <p className="text-lg text-gray-600 whitespace-nowrap">{user.email}</p>
           </>
         ) : (
-          // Si no hay usuario, muestra un mensaje de bienvenida
           <h1 className="text-2xl font-semibold text-white bg-opacity-70 p-2 rounded-lg">
             Bienvenido a LabGuard
           </h1>
@@ -111,9 +125,9 @@ const Inicio = () => {
 
               {user?.rol !== "MANTENIMIENTO" && (
                 <Link to={{ pathname: `/Reporte/${lab.nombre}/${lab.id}` }}>
-                  <button 
-                  onClick={()=> setLaboratorioId(lab.id)}
-                  className="border-2 border-white px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-white transition duration-300 opacity-80">
+                  <button
+                    onClick={() => setLaboratorioId(lab.id)}
+                    className="border-2 border-white px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-white transition duration-300 opacity-80">
                     Hacer un reporte
                   </button>
                 </Link>
@@ -129,10 +143,7 @@ const Inicio = () => {
             <h3 className="text-lg font-semibold">¿Estás seguro de que deseas eliminar este laboratorio?</h3>
             <div className="mt-4 flex justify-between">
               <button
-                onClick={() => {
-                  setLaboratorios(laboratorios.filter((lab) => lab.id !== showConfirm));
-                  setShowConfirm(null);
-                }}
+                onClick={() => handleEliminarLaboratorio(showConfirm)}
                 className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
                 Sí, eliminar
               </button>
