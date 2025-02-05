@@ -61,7 +61,6 @@ const Inicio = () => {
   )}
 </div>
 
-
       {error && <p className="text-red-500">Error: {error}</p>}
 
       <h2 className="text-xl font-bold text-colorNameUser my-3">
@@ -72,7 +71,7 @@ const Inicio = () => {
   <p>No hay laboratorios disponibles</p>
 ) : (
   <div className="overflow-x-auto">
-    <table className="min-w-full bg-white border border-gray-400  rounded-2xl overflow-hidden">
+    <table className="min-w-full bg-white border border-gray-400  rounded-2xl overflow-hidden mb-4">
       <thead className="bg-backgroundTableBar border-b border-gray-400">
         <tr className="text-left text-gray-700 uppercase text-sm text-textoLabs leading-normal">
           <th className="py-3 px-6 border-r border-gray-400">Clave</th>
@@ -161,12 +160,21 @@ const Inicio = () => {
             </button>
           </Link>
           <Link to="/RegistroLaboratorio">
-            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mb-4">
               Registrar Laboratorio
             </button>
           </Link>
         </>
       )}
+
+{user && (
+<button
+            onClick={handleLogout}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300 mb-8">
+            Cerrar Sesión
+</button>
+        )}
+
     </main>
   );
 };

@@ -79,13 +79,17 @@ const Reporte = () => {
   };
 
   return (
-    <div className="text-lg font-inter text-textoLabs flex flex-col items-center justify-center min-h-screen">
-      <h2>Crear Reporte</h2>
+    <div className="text-lg bg-backgroundColor font-inter text-textoLabs flex flex-col items-center justify-center">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center mb-6">
+        <h1 className="text-3xl font-extrabold text-center flex-grow text-colorArrowBack font-poppins">
+          Registrar Reporte
+        </h1>
+      </header>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
         
-        <div>
-          <h3>Tipo de Mantenimiento</h3>
+        <div className="text-lg font-inter text-textoLabs ">
+          <h3 className="mb-2 font-semibold">Tipo de Mantenimiento</h3>
           <label>
             <input
               type="radio"
@@ -113,7 +117,7 @@ const Reporte = () => {
           <select
             value={objeto}
             onChange={(e) => setObjeto(e.target.value)}
-            className="w-full border p-2 rounded-md"
+            className="w-full rounded-md bg-selectorButton border-2 border-orange-400 rounded-xl p-2 w-90"
           >
             <option value="">Seleccionar objeto</option>
             <option value="CAMPANA">Campana</option>
@@ -138,7 +142,7 @@ const Reporte = () => {
           value={especificacion}
           onChange={(e) => setEspecificacion(e.target.value)}
           placeholder="Especificación"
-          style={{ padding: '10px', width: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
+          style={{ padding: '10px', width: '450px', borderRadius: '5px', border: '1px solid #ccc' }}
         />
         
         <textarea
@@ -146,19 +150,19 @@ const Reporte = () => {
           onChange={(e) => setDescripcion(e.target.value)}
           placeholder="Descripción"
           required
-          style={{ padding: '10px', width: '250px', height: '100px', borderRadius: '5px', border: '1px solid #ccc' }}
+          style={{ padding: '10px', width: '450px', height: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
         />
 
         <button
           type="submit"
           style={{
             padding: '10px 20px',
-            backgroundColor: '#08a3ff',
+            backgroundColor: '#FCA61F',
             color: 'white',
             border: 'none',
-            borderRadius: '5px',
+            borderRadius: '10px',
             cursor: 'pointer',
-            width: '250px',
+            width: '180px',
             marginTop: '15px',
           }}
         >
@@ -166,7 +170,19 @@ const Reporte = () => {
         </button>
         
         <Link to={`/`}>
-          <button>Regresar</button>
+          <button style={{
+            padding: '10px 20px',
+            backgroundColor: '#643b0e',
+            color: 'white',
+            border: 'none',
+            borderRadius: '10px',
+            cursor: 'pointer',
+            width: '180px',
+            marginTop: '5px',
+            marginBottom: '30px',
+          }}>
+            Regresar
+            </button>
         </Link>
       </form>
     </div>
