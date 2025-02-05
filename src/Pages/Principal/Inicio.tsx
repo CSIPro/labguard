@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUser } from "../Context/UserContext";
 import { Link, useNavigate } from "react-router-dom";
 import { useLaboratorio } from "../Context/LaboratorioContext";
+import BeakerImage from "../../img/beaker-6308923.jpg";
 
 const Inicio = () => {
   const { user, setUser } = useUser();
@@ -55,92 +56,98 @@ const Inicio = () => {
 
   return (
     <main className="min-h-screen bg-backgroundColor flex flex-col items-center">
-      <header className="bg-customCream w-full p-4 flex items-center justify-between">
-        {user?.name ? (
-          <div className="flex items-center">
-            <div>
-              <h1 className="text-2xl font-semibold">{user.name}</h1>
-              <p className="text-gray-600">Rol: {user.rol}</p>
-            </div>
-          </div>
-        ) : (
-          <h1 className="text-2xl font-semibold text-center">Bienvenido a LabGuard</h1>
-        )}
-
-        {user && (
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">
-            Cerrar Sesión
-          </button>
-        )}
-      </header>
-
-      <div className="bg-customCream p-6 mb-6 text-center w-full h-80 flex flex-col items-center justify-center">
-        {user?.name ? (
-          <>
-            <h1 className="text-2xl font-semibold whitespace-nowrap">{user.name}</h1>
-            <p className="text-lg text-gray-600 whitespace-nowrap">{user.email}</p>
-          </>
-        ) : (
-          <h1 className="text-2xl font-semibold text-white bg-opacity-70 p-2 rounded-lg">
-            Bienvenido a LabGuard
-          </h1>
-        )}
-      </div>
+      <div
+  className="w-full p-4 flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat h-80 rounded-lg"
+  style={{ backgroundImage: `url(${BeakerImage})` }}
+>
+  {user?.name ? (
+    <div className="bg-white bg-opacity-50 p-4 rounded-lg text-center">
+      <h1 className="text-2xl font-semibold text-center bg-white bg-opacity-50 p-4 rounded-lg">
+      Bienvenido a LabGuard
+    </h1>
+      <h1 className="text-2xl font-semibold">{user.name}</h1>
+      <p className="text-gray-600">Rol: {user.rol}</p>
+      <p className="text-gray-600">{user.email}</p>
+    </div>
+  ) : (
+    <h1 className="text-2xl font-semibold text-center bg-white bg-opacity-50 p-4 rounded-lg">
+      Bienvenido a LabGuard
+    </h1>
+  )}
+</div>
 
       {error && <p className="text-red-500">Error: {error}</p>}
 
-      <h2 className="text-xl font-bold text-colorNameUser my-3">Lista de laboratorios existentes</h2>
+      <h2 className="text-xl font-bold text-colorNameUser my-3">
+  Lista de laboratorios existentes
+</h2>
 
-      {laboratorios.length === 0 ? (
-        <p>No hay laboratorios disponibles</p>
-      ) : (
-        <ul>
-          {laboratorios.map((lab) => (
-            <li key={lab.id} className="my-6 mb-4 flex items-center justify-between">
-              <span className="text-textoLabs px-5">{lab.nombre}</span>
-
+{laboratorios.length === 0 ? (
+  <p>No hay laboratorios disponibles</p>
+) : (
+  <div className="overflow-x-auto">
+    <table className="min-w-full bg-white border border-gray-400  rounded-2xl overflow-hidden mb-4">
+      <thead className="bg-backgroundTableBar border-b border-gray-400">
+        <tr className="text-left text-gray-700 uppercase text-sm text-textoLabs leading-normal">
+          <th className="py-3 px-6 border-r border-gray-400">Clave</th>
+          <th className="py-3 px-6 border-r border-gray-400">Nombre</th>
+          <th className="py-3 px-6">Acciones</th>
+        </tr>
+      </thead>
+      <tbody className="text-gray-700 text-sm divide-y divide-gray-300">
+        {laboratorios.map((lab) => (
+          <tr key={lab.clave} className="hover:bg-gray-100">
+            <td className="py-3 px-6 border-r border-gray-300">{lab.clave}</td>
+            <td className="py-3 px-6 border-r border-gray-300">{lab.nombre}</td>
+            <td className="py-3 px-6 flex items-center space-x-2">
               {user?.rol === "ADMINISTRADOR" && (
                 <>
                   <button
                     onClick={() => setShowConfirm(lab.id)}
-                    className="border-2 border-red-500 px-4 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white transition duration-300 opacity-80">
-                    Eliminar
+                    className="text-red-500 hover:text-red-700"
+                    >
+                      Eliminar 🗑️
                   </button>
 
                   <Link to={`/EditarLaboratorio/${lab.id}`}>
-                    <button className="border-2 border-pink px-4 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-600 text-white transition duration-300 opacity-80">
-                      Editar
+                    <button
+                      
+                      className="text-yellow-500 hover:text-yellow-700"
+                    >
+                      Editar ✏️
                     </button>
                   </Link>
                 </>
               )}
 
-              <Link to={{ pathname: `/ListadoReporte/${lab.nombre}/${lab.id}` }}>
-                <button className="border-2 border-pink px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-white transition duration-300 opacity-80">
-                  Historial
-                </button>
+              <Link to={{ pathname: `/ListadoReporte/${lab.nombre}/${lab.clave}` }}>
+                <button className="text-green-500 hover:text-green-700">Historial de Reportes 📂</button>
               </Link>
 
               {user?.rol !== "MANTENIMIENTO" && (
+          
                 <Link to={{ pathname: `/Reporte/${lab.nombre}/${lab.id}` }}>
                   <button
-                    onClick={() => setLaboratorioId(lab.id)}
-                    className="border-2 border-white px-4 py-2 rounded-lg bg-colorButtonOrange hover:bg-colorhoverButton text-white transition duration-300 opacity-80">
-                    Hacer un reporte
+                  onClick={()=> setLaboratorioId(lab.id)}
+                  className="text-blue-500 hover:text-blue-700">
+                    Crear Reporte 📩
                   </button>
                 </Link>
               )}
-            </li>
-          ))}
-        </ul>
-      )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
 
       {showConfirm && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
           <div className="bg-white p-6 rounded-md">
-            <h3 className="text-lg font-semibold">¿Estás seguro de que deseas eliminar este laboratorio?</h3>
+            <h3 className="text-lg font-semibold">
+              ¿Estás seguro de que deseas eliminar este laboratorio?
+            </h3>
             <div className="mt-4 flex justify-between">
               <button
                 onClick={() => handleEliminarLaboratorio(showConfirm)}
@@ -158,12 +165,28 @@ const Inicio = () => {
       )}
 
       {user?.rol === "ADMINISTRADOR" && (
-        <Link to="/ListadoUsuarios">
-          <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-            Gestión de Usuarios
-          </button>
-        </Link>
+        <>
+          <Link to="/ListadoUsuarios">
+            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+              Gestión de Usuarios
+            </button>
+          </Link>
+          <Link to="/RegistroLaboratorio">
+            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mb-4">
+              Registrar Laboratorio
+            </button>
+          </Link>
+        </>
       )}
+
+{user && (
+<button
+            onClick={handleLogout}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300 mb-8">
+            Cerrar Sesión
+</button>
+        )}
+
     </main>
   );
 };

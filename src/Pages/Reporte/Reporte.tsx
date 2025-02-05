@@ -5,14 +5,14 @@ import { useLaboratorio } from '../Context/LaboratorioContext';
 const Reporte = () => {
   const { laboratorioId: laboratorioIdUrl } = useParams<{ laboratorioId: string }>();
   const { laboratorioId: contextoLaboratorioId, setLaboratorioId } = useLaboratorio();
-
   const [tipoMant, setTipoMant] = useState('');
   const [objeto, setObjeto] = useState('');
   const [otroObjeto, setOtroObjeto] = useState('');
   const [especificacion, setEspecificacion] = useState('');
   const [descripcion, setDescripcion] = useState('');
-  const [estado] = useState('PENDIENTE');
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const estado = "PENDIENTE";
 
   useEffect(() => {
     if (laboratorioIdUrl) {
@@ -22,7 +22,8 @@ const Reporte = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    setError('');
+    
     if (!contextoLaboratorioId) {
       setError('Laboratorio no seleccionado.');
       return;
@@ -54,10 +55,9 @@ const Reporte = () => {
       laboratorio: Number(contextoLaboratorioId),
     };
 
-    const baseUrl = import.meta.env.VITE_API_URL;
-
     try {
-      const response = await fetch(`${baseUrl}/reporte`, {
+      setLoading(true);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/reporte`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nuevoReporte),
@@ -68,19 +68,28 @@ const Reporte = () => {
       }
 
       alert('Reporte creado exitosamente');
+      setTipoMant('');
+      setObjeto('');
+      setDescripcion('');
     } catch (error: any) {
       setError(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-      <h2>Crear Reporte</h2>
+    <div className="text-lg bg-backgroundColor font-inter text-textoLabs flex flex-col items-center justify-center">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center mb-6">
+        <h1 className="text-3xl font-extrabold text-center flex-grow text-colorArrowBack font-poppins">
+          Registrar Reporte
+        </h1>
+      </header>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
         
-        <div>
-          <h3>Tipo de Mantenimiento</h3>
+        <div className="text-lg font-inter text-textoLabs ">
+          <h3 className="mb-2 font-semibold">Tipo de Mantenimiento</h3>
           <label>
             <input
               type="radio"
@@ -108,7 +117,7 @@ const Reporte = () => {
           <select
             value={objeto}
             onChange={(e) => setObjeto(e.target.value)}
-            className="w-full border p-2 rounded-md"
+            className="w-full rounded-md bg-selectorButton border-2 border-orange-400 rounded-xl p-2 w-90"
           >
             <option value="">Seleccionar objeto</option>
             <option value="CAMPANA">Campana</option>
@@ -133,7 +142,7 @@ const Reporte = () => {
           value={especificacion}
           onChange={(e) => setEspecificacion(e.target.value)}
           placeholder="Especificación"
-          style={{ padding: '10px', width: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
+          style={{ padding: '10px', width: '450px', borderRadius: '5px', border: '1px solid #ccc' }}
         />
         
         <textarea
@@ -141,19 +150,19 @@ const Reporte = () => {
           onChange={(e) => setDescripcion(e.target.value)}
           placeholder="Descripción"
           required
-          style={{ padding: '10px', width: '250px', height: '100px', borderRadius: '5px', border: '1px solid #ccc' }}
+          style={{ padding: '10px', width: '450px', height: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
         />
 
         <button
           type="submit"
           style={{
             padding: '10px 20px',
-            backgroundColor: '#08a3ff',
+            backgroundColor: '#FCA61F',
             color: 'white',
             border: 'none',
-            borderRadius: '5px',
+            borderRadius: '10px',
             cursor: 'pointer',
-            width: '250px',
+            width: '180px',
             marginTop: '15px',
           }}
         >
@@ -161,15 +170,21 @@ const Reporte = () => {
         </button>
         
         <Link to={`/`}>
-          <button>Regresar</button>
+          <button style={{
+            padding: '10px 20px',
+            backgroundColor: '#643b0e',
+            color: 'white',
+            border: 'none',
+            borderRadius: '10px',
+            cursor: 'pointer',
+            width: '180px',
+            marginTop: '5px',
+            marginBottom: '30px',
+          }}>
+            Regresar
+            </button>
         </Link>
       </form>
-
-      {contextoLaboratorioId && (
-        <div style={{ marginTop: '20px', fontSize: '16px' }}>
-          <p><strong>ID del Laboratorio Actual:</strong> {contextoLaboratorioId}</p>
-        </div>
-      )}
     </div>
   );
 };

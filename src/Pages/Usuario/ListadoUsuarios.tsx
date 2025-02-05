@@ -46,19 +46,15 @@ const ListadoUsuarios: React.FC = () => {
   };
 
   return (
-    <main className="min-h-screen bg-backgroundColor flex flex-col items-center p-6">
-      <h1 className="text-3xl font-bold mb-6">Gestión de Usuarios</h1>
-
-      <Link to="/AgregarUsuario">
-        <button className="mb-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
-          Agregar Usuario
-        </button>
-      </Link>
+    <main className="min-h-screen bg-backgroundColor flex flex-col items-center">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center mb-12">
+  <h1 className="text-2xl font-bold text-center">Gestión de Usuario</h1>
+</header>
 
       {error ? (
         <p className="text-red-500">Error: {error}</p>
       ) : (
-        <table className="w-full max-w-4xl border-collapse border border-gray-300">
+        <table className="w-full max-w-4xl border-collapse border border-gray-300 mb-12">
           <thead>
             <tr className="bg-gray-200">
               <th className="border border-gray-300 px-4 py-2">ID</th>
@@ -99,6 +95,11 @@ const ListadoUsuarios: React.FC = () => {
           </tbody>
         </table>
       )}
+      <Link to="/AgregarUsuario">
+        <button className="mb-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+          Agregar Usuario
+        </button>
+      </Link>
     </main>
   );
 };
