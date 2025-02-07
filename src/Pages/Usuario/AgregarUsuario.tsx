@@ -35,7 +35,11 @@ const AgregarUsuario: React.FC = () => {
 
   return (
     <main className="min-h-screen flex flex-col items-center p-6 bg-backgroundColor">
-      <h1 className="text-3xl font-bold mb-6">Agregar Usuario</h1>
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center fixed top-0 left-0 z-50 transition-all duration-300">
+        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
+          Agregar Usuario
+        </h1>
+      </header>
 
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-96">
         {error && <p className="text-red-500 mb-4">{error}</p>}
