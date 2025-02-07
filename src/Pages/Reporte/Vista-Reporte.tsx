@@ -1,88 +1,87 @@
 import React, { useState } from "react";
 import { useUser } from "../../Pages/Context/UserContext";
 
+interface Report {
+  id: number;
+  objeto: string;
+  especificacion: string;
+  descripcion: string;
+  tipoMant: string;
+  estado: string;
+  creado: string;
+  usuarioMant?: { id: number; name: string } | null;
+  laboratorio: { id: number; clave: string; nombre: string };
+}
+
 interface Props {
-  report: {
-    id: number;
-    objeto: string;
-    especificacion: string;
-    descripcion: string;
-    tipoMant: string;
-    estado: string;
-    creado: string;
-    laboratorio: {
-      id: number;
-      clave: string;
-      nombre: string;
-    };
-  };
-  onUpdateReport: (updatedReport: any) => void;
+  report: Report;
+  onUpdateReport: (updatedReport: Report) => void;
   onDeleteReport: (reportId: number) => void;
 }
 
 export const VistaReporte: React.FC<Props> = ({ report, onUpdateReport, onDeleteReport }) => {
   const { user } = useUser();
-  const [editableReport, setEditableReport] = useState(report);
+  const [editableReport, setEditableReport] = useState<Report>(report);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
   const isAdmin = user?.rol === "ADMINISTRADOR";
   const isMantenimiento = user?.rol === "MANTENIMIENTO";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setEditableReport((prev) => ({ ...prev, [name]: value }));
+    setEditableReport((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSave = () => {
     onUpdateReport(editableReport);
+    showSuccessMessage("Los cambios se guardaron correctamente.");
   };
 
   const handleEstadoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const nuevoEstado = e.target.value;
-    const updatedReport = { ...editableReport, estado: nuevoEstado };
-    setEditableReport(updatedReport);
-    onUpdateReport(updatedReport);
+    setEditableReport((prev) => ({ ...prev, estado: e.target.value }));
+    onUpdateReport({ ...editableReport, estado: e.target.value });
+    showSuccessMessage("El estado se actualizó correctamente.");
+  };
+
+  const showSuccessMessage = (message: string) => {
+    setSuccessMessage(message);
+    setTimeout(() => setSuccessMessage(null), 1500);
   };
 
   return (
     <main>
       <h2>Detalles del Reporte</h2>
+      {successMessage && <p className="text-green-500">{successMessage}</p>}
 
       <p><strong>ID:</strong> {report.id}</p>
-      
-      <label><strong>Objeto:</strong></label>
-      {isAdmin ? (
-        <input type="text" name="objeto" value={editableReport.objeto} onChange={handleChange} className="border p-2 rounded w-full" />
-      ) : (
-        <p>{report.objeto}</p>
-      )}
 
-      <label><strong>Especificación:</strong></label>
-      {isAdmin ? (
-        <input type="text" name="especificacion" value={editableReport.especificacion} onChange={handleChange} className="border p-2 rounded w-full" />
-      ) : (
-        <p>{report.especificacion}</p>
-      )}
+      {(["objeto", "especificacion", "descripcion", "tipoMant"] as const).map((field) => (
+        <div key={field}>
+          <label><strong>{field.charAt(0).toUpperCase() + field.slice(1)}:</strong></label>
+          {isAdmin ? (
+            field === "descripcion" ? (
+              <textarea name={field} value={editableReport[field]} onChange={handleChange} className="border p-2 rounded w-full" />
+            ) : (
+              <input type="text" name={field} value={editableReport[field]} onChange={handleChange} className="border p-2 rounded w-full" />
+            )
+          ) : (
+            <p>{report[field]}</p>
+          )}
+        </div>
+      ))}
 
-      <label><strong>Descripción:</strong></label>
-      {isAdmin ? (
-        <textarea name="descripcion" value={editableReport.descripcion} onChange={handleChange} className="border p-2 rounded w-full" />
-      ) : (
-        <p>{report.descripcion}</p>
-      )}
+      <p><strong>Encargado:</strong> {report.usuarioMant?.name || "Sin asignar"}</p>
 
-      <label><strong>Tipo de Mantenimiento:</strong></label>
-      {isAdmin ? (
-        <input type="text" name="tipoMant" value={editableReport.tipoMant} onChange={handleChange} className="border p-2 rounded w-full" />
-      ) : (
-        <p>{report.tipoMant}</p>
-      )}
-
-      {isMantenimiento ? (
+      {isMantenimiento || isAdmin ? (
         <div className="mt-4">
           <label><strong>Cambiar Estado:</strong></label>
           <select value={editableReport.estado} onChange={handleEstadoChange} className="border p-2 rounded">
-            <option value="PENDIENTE">PENDIENTE</option>
-            <option value="EN MANTENIMIENTO">EN MANTENIMIENTO</option>
-            <option value="ARREGLADO">ARREGLADO</option>
+            {["PENDIENTE", "EN MANTENIMIENTO", "ARREGLADO"].map((estado) => (
+              <option key={estado} value={estado}>{estado}</option>
+            ))}
           </select>
         </div>
       ) : (
@@ -97,7 +96,6 @@ export const VistaReporte: React.FC<Props> = ({ report, onUpdateReport, onDelete
           <button onClick={handleSave} className="mt-4 p-2 bg-blue-500 text-white rounded">
             Guardar cambios
           </button>
-
           <button onClick={() => onDeleteReport(report.id)} className="mt-4 p-2 bg-red-500 text-white rounded ml-2">
             Eliminar Reporte
           </button>

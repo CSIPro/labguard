@@ -53,6 +53,7 @@ const Reporte = () => {
       descripcion,
       estado,
       laboratorio: Number(contextoLaboratorioId),
+      usuarioMant: null,
     };
 
     try {

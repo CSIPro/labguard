@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from './Context/UserContext';
 import type { FormProps } from 'antd';
-import { Button, Checkbox, Form, Input } from 'antd';
+import { Button, Form, Input } from 'antd';
 import bgImage from '../img/beaker-6308923.jpg';
 
 const baseUrl = import.meta.env.VITE_API_URL;
@@ -12,6 +12,17 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const { setUser } = useUser();
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    const storedUser = localStorage.getItem('user');
+    
+    if (token && storedUser) {
+      const user = JSON.parse(storedUser);
+      setUser(user);
+      navigate('/');
+    }
+  }, [setUser, navigate]);
 
   const onFinish: FormProps<{ email: string; password: string; remember?: boolean }>['onFinish'] = async (values) => {
     console.log("Enviando datos a:", `${baseUrl}/auth/login`);
@@ -59,9 +70,9 @@ const Login = () => {
 
   return (
     <div
-  className="flex justify-center items-center min-h-screen bg-cover bg-center"
-  style={{ backgroundImage: `url(${bgImage})` }}
->
+      className="flex justify-center items-center min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
       <Form
         name="login"
         className="bg-white/90 p-8 rounded-lg shadow-md w-full max-w-md"
@@ -71,30 +82,24 @@ const Login = () => {
       >
         <h2 className="text-2xl font-bold text-center text-textoLabs mb-6">Iniciar Sesión</h2>
         <Form.Item
-  label="Correo electrónico: "
-  name="email"
-  rules={[{ required: true, message: 'Por favor ingrese su correo electrónico' }]}
-  labelCol={{ span: 24 }}
-  wrapperCol={{ span: 24 }}
->
-  <Input className="w-full" />
-</Form.Item>
-
-<Form.Item
-  label="Contraseña: "
-  name="password"
-  rules={[{ required: true, message: 'Por favor ingrese su contraseña' }]}
-  labelCol={{ span: 24 }}
-  wrapperCol={{ span: 24 }}
->
-  <Input.Password className="w-full" />
-</Form.Item>
-
-{/*
-        <Form.Item name="remember" valuePropName="checked" label={null}>
-          <Checkbox>Recordarme</Checkbox>
+          label="Correo electrónico: "
+          name="email"
+          rules={[{ required: true, message: 'Por favor ingrese su correo electrónico' }]}
+          labelCol={{ span: 24 }}
+          wrapperCol={{ span: 24 }}
+        >
+          <Input className="w-full" />
         </Form.Item>
-        */}
+
+        <Form.Item
+          label="Contraseña: "
+          name="password"
+          rules={[{ required: true, message: 'Por favor ingrese su contraseña' }]}
+          labelCol={{ span: 24 }}
+          wrapperCol={{ span: 24 }}
+        >
+          <Input.Password className="w-full" />
+        </Form.Item>
 
         <Form.Item label={null}>
           <Button type="primary" htmlType="submit" className="w-50 bg-colorButtonOrange hover-custom text-white py-2 rounded-md">

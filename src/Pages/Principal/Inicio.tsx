@@ -35,6 +35,8 @@ const Inicio = () => {
 
   const handleLogout = () => {
     setUser(null);
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
     navigate("/login");
   };
 
@@ -120,8 +122,12 @@ const Inicio = () => {
                 </>
               )}
 
-              <Link to={{ pathname: `/ListadoReporte/${lab.nombre}/${lab.clave}` }}>
-                <button className="text-green-500 hover:text-green-700">Historial de Reportes 📂</button>
+              <Link to={{ pathname: `/ListadoReporte/${lab.nombre}/${lab.id}` }}>
+                <button 
+                  onClick={() => setLaboratorioId(lab.id)}
+                  className="text-green-500 hover:text-green-700">
+                  Historial de Reportes 📂
+                </button>
               </Link>
 
               {user?.rol !== "MANTENIMIENTO" && (
