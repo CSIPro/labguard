@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../Context/UserContext";
+import { UserAddOutlined } from '@ant-design/icons';
 
 const AgregarUsuario: React.FC = () => {
   const [name, setName] = useState("");
@@ -41,9 +42,14 @@ const AgregarUsuario: React.FC = () => {
         </h1>
       </header>
 
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-96 mt-28">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded-lg shadow-md w-96 mt-28 text-textoLabs"
+      >
         {error && <p className="text-red-500 mb-4">{error}</p>}
-        {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
+        {successMessage && (
+          <p className="text-green-500 mb-4">{successMessage}</p>
+        )}
 
         <div className="mb-4">
           <label className="block font-semibold mb-2">Nombre:</label>
@@ -51,7 +57,7 @@ const AgregarUsuario: React.FC = () => {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full border p-2 rounded-md"
+            className="w-full border-2 border-colorOutline p-2 rounded-md"
           />
         </div>
 
@@ -61,7 +67,7 @@ const AgregarUsuario: React.FC = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border p-2 rounded-md"
+            className="w-full border-2 border-colorOutline p-2 rounded-md"
           />
         </div>
 
@@ -71,7 +77,8 @@ const AgregarUsuario: React.FC = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border p-2 rounded-md"
+            className="w-full border-2 border-colorOutline p-2 rounded-md border-2 focus:border-focusInputColor"
+
           />
         </div>
 
@@ -80,7 +87,7 @@ const AgregarUsuario: React.FC = () => {
           <select
             value={rol}
             onChange={(e) => setRol(e.target.value)}
-            className="w-full border p-2 rounded-md mb-2"
+            className="w-full border-2 border-colorOutline p-2 rounded-md"
           >
             <option value="ADMINISTRADOR">Administrador</option>
             <option value="MAESTRO">Maestro</option>
@@ -88,9 +95,14 @@ const AgregarUsuario: React.FC = () => {
           </select>
         </div>
 
-        <button type="submit" className="w-40 bg-blue-500 text-white py-2 rounded-full hover:bg-blue-600">
-          Agregar Usuario
-        </button>
+        <div className="flex justify-center mt-8">
+    <button type="submit" className="w-52 bg-green-500 text-confirmTextGreen font-semibold py-2 rounded-full hover:bg-green-600 flex items-center justify-center">
+      <UserAddOutlined className="mr-2" />
+      Agregar Usuario
+    </button>
+  </div>
+
+
       </form>
     </main>
   );

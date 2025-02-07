@@ -27,6 +27,9 @@ export default {
         colorLine: '#ece1d5',
         linedividers: '#FF654321',
         buttonBrown:'#643b0e',
+        colorOutline: '#f9c285',
+        focusInputColor: '#feab478',
+        confirmTextGreen: '#f2faf3'
       },
 
       fontFamily: {
