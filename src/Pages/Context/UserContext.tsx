@@ -71,7 +71,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  // 🆕 Función para crear usuario
   const createUser = async (userData: Omit<User, "id"> & { password: string }) => {
     try {
       const response = await fetch(`${baseUrl}/users`, {
