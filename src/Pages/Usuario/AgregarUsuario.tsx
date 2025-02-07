@@ -88,7 +88,7 @@ const AgregarUsuario: React.FC = () => {
           </select>
         </div>
 
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+        <button type="submit" className="w-40 bg-blue-500 text-white py-2 rounded-full hover:bg-blue-600">
           Agregar Usuario
         </button>
       </form>
