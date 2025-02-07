@@ -46,7 +46,7 @@ const AgregarUsuario: React.FC = () => {
         {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
 
         <div className="mb-4">
-          <label className="block font-semibold">Nombre:</label>
+          <label className="block font-semibold mb-2">Nombre:</label>
           <input
             type="text"
             value={name}
@@ -56,7 +56,7 @@ const AgregarUsuario: React.FC = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block font-semibold">Correo:</label>
+          <label className="block font-semibold mb-2">Correo:</label>
           <input
             type="email"
             value={email}
@@ -66,7 +66,7 @@ const AgregarUsuario: React.FC = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block font-semibold">Contraseña:</label>
+          <label className="block font-semibold mb-2">Contraseña:</label>
           <input
             type="password"
             value={password}
@@ -76,7 +76,7 @@ const AgregarUsuario: React.FC = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block font-semibold">Rol:</label>
+          <label className="block font-semibold mb-2">Rol:</label>
           <select
             value={rol}
             onChange={(e) => setRol(e.target.value)}
