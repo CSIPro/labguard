@@ -80,7 +80,7 @@ const AgregarUsuario: React.FC = () => {
           <select
             value={rol}
             onChange={(e) => setRol(e.target.value)}
-            className="w-full border p-2 rounded-md"
+            className="w-full border p-2 rounded-md mb-2"
           >
             <option value="ADMINISTRADOR">Administrador</option>
             <option value="MAESTRO">Maestro</option>
