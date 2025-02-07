@@ -41,7 +41,7 @@ const AgregarUsuario: React.FC = () => {
         </h1>
       </header>
 
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-96">
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-96 mt-28">
         {error && <p className="text-red-500 mb-4">{error}</p>}
         {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
 
