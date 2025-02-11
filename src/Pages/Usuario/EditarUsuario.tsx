@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useUser } from "../Context/UserContext";
+import { CheckOutlined } from '@ant-design/icons';
 
 const EditarUsuario: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -79,56 +80,69 @@ const EditarUsuario: React.FC = () => {
       {error && <p className="text-red-500">{error}</p>}
       {successMessage && <p className="text-green-500">{successMessage}</p>}
 
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-6 shadow-md rounded-md">
-        <label className="block mb-2">Nombre:</label>
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-96 mt-28 text-textoLabs">
+        <div className="mb-4">
+        <label className="block font-semibold mb-2">Nombre:</label>
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full border-2 border-colorOutline p-2 rounded-md"
           required
         />
+        </div>
 
-        <label className="block mb-2">Correo:</label>
+        <div className="mb-4">  
+        <label className="block font-semibold mb-2">Correo:</label>
         <input
           type="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full border-2 border-colorOutline p-2 rounded-md"
           required
         />
+        </div>
 
-        <label className="block mb-2">Rol:</label>
+        <div className="mb-4">
+        <label className="block font-semibold mb-2">Rol:</label>
         <select
           name="rol"
           value={formData.rol}
           onChange={handleChange}
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full border-2 border-colorOutline p-2 rounded-md"
           required
         >
           <option value="ADMINISTRADOR">ADMINISTRADOR</option>
           <option value="USUARIO">USUARIO</option>
         </select>
+        </div>
 
-        <label className="block mb-2">Nueva Contraseña (opcional):</label>
+<div className="mb-4">
+        <label className="block font-semibold mb-2">Nueva Contraseña (opcional):</label>
         <input
           type="password"
           name="password"
           value={formData.password}
           onChange={handleChange}
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full border-2 border-colorOutline p-2 rounded-md"
         />
         {passwordError && <p className="text-red-500">{passwordError}</p>}
+       </div>
 
+        <div className="flex justify-center mt-8">
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          className="w-52 bg-blue-500 text-confirmTextGreen font-semibold py-2 rounded-full hover:bg-blue-600 flex items-center justify-center"
           disabled={!!passwordError}
         >
           Guardar Cambios
+        <CheckOutlined className="ml-2" />
+
         </button>
+        </div>
+        
       </form>
     </main>
   );
