@@ -93,8 +93,8 @@ const ListadoUsuarios: React.FC = () => {
                       onClick={() => handleDelete(usuario.id)}
                       className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 w-40 flex items-center justify-center"
                     >
-                      <DeleteOutlined className="ml-2 mr-2"/>
                       Eliminar
+                      <DeleteOutlined className="ml-2"/>
                     </button>
                   </td>
                 </tr>
