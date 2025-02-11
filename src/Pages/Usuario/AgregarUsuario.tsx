@@ -96,9 +96,9 @@ const AgregarUsuario: React.FC = () => {
         </div>
 
         <div className="flex justify-center mt-8">
-    <button type="submit" className="w-52 bg-green-500 text-confirmTextGreen font-semibold py-2 rounded-full hover:bg-green-600 flex items-center justify-center">
+    <button type="submit" className="w-52 bg-green-400 text-confirmTextGreen font-semibold py-2 rounded-full hover:bg-green-600 flex items-center justify-center">
       <UserAddOutlined className="mr-2" />
-      Agregar Usuario
+      Confirmar Usuario
     </button>
   </div>
 

@@ -69,8 +69,12 @@ const EditarUsuario: React.FC = () => {
   };
 
   return (
-    <main className="min-h-screen bg-backgroundColor flex flex-col items-center p-6">
-      <h1 className="text-3xl font-bold mb-6">Editar Usuario</h1>
+    <main className="min-h-screen flex flex-col items-center p-6 bg-backgroundColor">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center fixed top-0 left-0 z-50 transition-all duration-300">
+        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
+          Editar Usuario
+        </h1>
+      </header>
 
       {error && <p className="text-red-500">{error}</p>}
       {successMessage && <p className="text-green-500">{successMessage}</p>}

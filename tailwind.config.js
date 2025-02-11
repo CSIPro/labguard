@@ -16,7 +16,7 @@ export default {
         colorhoverButton: '#f98d0a',
         colorhoverBrown: '#43280a',
         textoLabs: '#40201E',
-        colorColumn1: '#FFEEC5',
+        headerTable: '#f7da96',
         colorNameUser: '#1C140D',
         backgroundTableBar: '#ffdf8f',
         backgroundTableHov: '#FFEEC5',
@@ -29,7 +29,9 @@ export default {
         buttonBrown:'#643b0e',
         colorOutline: '#f9c285',
         focusInputColor: '#feab478',
-        confirmTextGreen: '#f2faf3'
+        confirmTextGreen: '#f2faf3',
+        backgroundTable: '#fef8ea',
+        tableLines: '#c68744'
       },
 
       fontFamily: {
