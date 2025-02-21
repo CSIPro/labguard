@@ -17,20 +17,25 @@ const ListadoReportes = () => {
         setError("No se encontró un laboratorioId en el contexto");
         return;
       }
-
+  
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/reporte`);
         if (!response.ok) throw new Error("No se pudo obtener los reportes");
-
+  
         const data = await response.json();
-        setReportes(data.filter((reporte: any) => reporte.laboratorio?.id === parseInt(laboratorioId)));
+        // Filtrar por laboratorioId y ordenar por id de forma descendente
+        setReportes(data
+          .filter((reporte: any) => reporte.laboratorio?.id === parseInt(laboratorioId))
+          .sort((a: any, b: any) => b.id - a.id) // Ordenar por id descendente
+        );
       } catch (error: any) {
         setError(error.message);
       }
     };
-
+  
     fetchReportes();
   }, [laboratorioId]);
+  
 
   const asignarseReporte = async (id: number, estaAsignado: boolean) => {
     if (!user) return;
