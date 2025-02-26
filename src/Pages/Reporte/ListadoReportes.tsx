@@ -58,7 +58,7 @@ const ListadoReportes = () => {
 
   return (
     <div className="min-h-screen bg-backgroundColor flex flex-col pt-10">
-      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center fixed top-0 left-0 z-50 transition-all duration-300">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center absolute top-0 left-0">
         <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
           Historial de Reportes
         </h1>
@@ -78,23 +78,43 @@ const ListadoReportes = () => {
                 className="shadow-md bg-cardsbg text-textoLabs"
               >
                 <Descriptions column={1} size="middle">
-                  <Descriptions.Item label="Tipo de Mantenimiento">{reporte.tipoMant}</Descriptions.Item>
-                  <Descriptions.Item label="Objeto">{reporte.objeto}</Descriptions.Item>
-                  <Descriptions.Item label="Fecha">{dayjs(reporte.creado).format("YYYY-MM-DD")}</Descriptions.Item>
-                  <Descriptions.Item label="Asignado a">{reporte.usuarioMant?.name || "Sin asignar"}</Descriptions.Item>
+                  <Descriptions.Item label="Tipo de Mantenimiento">
+                    {reporte.tipoMant}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Objeto">
+                    {reporte.objeto}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Fecha">
+                    {dayjs(reporte.creado).format("YYYY-MM-DD")}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Asignado a">
+                    {reporte.usuarioMant?.name || "Sin asignar"}
+                  </Descriptions.Item>
                 </Descriptions>
 
                 {user?.rol === "MANTENIMIENTO" && (
                   <div className="mt-4">
                     <label className="flex items-center space-x-2">
-                      <input type="checkbox" checked={estaAsignado} onChange={() => asignarseReporte(reporte.id, estaAsignado)} />
-                      <span>{estaAsignado ? "Desasignarme de este reporte" : "Asignarme este reporte"}</span>
+                      <input
+                        type="checkbox"
+                        checked={estaAsignado}
+                        onChange={() =>
+                          asignarseReporte(reporte.id, estaAsignado)
+                        }
+                      />
+                      <span>
+                        {estaAsignado
+                          ? "Desasignarme de este reporte"
+                          : "Asignarme este reporte"}
+                      </span>
                     </label>
                   </div>
                 )}
 
                 <div className="flex space-x-4 mt-4">
-                  <Link to={`/InfoReporte/${reporte.id}/${reporte.laboratorio.nombre}/${reporte.laboratorio.id}`}>
+                  <Link
+                    to={`/InfoReporte/${reporte.id}/${reporte.laboratorio.nombre}/${reporte.laboratorio.id}`}
+                  >
                     <button className="px-4 py-2 bg-colorButtonOrange text-white rounded hover:bg-colorhoverButton">
                       Ver más
                     </button>
@@ -109,7 +129,9 @@ const ListadoReportes = () => {
             );
           })
         ) : (
-          <div className="text-center text-red-500 font-bold">No se encontraron reportes para este laboratorio.</div>
+          <div className="text-center text-red-500 font-bold">
+            No se encontraron reportes para este laboratorio.
+          </div>
         )}
       </div>
     </div>
