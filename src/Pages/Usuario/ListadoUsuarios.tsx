@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../Context/UserContext";
-import { EyeOutlined } from '@ant-design/icons';
-import { EditOutlined } from '@ant-design/icons';
-import { DeleteOutlined } from '@ant-design/icons';
+import { EyeOutlined, EditOutlined, DeleteOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 
 interface Usuario {
   id: number;
@@ -50,14 +48,25 @@ const ListadoUsuarios: React.FC = () => {
 
   return (
     <main className="min-h-screen flex flex-col items-center p-6 bg-backgroundColor">
-    <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center fixed top-0 left-0 z-50 transition-all duration-300">
-      <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
-       Gestión de Usuarios
-      </h1>
-    </header>
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center fixed top-0 left-0 z-50 transition-all duration-300">
+        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
+          Gestión de Usuarios
+        </h1>
+      </header>
+
+      {/* 🔹 Botón de regresar en la esquina superior izquierda */}
+      <div className="fixed top-24 left-6">
+        <Link
+          to="/"
+          className="bg-buttonBrown text-white px-4 py-2 rounded-lg shadow-lg hover:bg-brown-900 transition flex items-center gap-2"
+        >
+          <ArrowLeftOutlined />
+          Regresar
+        </Link>
+      </div>
 
       {error ? (
-        <p className="text-red-500">Error: {error}</p>
+        <p className="text-red-500 mt-28">Error: {error}</p>
       ) : (
         <table className="w-full max-w-4xl bg-backgroundTable border-separate border-spacing-0 border-4 border-tableLines mb-12 mt-28 rounded-lg overflow-hidden">
           <thead>
@@ -81,20 +90,20 @@ const ListadoUsuarios: React.FC = () => {
                   <td className="border border-tableLines px-4 py-2">{usuario.name}</td>
                   <td className="border border-tableLines px-4 py-2">{usuario.email}</td>
                   <td className="border border-tableLines px-4 py-2">{usuario.rol}</td>
-                  <td className="border border border-tableLines px-4 py-2 flex justify-center gap-2">
-                  <Link to={`/EditarUsuario/${usuario.id}`}>
-                    <button className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-40 flex items-center justify-center">
-                    <EyeOutlined className="mr-2"/>
-                      Ver / Editar
-                      <EditOutlined className="ml-2"/>
-                    </button>
-                  </Link>
+                  <td className="border border-tableLines px-4 py-2 flex justify-center gap-2">
+                    <Link to={`/EditarUsuario/${usuario.id}`}>
+                      <button className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-40 flex items-center justify-center">
+                        <EyeOutlined className="mr-2" />
+                        Ver / Editar
+                        <EditOutlined className="ml-2" />
+                      </button>
+                    </Link>
                     <button
                       onClick={() => handleDelete(usuario.id)}
                       className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 w-40 flex items-center justify-center"
                     >
                       Eliminar
-                      <DeleteOutlined className="ml-2"/>
+                      <DeleteOutlined className="ml-2" />
                     </button>
                   </td>
                 </tr>

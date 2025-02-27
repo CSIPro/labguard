@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../Context/UserContext";
-import { UserAddOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, UserAddOutlined } from '@ant-design/icons';
 
 const AgregarUsuario: React.FC = () => {
   const [name, setName] = useState("");
@@ -42,6 +42,16 @@ const AgregarUsuario: React.FC = () => {
         </h1>
       </header>
 
+      <div className="fixed top-24 left-6">
+        <Link
+          to="/ListadoUsuarios"
+          className="bg-buttonBrown text-white px-4 py-2 rounded-lg shadow-lg hover:bg-brown-900 transition flex items-center gap-2"
+        >
+          <ArrowLeftOutlined />
+          Regresar
+        </Link>
+      </div>
+      
       <form
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-lg shadow-md w-96 mt-28 text-textoLabs"
@@ -101,8 +111,6 @@ const AgregarUsuario: React.FC = () => {
       Confirmar Usuario
     </button>
   </div>
-
-
       </form>
     </main>
   );
