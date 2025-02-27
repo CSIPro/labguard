@@ -2,8 +2,34 @@ import React, { useState, useEffect } from "react";
 import { useLaboratorio } from "../Context/LaboratorioContext";
 import { useUser } from "../Context/UserContext";
 import { Link } from "react-router-dom";
-import { Card, Descriptions } from "antd";
+import { Tag, Card, Descriptions } from "antd";
+import { CheckCircleOutlined, ExclamationCircleOutlined, ToolOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
+
+type EstadoReporte = "PENDIENTE" | "EN MANTENIMIENTO" | "ARREGLADO";
+
+const getEstadoTag = (estado: EstadoReporte) => {
+  const estados: Record<EstadoReporte, { color: string; icon: JSX.Element }> = {
+    "ARREGLADO": { color: "green", icon: <CheckCircleOutlined /> },
+    "EN MANTENIMIENTO": { color: "orange", icon: <ToolOutlined /> },
+    "PENDIENTE": { color: "red", icon: <ExclamationCircleOutlined /> },
+  };
+
+  // Verifica si el estado existe en el objeto de estados
+  const estadoData = estados[estado];
+  if (!estadoData) {
+    // Si el estado no es válido, devuelve un estado por defecto o no muestra nada
+    return <Tag color="gray">Estado desconocido</Tag>;
+  }
+
+  return (
+    <Tag color={estadoData.color} className="text-md px-3 py-1 flex items-center gap-1">
+      {estadoData.icon} {estado}
+    </Tag>
+  );
+};
+
+
 
 const ListadoReportes = () => {
   const { laboratorioId } = useLaboratorio();
@@ -72,60 +98,43 @@ const ListadoReportes = () => {
 
             return (
               <Card
-                key={reporte.id}
-                title={`Estado: ${reporte.estado}`}
-                bordered={false}
-                className="shadow-md bg-cardsbg text-textoLabs"
-              >
-                <Descriptions column={1} size="middle">
-                  <Descriptions.Item label="Tipo de Mantenimiento">
-                    {reporte.tipoMant}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Objeto">
-                    {reporte.objeto}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Fecha">
-                    {dayjs(reporte.creado).format("YYYY-MM-DD")}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Asignado a">
-                    {reporte.usuarioMant?.name || "Sin asignar"}
-                  </Descriptions.Item>
-                </Descriptions>
+  key={reporte.id}
+  className="shadow-md rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-shadow duration-300"
+  title={<span className="font-semibold text-lg">{reporte.especificacion}</span>}
+>
+  <div className="flex justify-between items-center mb-4 mr-52 ">
+    <span className="font-medium text-gray-600">Estado:</span>
+    {getEstadoTag(reporte.estado)}
+  </div>
 
-                {user?.rol === "MANTENIMIENTO" && (
-                  <div className="mt-4">
-                    <label className="flex items-center space-x-2">
-                      <input
-                        type="checkbox"
-                        checked={estaAsignado}
-                        onChange={() =>
-                          asignarseReporte(reporte.id, estaAsignado)
-                        }
-                      />
-                      <span>
-                        {estaAsignado
-                          ? "Desasignarme de este reporte"
-                          : "Asignarme este reporte"}
-                      </span>
-                    </label>
-                  </div>
-                )}
+  <Descriptions column={1} size="middle">
+    <Descriptions.Item label="Tipo de Mantenimiento">
+      {reporte.tipoMant}
+    </Descriptions.Item>
+    <Descriptions.Item label="Objeto">
+      {reporte.objeto}
+    </Descriptions.Item>
+    <Descriptions.Item label="Fecha">
+      {dayjs(reporte.creado).format("YYYY-MM-DD")}
+    </Descriptions.Item>
+    <Descriptions.Item label="Asignado a">
+      {reporte.usuarioMant?.name || "Sin asignar"}
+    </Descriptions.Item>
+  </Descriptions>
 
-                <div className="flex space-x-4 mt-4">
-                  <Link
-                    to={`/InfoReporte/${reporte.id}/${reporte.laboratorio.nombre}/${reporte.laboratorio.id}`}
-                  >
-                    <button className="px-4 py-2 bg-colorButtonOrange text-white rounded hover:bg-colorhoverButton">
-                      Ver más
-                    </button>
-                  </Link>
-                  <Link to="/">
-                    <button className="px-4 py-2 bg-buttonBrown text-white rounded hover:bg-ColorhoverBrown">
-                      Regresar
-                    </button>
-                  </Link>
-                </div>
-              </Card>
+  <div className="flex justify-end mt-4 space-x-3">
+    <Link to={`/InfoReporte/${reporte.id}/${reporte.laboratorio.nombre}/${reporte.laboratorio.id}`}>
+      <button className="px-4 py-2 bg-colorButtonOrange text-white rounded-lg hover:bg-orange-400 transition">
+        Ver más
+      </button>
+    </Link>
+    <Link to="/">
+      <button className="px-4 py-2 bg-buttonBrown text-white rounded-lg hover:bg-brown-900 transition">
+        Regresar
+      </button>
+    </Link>
+  </div>
+</Card>
             );
           })
         ) : (
