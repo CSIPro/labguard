@@ -10,6 +10,7 @@ const ListadoReportes = () => {
   const { user } = useUser();
   const [reportes, setReportes] = useState<any[]>([]);
   const [error, setError] = useState<string>("");
+  const [filtro, setFiltro] = useState<string>("nuevo"); // 🔹 Estado del filtro
 
   useEffect(() => {
     const fetchReportes = async () => {
@@ -17,25 +18,36 @@ const ListadoReportes = () => {
         setError("No se encontró un laboratorioId en el contexto");
         return;
       }
-  
+
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/reporte`);
         if (!response.ok) throw new Error("No se pudo obtener los reportes");
-  
+
         const data = await response.json();
-        // Filtrar por laboratorioId y ordenar por id de forma descendente
-        setReportes(data
-          .filter((reporte: any) => reporte.laboratorio?.id === parseInt(laboratorioId))
-          .sort((a: any, b: any) => b.id - a.id) // Ordenar por id descendente
+        setReportes(
+          data.filter((reporte: any) => reporte.laboratorio?.id === parseInt(laboratorioId))
         );
       } catch (error: any) {
         setError(error.message);
       }
     };
-  
+
     fetchReportes();
   }, [laboratorioId]);
-  
+
+  const reportesFiltrados = reportes
+    .filter((reporte) => {
+      if (["PENDIENTE", "EN MANTENIMIENTO", "ARREGLADO"].includes(filtro)) {
+        return reporte.estado === filtro;
+      }
+      return true;
+    })
+    .sort((a, b) => {
+      if (filtro === "viejo") {
+        return new Date(a.creado).getTime() - new Date(b.creado).getTime();
+      }
+      return new Date(b.creado).getTime() - new Date(a.creado).getTime();
+    });
 
   const asignarseReporte = async (id: number, estaAsignado: boolean) => {
     if (!user) return;
@@ -69,10 +81,25 @@ const ListadoReportes = () => {
         </h1>
       </header>
 
-      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto mt-20">
+      <div className="mt-24 mb-4 text-center">
+        <label className="mr-2 font-bold">Filtrar por:</label>
+        <select
+          value={filtro}
+          onChange={(e) => setFiltro(e.target.value)}
+          className="border p-2 rounded"
+        >
+          <option value="nuevo">Más reciente a Más antiguo (opción default)</option>
+          <option value="viejo">Más antiguo a Más reciente</option>
+          <option value="PENDIENTE">Pendiente</option>
+          <option value="EN MANTENIMIENTO">En Mantenimiento</option>
+          <option value="ARREGLADO">Arreglado</option>
+        </select>
+      </div>
+
+      <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto mt-4">
         {error && <div className="text-red-600 font-bold mb-4">{error}</div>}
-        {reportes.length > 0 ? (
-          reportes.map((reporte) => {
+        {reportesFiltrados.length > 0 ? (
+          reportesFiltrados.map((reporte) => {
             const estaAsignado = reporte.usuarioMant?.id === user?.id;
 
             return (
