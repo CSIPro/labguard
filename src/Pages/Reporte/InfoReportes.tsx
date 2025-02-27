@@ -73,8 +73,12 @@ export default function InfoReporte() {
   };
 
   return (
-    <main className="min-h-screen bg-backgroundColor flex flex-col items-center py-6">
-      <h2 className="text-3xl font-semibold mb-4">Información del Reporte</h2>
+    <div className="min-h-screen bg-backgroundColor flex flex-col items-center py-6 pt-28">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center absolute top-0 left-0">
+        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
+          Historial de Reportes
+        </h1>
+      </header>
       
       {error && <p className="text-red-600 mb-4">{error}</p>}
       
@@ -95,6 +99,6 @@ export default function InfoReporte() {
           </button>
         </Link>
       </div>
-    </main>
+    </div>
   );
 }

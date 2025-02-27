@@ -40,44 +40,49 @@ const RegistroLab = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
-      <h2>Crear Reporte</h2>
+    <main className="min-h-screen flex flex-col items-center p-6 bg-backgroundColor">
+    <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center fixed top-0 left-0 z-50 transition-all duration-300">
+      <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
+       Registro de Laboratorios
+      </h1>
+    </header>
+
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
-        
+      <form onSubmit={handleSubmit} className="w-600 bg-white p-6 rounded-lg shadow-md w-96 mt-28 text-textoLabs">
+      <div className="mb-4">
+      <label className="block font-semibold mb-2">Clave:</label>
         <input
           value={clave}
             onChange={(e) => setClave(e.target.value)}
-          placeholder="Clave"
+          placeholder="Clave Laboratorio"
           required
           style={{ padding: '10px', width: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
         />
+        </div>
+        
+      <div className="mb-4">
+      <label className="block font-semibold mb-2">Nombre:</label>
         <input
           value={nombre}
             onChange={(e) => setNombre(e.target.value)}
-          placeholder="Nombre"
+          placeholder="Nombre del Laboratorio"
           style={{ padding: '10px', width: '250px', borderRadius: '5px', border: '1px solid #ccc' }}
         />
+        </div>
+
         <button
           type="submit"
-          style={{
-            padding: '10px 20px',
-            backgroundColor: '#08a3ff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            width: '250px',
-            marginTop: '15px',
-          }}
+          className="w-52 mr-12 bg-blue-500 text-confirmTextGreen font-semibold py-2 rounded-full hover:bg-blue-600 flex items-center justify-center"
         >
           Registrar Laboratorio
         </button>
         <Link to={`/`}>
-        <button>Regresar</button>
+        <button
+        className="ml-56"
+        >Regresar</button>
         </Link>
       </form>
-    </div>
+    </main>
     
   );
 };
