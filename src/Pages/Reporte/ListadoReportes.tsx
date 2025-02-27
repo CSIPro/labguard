@@ -98,43 +98,49 @@ const ListadoReportes = () => {
 
             return (
               <Card
-  key={reporte.id}
-  className="shadow-md rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-shadow duration-300"
-  title={<span className="font-semibold text-lg">{reporte.especificacion}</span>}
->
-  <div className="flex justify-between items-center mb-4 mr-52 ">
-    <span className="font-medium text-gray-600">Estado:</span>
-    {getEstadoTag(reporte.estado)}
-  </div>
+                key={reporte.id}
+                className="shadow-md rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-shadow duration-300 mb-12"
+                title={
+                  <span className="font-semibold text-lg">
+                    {reporte.especificacion}
+                  </span>
+                }
+              >
+                <div className="flex justify-between items-center mb-4 mr-52 ">
+                  <span className="font-medium text-gray-600">Estado:</span>
+                  {getEstadoTag(reporte.estado)}
+                </div>
 
-  <Descriptions column={1} size="middle">
-    <Descriptions.Item label="Tipo de Mantenimiento">
-      {reporte.tipoMant}
-    </Descriptions.Item>
-    <Descriptions.Item label="Objeto">
-      {reporte.objeto}
-    </Descriptions.Item>
-    <Descriptions.Item label="Fecha">
-      {dayjs(reporte.creado).format("YYYY-MM-DD")}
-    </Descriptions.Item>
-    <Descriptions.Item label="Asignado a">
-      {reporte.usuarioMant?.name || "Sin asignar"}
-    </Descriptions.Item>
-  </Descriptions>
+                <Descriptions column={1} size="middle">
+                  <Descriptions.Item label="Tipo de Mantenimiento">
+                    {reporte.tipoMant}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Objeto">
+                    {reporte.objeto}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Fecha">
+                    {dayjs(reporte.creado).format("YYYY-MM-DD")}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Asignado a">
+                    {reporte.usuarioMant?.name || "Sin asignar"}
+                  </Descriptions.Item>
+                </Descriptions>
 
-  <div className="flex justify-end mt-4 space-x-3">
-    <Link to={`/InfoReporte/${reporte.id}/${reporte.laboratorio.nombre}/${reporte.laboratorio.id}`}>
-      <button className="px-4 py-2 bg-colorButtonOrange text-white rounded-lg hover:bg-orange-400 transition">
-        Ver más
-      </button>
-    </Link>
-    <Link to="/">
-      <button className="px-4 py-2 bg-buttonBrown text-white rounded-lg hover:bg-brown-900 transition">
-        Regresar
-      </button>
-    </Link>
-  </div>
-</Card>
+                <div className="flex justify-end mt-4 space-x-3">
+                  <Link
+                    to={`/InfoReporte/${reporte.id}/${reporte.laboratorio.nombre}/${reporte.laboratorio.id}`}
+                  >
+                    <button className="px-4 py-2 bg-colorButtonOrange text-white rounded-lg hover:bg-orange-400 transition">
+                      Ver más
+                    </button>
+                  </Link>
+                  <Link to="/">
+                    <button className="px-4 py-2 bg-buttonBrown text-white rounded-lg hover:bg-brown-900 transition">
+                      Regresar
+                    </button>
+                  </Link>
+                </div>
+              </Card>
             );
           })
         ) : (
