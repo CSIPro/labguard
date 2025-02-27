@@ -77,10 +77,16 @@ const EditarUsuario: React.FC = () => {
         </h1>
       </header>
 
-      {error && <p className="text-red-500">{error}</p>}
-      {successMessage && <p className="text-green-500">{successMessage}</p>}
+      <div className="mt-24 w-full flex justify-center">
+        {successMessage && (
+          <p className="text-green-500">{successMessage}</p>
+        )}
+        {error && (
+          <p className="text-red-500">{error}</p>
+        )}
+      </div>
 
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-96 mt-28 text-textoLabs">
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-96 mt-8 text-textoLabs">
         <div className="mb-4">
         <label className="block font-semibold mb-2">Nombre:</label>
         <input

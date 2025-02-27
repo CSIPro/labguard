@@ -11,6 +11,7 @@ const Reporte = () => {
   const [especificacion, setEspecificacion] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState(''); // Nuevo estado para mensajes de éxito
   const [loading, setLoading] = useState(false);
   const estado = "PENDIENTE";
 
@@ -23,7 +24,8 @@ const Reporte = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    
+    setSuccessMessage(''); // Resetear mensaje de éxito al intentar enviar el formulario
+
     if (!contextoLaboratorioId) {
       setError('Laboratorio no seleccionado.');
       return;
@@ -68,7 +70,7 @@ const Reporte = () => {
         throw new Error('Error al crear el reporte');
       }
 
-      alert('Reporte creado exitosamente');
+      setSuccessMessage('Reporte creado exitosamente'); // Mensaje de éxito
       setTipoMant('');
       setObjeto('');
       setDescripcion('');
@@ -86,9 +88,12 @@ const Reporte = () => {
           Registrar Reporte
         </h1>
       </header>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      
+      {/* Mostrar mensaje de error o éxito */}
+      {error && <p className="text-red-500">{error}</p>}
+      {successMessage && <p className="text-green-500">{successMessage}</p>}
+      
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
-        
         <div className="text-lg font-inter text-textoLabs ">
           <h3 className="mb-2 font-semibold">Tipo de Mantenimiento</h3>
           <label>
