@@ -36,12 +36,19 @@ const AgregarUsuario: React.FC = () => {
 
   return (
     <main className="min-h-screen flex flex-col items-center p-6 bg-backgroundColor">
-      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center fixed top-0 left-0 z-50 transition-all duration-300">
-        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center absolute top-0 left-0">
+        <Link
+          to="/ListadoUsuarios"
+          className="bg-transparent transition group absolute left-6 top-6"
+        >
+          <ArrowLeftOutlined className="text-3xl text-hoverArrow group-hover:text-colorArrowBack" />
+        </Link>
+        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins flex-1 text-center">
           Agregar Usuario
         </h1>
       </header>
 
+      {/* Mostrar mensaje de error o éxito 
       <div className="fixed top-24 left-6">
         <Link
           to="/ListadoUsuarios"
@@ -51,7 +58,8 @@ const AgregarUsuario: React.FC = () => {
           Regresar
         </Link>
       </div>
-      
+      */}
+
       <form
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-lg shadow-md w-96 mt-28 text-textoLabs"
@@ -88,7 +96,6 @@ const AgregarUsuario: React.FC = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full border-2 border-colorOutline p-2 rounded-md border-2 focus:border-focusInputColor"
-
           />
         </div>
 
@@ -99,6 +106,9 @@ const AgregarUsuario: React.FC = () => {
             onChange={(e) => setRol(e.target.value)}
             className="w-full border-2 border-colorOutline p-2 rounded-md"
           >
+            <option value="" disabled>
+              Seleccione un rol
+            </option>
             <option value="ADMINISTRADOR">Administrador</option>
             <option value="MAESTRO">Maestro</option>
             <option value="MANTENIMIENTO">Mantenimiento</option>
@@ -106,11 +116,14 @@ const AgregarUsuario: React.FC = () => {
         </div>
 
         <div className="flex justify-center mt-8">
-    <button type="submit" className="w-52 bg-green-400 text-confirmTextGreen font-semibold py-2 rounded-full hover:bg-green-600 flex items-center justify-center">
-      <UserAddOutlined className="mr-2" />
-      Confirmar Usuario
-    </button>
-  </div>
+          <button
+            type="submit"
+            className="w-52 bg-green-500 text-confirmTextGreen font-semibold py-2 rounded-full hover:bg-green-600 flex items-center justify-center"
+          >
+            <UserAddOutlined className="mr-2" />
+            Confirmar Usuario
+          </button>
+        </div>
       </form>
     </main>
   );

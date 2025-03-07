@@ -3,6 +3,7 @@ import { useUser } from "../../Pages/Context/UserContext";
 import { CheckOutlined } from "@ant-design/icons";
 import { DeleteOutlined } from "@ant-design/icons";
 import { WarningOutlined } from "@ant-design/icons";
+import Select from 'react-select';
 
 interface Report {
   id: number;
@@ -47,6 +48,7 @@ export const VistaReporte: React.FC<Props> = ({ report, onUpdateReport, onDelete
     descripcion: "Descripción",
     tipoMant: "Tipo de Mantenimiento", // Aquí cambias el texto
   };
+  
 
   const handleSave = () => {
     // Si se selecciona "Otro", se asigna el valor del campo de texto al objeto
@@ -75,7 +77,7 @@ export const VistaReporte: React.FC<Props> = ({ report, onUpdateReport, onDelete
 
   return (
     <main className="p-4 bg-white rounded-xl shadow-lg w-3/5 mx-auto">
-      <h2 className="text-lg font-inter font-bold text-textoLabs mt-2 mb-12">
+      <h2 className="text-xl font-inter font-bold text-textoLabs mt-6 mb-12">
         DETALLES DEL REPORTE
       </h2>
       {successMessage && <p className="text-green-500">{successMessage}</p>}

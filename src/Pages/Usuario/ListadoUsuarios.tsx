@@ -49,12 +49,18 @@ const ListadoUsuarios: React.FC = () => {
   return (
     <main className="min-h-screen flex flex-col items-center p-6 bg-backgroundColor">
       <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center fixed top-0 left-0 z-50 transition-all duration-300">
+        <Link
+            to="/"
+            className="bg-transparent transition group absolute left-6 top-6"
+          >
+            <ArrowLeftOutlined className="text-3xl text-hoverArrow group-hover:text-colorArrowBack" />
+          </Link>
         <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
           Gestión de Usuarios
         </h1>
       </header>
 
-      {/* 🔹 Botón de regresar en la esquina superior izquierda */}
+      {/* 🔹 Botón de regresar en la esquina superior izquierda 
       <div className="fixed top-24 left-6">
         <Link
           to="/"
@@ -64,7 +70,7 @@ const ListadoUsuarios: React.FC = () => {
           Regresar
         </Link>
       </div>
-
+*/}
       {error ? (
         <p className="text-red-500 mt-28">Error: {error}</p>
       ) : (

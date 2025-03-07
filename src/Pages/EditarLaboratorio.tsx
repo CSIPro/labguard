@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useLaboratorio } from "./Context/LaboratorioContext";
 
 const EditarLaboratorio = () => {
@@ -70,6 +71,17 @@ const EditarLaboratorio = () => {
   className="min-h-screen flex flex-col items-center justify-center"
   style={{ backgroundImage: "url('/src/img/beaker-6308923.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
 >
+<header className="bg-colorLabsHeader w-full h-20 p-4 flex items-center absolute top-0 left-0">
+  <Link
+    to="/"
+    className="bg-transparent transition group absolute left-6 top-6"
+  >
+    <ArrowLeftOutlined className="text-3xl text-hoverArrow group-hover:text-colorArrowBack" />
+  </Link>
+  <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins flex-1 text-center">
+    Editar Laboratorio
+  </h1>
+</header>
   {successMessage && (
     <p className="bg-green-200 text-green-800 p-3 rounded-md mb-4 text-center w-full max-w-md">
       {successMessage}
@@ -77,7 +89,7 @@ const EditarLaboratorio = () => {
   )}
 
   <form onSubmit={handleSubmit} className="w-full max-w-md bg-white bg-opacity-80 p-12 shadow-md rounded-md text-textoLabs">
-    <h1 className="text-2xl font-bold text-center text-textoLabs mb-8">Editar Laboratorio</h1>
+    <h1 className="text-2xl font-bold text-center text-textoLabs mb-8">Actualice los datos</h1>
     <label className="block mb-2">Nombre:</label>
     <input
       type="text"

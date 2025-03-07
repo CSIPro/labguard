@@ -10,6 +10,12 @@
     /* Para asegurar que los bordes redondeados se vean bien */
 }
 
+.customSelect option:hover {
+    background-color: #f97316; /* Naranja */
+    /* color: white; /* Texto en blanco */
+  }
+  
+
 .custom-table .ant-table {
     width: 100% !important;
     /* Asegura que la tabla ocupe el 100% de su contenedor */
