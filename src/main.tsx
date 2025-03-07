@@ -17,6 +17,7 @@ import ListadoUsuarios from "./Pages/Usuario/ListadoUsuarios";
 import AgregarUsuario from "./Pages/Usuario/AgregarUsuario";
 import EditarUsuario from "./Pages/Usuario/EditarUsuario";
 import EditarLaboratorio from "./Pages/EditarLaboratorio";
+import RegistroLab from "./Pages/RegistroLab";
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { user } = useUser();
@@ -86,6 +87,15 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <EditarLaboratorio />
+      </ProtectedRoute>
+    ),
+  },
+
+  {
+  path: "/RegistroLaboratorio",
+    element: (
+      <ProtectedRoute>
+        <RegistroLab />
       </ProtectedRoute>
     ),
   },
