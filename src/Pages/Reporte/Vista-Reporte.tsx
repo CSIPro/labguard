@@ -31,7 +31,7 @@ export const VistaReporte: React.FC<Props> = ({ report, onUpdateReport, onDelete
   const isAdmin = user?.rol === "ADMINISTRADOR";
   const isMantenimiento = user?.rol === "MANTENIMIENTO";
 
-  const [objeto, setObjeto] = useState<string>(editableReport.objeto);
+  const [objeto, setObjeto] = useState('');
   const [otroObjeto, setOtroObjeto] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
