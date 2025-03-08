@@ -130,7 +130,7 @@ const ListadoReportes = () => {
             return (
               <Card
                 key={reporte.id}
-                className="shadow-md rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-shadow duration-300 mb-12"
+                className="shadow-md rounded-xl border border-orange-200 bg-white hover:shadow-lg transition-shadow duration-300 mb-12"
                 title={
                   <span className="font-semibold text-lg text-textoLabs ">
                     {reporte.especificacion}
