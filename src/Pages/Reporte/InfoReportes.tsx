@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { VistaReporte } from "./Vista-Reporte";
-
+import { ArrowLeftOutlined } from "@ant-design/icons";
 export default function InfoReporte() {
   const { IdReporte } = useParams<{ IdReporte: string }>();
   const [reporte, setReporte] = useState<any>(null);
@@ -74,9 +74,15 @@ export default function InfoReporte() {
 
   return (
     <div className="min-h-screen bg-backgroundColor flex flex-col items-center py-6 pt-28">
-      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center absolute top-0 left-0">
-        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
-          Historial de Reportes
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center absolute top-0 left-0">
+        <Link
+          to="/ListadoReporte/Todos/1"
+          className="bg-transparent transition group absolute left-6 top-6"
+        >
+          <ArrowLeftOutlined className="text-3xl text-hoverArrow group-hover:text-colorArrowBack" />
+        </Link>
+        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins flex-1 text-center">
+          Información del Reporte
         </h1>
       </header>
       

@@ -34,6 +34,7 @@ export default {
         confirmTextGreen: '#f2faf3',
         backgroundTable: '#fef8ea',
         tableLines: '#c68744',
+        textWelcome: 'rgba(87, 45, 11, 0.84)',
         'brown': {
               50: '#efebe9',
               100: '#d7ccc8',

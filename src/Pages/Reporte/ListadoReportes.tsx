@@ -92,28 +92,29 @@ const ListadoReportes = () => {
   return (
     <div className="min-h-screen bg-backgroundColor flex flex-col pt-10">
       <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center absolute top-0 left-0">
-  <Link
-    to="/"
-    className="bg-transparent transition group absolute left-6 top-6"
-  >
-    <ArrowLeftOutlined className="text-3xl text-hoverArrow group-hover:text-colorArrowBack" />
-  </Link>
-  <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins flex-1 text-center">
-    Historial de Reportes
-  </h1>
-</header>
+        <Link
+          to="/"
+          className="bg-transparent transition group absolute left-6 top-6"
+        >
+          <ArrowLeftOutlined className="text-3xl text-hoverArrow group-hover:text-colorArrowBack" />
+        </Link>
+        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins flex-1 text-center">
+          Historial de Reportes
+        </h1>
+      </header>
 
-      <div className="fixed top-24 left-6">
-      </div>
+      <div className="fixed top-24 left-6"></div>
 
-      <div className="mt-24 mb-4 text-center">
-        <label className="mr-2 font-bold">Filtrar por:</label>
+      <div className="mt-24 mb-4 text-center text-textoLabs text-base">
+        <label className="mr-2 text-base text-textoLabs">Filtrar por:</label>
         <select
           value={filtro}
           onChange={(e) => setFiltro(e.target.value)}
           className="border p-2 rounded"
         >
-          <option value="nuevo">Más reciente a Más antiguo (opción default)</option>
+          <option value="nuevo">
+            Más reciente a Más antiguo (opción default)
+          </option>
           <option value="viejo">Más antiguo a Más reciente</option>
           <option value="PENDIENTE">Pendiente</option>
           <option value="EN MANTENIMIENTO">En Mantenimiento</option>
@@ -130,7 +131,7 @@ const ListadoReportes = () => {
             return (
               <Card
                 key={reporte.id}
-                className="shadow-md rounded-xl border border-orange-200 bg-white hover:shadow-lg transition-shadow duration-300 mb-12"
+                className="shadow-md rounded-2xl border border-orange-200 bg-white hover:shadow-lg transition-shadow duration-300 mb-12"
                 title={
                   <span className="font-semibold text-lg text-textoLabs ">
                     {reporte.especificacion}
@@ -229,7 +230,9 @@ const ListadoReportes = () => {
             );
           })
         ) : (
-          <div className="text-center text-red-500 font-bold">No se encontraron reportes para este laboratorio.</div>
+          <div className="text-center text-red-500 font-bold">
+            No se encontraron reportes para este laboratorio.
+          </div>
         )}
       </div>
     </div>
