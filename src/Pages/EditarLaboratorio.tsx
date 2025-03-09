@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useLaboratorio } from "./Context/LaboratorioContext";
 
 const EditarLaboratorio = () => {
@@ -66,39 +67,70 @@ const EditarLaboratorio = () => {
   if (isLoading) return <p className="text-center">Cargando laboratorio...</p>;
 
   return (
-    <main className="min-h-screen bg-backgroundColor flex flex-col items-center p-6">
-      <h1 className="text-3xl font-bold mb-6">Editar Laboratorio</h1>
+    <main
+  className="min-h-screen flex flex-col items-center justify-center"
+  style={{ backgroundImage: "url('/src/img/beaker-6308923.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}
+>
+<header className="bg-colorLabsHeader w-full h-20 p-4 flex items-center absolute top-0 left-0">
+  <Link
+    to="/"
+    className="bg-transparent transition group absolute left-6 top-6"
+  >
+    <ArrowLeftOutlined className="text-3xl text-hoverArrow group-hover:text-colorArrowBack" />
+  </Link>
+  <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins flex-1 text-center">
+    Editar Laboratorio
+  </h1>
+</header>
+  {successMessage && (
+    <p className="bg-green-200 text-green-800 p-3 rounded-md mb-4 text-center w-full max-w-md">
+      {successMessage}
+    </p>
+  )}
 
-      {successMessage && (
-        <p className="bg-green-200 text-green-800 p-3 rounded-md mb-4 text-center w-full max-w-md">
-          {successMessage}
-        </p>
-      )}
+  <form onSubmit={handleSubmit} className="w-full max-w-md bg-white bg-opacity-80 p-12 shadow-md rounded-md text-textoLabs">
+    <h1 className="text-2xl font-bold text-center text-textoLabs mb-8">Actualice los datos</h1>
+    <label className="block mb-2">Nombre:</label>
+    <input
+      type="text"
+      name="nombre"
+      value={localLaboratorio.nombre}
+      onChange={handleChange}
+      className="w-full p-2 mb-4 border rounded"
+      required
+    />
 
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-6 shadow-md rounded-md">
-        <label className="block mb-2">Nombre:</label>
-        <input
-          type="text"
-          name="nombre"
-          value={localLaboratorio.nombre}
-          onChange={handleChange}
-          className="w-full p-2 mb-4 border rounded"
-          required
-        />
+    <label className="block mb-2">Clave:</label>
+    <input
+      type="text"
+      name="clave"
+      value={localLaboratorio.clave}
+      onChange={handleChange}
+      className="w-full p-2 mb-12 border rounded"
+      required
+    />
 
-        <label className="block mb-2">Clave:</label>
-        <input
-          type="text"
-          name="clave"
-          value={localLaboratorio.clave}
-          onChange={handleChange}
-          className="w-full p-2 mb-4 border rounded"
-          required
-        />
+<div className="flex justify-center">
+  <button
+    type="submit"
+    className="flex items-center justify-center gap-2 bg-buttonBrown text-white p-2 rounded-full hover:bg-colorhoverBrown w-[200px] px-4"
+  >
+    <span className="flex-1 text-center">Guardar Cambios</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+      className="w-5 h-5"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  </button>
+</div>
 
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
-          Guardar Cambios
-        </button>
+
+
       </form>
     </main>
   );

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../Context/UserContext";
+import { ArrowLeftOutlined, UserAddOutlined } from '@ant-design/icons';
 
 const AgregarUsuario: React.FC = () => {
   const [name, setName] = useState("");
@@ -35,58 +36,94 @@ const AgregarUsuario: React.FC = () => {
 
   return (
     <main className="min-h-screen flex flex-col items-center p-6 bg-backgroundColor">
-      <h1 className="text-3xl font-bold mb-6">Agregar Usuario</h1>
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center absolute top-0 left-0">
+        <Link
+          to="/ListadoUsuarios"
+          className="bg-transparent transition group absolute left-6 top-6"
+        >
+          <ArrowLeftOutlined className="text-3xl text-hoverArrow group-hover:text-colorArrowBack" />
+        </Link>
+        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins flex-1 text-center">
+          Agregar Usuario
+        </h1>
+      </header>
 
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-96">
+      {/* Mostrar mensaje de error o éxito 
+      <div className="fixed top-24 left-6">
+        <Link
+          to="/ListadoUsuarios"
+          className="bg-buttonBrown text-white px-4 py-2 rounded-lg shadow-lg hover:bg-brown-900 transition flex items-center gap-2"
+        >
+          <ArrowLeftOutlined />
+          Regresar
+        </Link>
+      </div>
+      */}
+
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded-lg shadow-md w-96 mt-28 text-textoLabs"
+      >
         {error && <p className="text-red-500 mb-4">{error}</p>}
-        {successMessage && <p className="text-green-500 mb-4">{successMessage}</p>}
+        {successMessage && (
+          <p className="text-green-500 mb-4">{successMessage}</p>
+        )}
 
         <div className="mb-4">
-          <label className="block font-semibold">Nombre:</label>
+          <label className="block font-semibold mb-2">Nombre:</label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full border p-2 rounded-md"
+            className="w-full border-2 border-colorOutline p-2 rounded-md"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block font-semibold">Correo:</label>
+          <label className="block font-semibold mb-2">Correo:</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full border p-2 rounded-md"
+            className="w-full border-2 border-colorOutline p-2 rounded-md"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block font-semibold">Contraseña:</label>
+          <label className="block font-semibold mb-2">Contraseña:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full border p-2 rounded-md"
+            className="w-full border-2 border-colorOutline p-2 rounded-md border-2 focus:border-focusInputColor"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block font-semibold">Rol:</label>
+          <label className="block font-semibold mb-2">Rol:</label>
           <select
             value={rol}
             onChange={(e) => setRol(e.target.value)}
-            className="w-full border p-2 rounded-md"
+            className="w-full border-2 border-colorOutline p-2 rounded-md"
           >
+            <option value="" disabled>
+              Seleccione un rol
+            </option>
             <option value="ADMINISTRADOR">Administrador</option>
             <option value="MAESTRO">Maestro</option>
             <option value="MANTENIMIENTO">Mantenimiento</option>
           </select>
         </div>
 
-        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
-          Agregar Usuario
-        </button>
+        <div className="flex justify-center mt-8">
+          <button
+            type="submit"
+            className="w-52 bg-green-500 text-confirmTextGreen font-semibold py-2 rounded-full hover:bg-green-600 flex items-center justify-center"
+          >
+            <UserAddOutlined className="mr-2" />
+            Confirmar Usuario
+          </button>
+        </div>
       </form>
     </main>
   );
