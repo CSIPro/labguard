@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Link, useParams } from 'react-router-dom';
 import { useLaboratorio } from '../Context/LaboratorioContext';
 
@@ -84,6 +85,12 @@ const Reporte = () => {
   return (
     <div className="text-lg bg-backgroundColor font-inter text-textoLabs flex flex-col items-center justify-center">
       <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center mb-6">
+      <Link
+            to="/"
+            className="bg-transparent transition group absolute left-6 top-6"
+          >
+            <ArrowLeftOutlined className="text-3xl text-hoverArrow group-hover:text-colorArrowBack" />
+          </Link>
         <h1 className="text-3xl font-extrabold text-center flex-grow text-colorArrowBack font-poppins">
           Registrar Reporte
         </h1>

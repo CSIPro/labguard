@@ -64,12 +64,12 @@ const Inicio = () => {
 >
   {user?.name ? (
     <div className="bg-white bg-opacity-50 p-4 rounded-lg text-center">
-      <h1 className="text-2xl font-semibold text-center bg-white bg-opacity-50 p-4 rounded-lg">
+      <h1 className="text-4xl font-semibold text-center text-textoLabs bg-white bg-opacity-50 p-4 rounded-lg">
       Bienvenido a LabGuard
     </h1>
-      <h1 className="text-2xl font-semibold">{user.name}</h1>
-      <p className="text-gray-600">Rol: {user.rol}</p>
-      <p className="text-gray-600">{user.email}</p>
+      <h1 className="text-2xl text-textWelcome font-semibold text-textWelcome">{user.name}</h1>
+      <p className="text-gray-600 text-textWelcome">Rol: {user.rol}</p>
+      <p className="text-gray-600 text-textWelcome">{user.email}</p>
     </div>
   ) : (
     <h1 className="text-2xl font-semibold text-center bg-white bg-opacity-50 p-4 rounded-lg">

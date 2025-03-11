@@ -9,6 +9,7 @@ export default {
       colors: {
         customCream: '#FFF1CE', // Color header inicio
         colorNavHeaderPag: 'rgba(249, 156, 10, 0.57)',
+        colorLabsHeader: 'rgba(250, 234, 193, 0.74)', //Color header labs,
         backgroundColor: '#FFF9F2', //Color fondo
         colorArrowBack: '#6C3E1B',
         bordercolororange: '#F99C0A',
@@ -23,6 +24,7 @@ export default {
         buttonPrueba: '#F9C68A',
         selectorButton: '#FFE0BD',
         generalBorder: '#FF927444',
+        hoverArrow: 'rgba(69, 43, 3, 0.68)',
         cardsbg: '#fff3e6',
         colorLine: '#ece1d5',
         linedividers: '#FF654321',
@@ -32,6 +34,7 @@ export default {
         confirmTextGreen: '#f2faf3',
         backgroundTable: '#fef8ea',
         tableLines: '#c68744',
+        textWelcome: 'rgba(87, 45, 11, 0.84)',
         'brown': {
               50: '#efebe9',
               100: '#d7ccc8',

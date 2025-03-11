@@ -3,7 +3,7 @@ import { useLaboratorio } from "../Context/LaboratorioContext";
 import { useUser } from "../Context/UserContext";
 import { Link } from "react-router-dom";
 import { Tag, Card, Descriptions } from "antd";
-import { CheckCircleOutlined, ExclamationCircleOutlined, ToolOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import { CheckCircleOutlined, ExclamationCircleOutlined, ToolOutlined, ArrowLeftOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 
 type EstadoReporte = "PENDIENTE" | "EN MANTENIMIENTO" | "ARREGLADO";
@@ -91,30 +91,30 @@ const ListadoReportes = () => {
 
   return (
     <div className="min-h-screen bg-backgroundColor flex flex-col pt-10">
-      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center justify-center absolute top-0 left-0">
-        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins">
+      <header className="bg-colorNavHeaderPag w-full h-20 p-4 flex items-center absolute top-0 left-0">
+        <Link
+          to="/"
+          className="bg-transparent transition group absolute left-6 top-6"
+        >
+          <ArrowLeftOutlined className="text-3xl text-hoverArrow group-hover:text-colorArrowBack" />
+        </Link>
+        <h1 className="text-3xl font-extrabold text-center text-colorArrowBack font-poppins flex-1 text-center">
           Historial de Reportes
         </h1>
       </header>
-      
-      <div className="fixed top-24 left-6">
-        <Link
-          to="/"
-          className="bg-buttonBrown text-white px-4 py-2 rounded-lg shadow-lg hover:bg-brown-900 transition flex items-center gap-2"
-        >
-          <ArrowLeftOutlined />
-          Regresar
-        </Link>
-      </div>
 
-      <div className="mt-24 mb-4 text-center">
-        <label className="mr-2 font-bold">Filtrar por:</label>
+      <div className="fixed top-24 left-6"></div>
+
+      <div className="mt-24 mb-4 text-center text-textoLabs text-base">
+        <label className="mr-2 text-base text-textoLabs">Filtrar por:</label>
         <select
           value={filtro}
           onChange={(e) => setFiltro(e.target.value)}
           className="border p-2 rounded"
         >
-          <option value="nuevo">Más reciente a Más antiguo (opción default)</option>
+          <option value="nuevo">
+            Más reciente a Más antiguo (opción default)
+          </option>
           <option value="viejo">Más antiguo a Más reciente</option>
           <option value="PENDIENTE">Pendiente</option>
           <option value="EN MANTENIMIENTO">En Mantenimiento</option>
@@ -131,19 +131,70 @@ const ListadoReportes = () => {
             return (
               <Card
                 key={reporte.id}
-                className="shadow-md rounded-xl border border-gray-200 bg-white hover:shadow-lg transition-shadow duration-300 mb-12"
-                title={<span className="font-semibold text-lg">{reporte.especificacion}</span>}
+                className="shadow-md rounded-2xl border border-orange-200 bg-white hover:shadow-lg transition-shadow duration-300 mb-12"
+                title={
+                  <span className="font-semibold text-lg text-textoLabs ">
+                    {reporte.especificacion}
+                  </span>
+                }
               >
                 <div className="flex justify-between items-center mb-4 mr-52">
-                  <span className="font-medium text-gray-600">Estado:</span>
+                  <span className="font-semibold text-base text-brown-800">
+                    Estado:
+                  </span>
                   {getEstadoTag(reporte.estado)}
                 </div>
 
-                <Descriptions column={1} size="middle">
-                  <Descriptions.Item label="Tipo de Mantenimiento">{reporte.tipoMant}</Descriptions.Item>
-                  <Descriptions.Item label="Objeto">{reporte.objeto}</Descriptions.Item>
-                  <Descriptions.Item label="Fecha">{dayjs(reporte.creado).format("YYYY-MM-DD")}</Descriptions.Item>
-                  <Descriptions.Item label="Asignado a">{reporte.usuarioMant?.name || "Sin asignar"}</Descriptions.Item>
+                <Descriptions
+                  column={1}
+                  size="middle"
+                  className="text-textoLabs font-mediumlight"
+                >
+                  <Descriptions.Item
+                    label={
+                      <span className="font-semibold text-base text-brown-800">
+                        Laboratorio
+                      </span>
+                    }
+                  >
+                    {reporte.laboratorio.nombre}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    label={
+                      <span className="font-semibold text-base text-brown-800">
+                        Tipo de Mantenimiento
+                      </span>
+                    }
+                  >
+                    {reporte.tipoMant}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    label={
+                      <span className="font-semibold text-base text-brown-800">
+                        Objeto
+                      </span>
+                    }
+                  >
+                    {reporte.objeto}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    label={
+                      <span className="font-semibold text-base text-brown-800">
+                        Fecha
+                      </span>
+                    }
+                  >
+                    {dayjs(reporte.creado).format("YYYY-MM-DD")}
+                  </Descriptions.Item>
+                  <Descriptions.Item
+                    label={
+                      <span className="font-semibold text-base text-brown-800">
+                        Asignado a
+                      </span>
+                    }
+                  >
+                    {reporte.usuarioMant?.name || "Sin asignar"}
+                  </Descriptions.Item>
                 </Descriptions>
 
                 {user?.rol === "MANTENIMIENTO" && (
@@ -152,17 +203,26 @@ const ListadoReportes = () => {
                       <input
                         type="checkbox"
                         checked={estaAsignado}
-                        onChange={() => asignarseReporte(reporte.id, estaAsignado)}
+                        onChange={() =>
+                          asignarseReporte(reporte.id, estaAsignado)
+                        }
                       />
-                      <span>{estaAsignado ? "Desasignarme de este reporte" : "Asignarme este reporte"}</span>
+                      <span>
+                        {estaAsignado
+                          ? "Desasignarme de este reporte"
+                          : "Asignarme este reporte"}
+                      </span>
                     </label>
                   </div>
                 )}
 
                 <div className="flex justify-end mt-4">
-                  <Link to={`/InfoReporte/${reporte.id}/${reporte.laboratorio.nombre}/${reporte.laboratorio.id}`}>
-                    <button className="px-4 py-2 bg-colorButtonOrange text-white rounded-lg hover:bg-orange-400 transition">
+                  <Link
+                    to={`/InfoReporte/${reporte.id}/${reporte.laboratorio.nombre}/${reporte.laboratorio.id}`}
+                  >
+                    <button className="px-4 py-2 bg-colorButtonOrange text-white text-base font-mediumlight rounded-lg hover:bg-orange-400 transition flex items-center justify-center">
                       Ver más
+                      <EyeOutlined className="ml-2" />
                     </button>
                   </Link>
                 </div>
@@ -170,7 +230,9 @@ const ListadoReportes = () => {
             );
           })
         ) : (
-          <div className="text-center text-red-500 font-bold">No se encontraron reportes para este laboratorio.</div>
+          <div className="text-center text-red-500 font-bold">
+            No se encontraron reportes para este laboratorio.
+          </div>
         )}
       </div>
     </div>
