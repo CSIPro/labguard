@@ -50,4 +50,4 @@ jobs:
       # Transferimos los archivos al directorio de destino en el servidor de ISI
       - name: Transfer files to Production
         run: |
-          rsync -rvz --delete ./dist unison-isi:/var/www/labguard
+          rsync -rvz --delete ./dist/ unison-isi:/var/www/labguard
